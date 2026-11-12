@@ -2,19 +2,22 @@
 
 **Project:** From Idea to MVP — InnovateHack+ 2.0 (GDG on Campus Xavier Ateneo)
 **Speaker:** Arron Kian Parejas
-**QA date:** November 11, 2026
-**Build under test:** `/Users/arronkianparejas/xavier` (working tree at commit time)
+**QA date:** November 12, 2026
+**Build under test:** `/Users/arronkianparejas/xavier` (typographic redesign working tree)
 
 **Method.** Every check below was executed against the running deck with
 headless Chromium via Playwright, not reasoned about. The automated suite is
 `tools/qa.mjs` (`npm run qa`); the responsive sweep is
 `tools/responsive-test.mjs`; the link check is `tools/link-check.mjs`. Screens
-were captured at each viewport and inspected by eye, in both screen media and
-print media.
+were captured at each viewport and inspected by eye, in screen media and print
+media. The `file://` path was tested by launching `index.html` and
+`standalone.html` directly from disk.
 
 **Result: 48 / 48 automated checks passed. 8 / 8 viewport sizes passed.
-21 external links checked, 20 confirmed reachable by automated request.
-15-page PDF generated and inspected.**
+23 external link anchors (19 unique URLs) on the slides; 22 URLs checked by the
+link script, 21 reachable. 15-page PDF generated, inspected, and confirmed to
+show the CLEAR framework fully revealed. `standalone.html` verified over
+`file://` with 15 slides, 15 images, zero console errors and no overflow.**
 
 ---
 
@@ -23,7 +26,7 @@ print media.
 | # | Test | Expected | Actual | Status |
 |---|---|---|---|---|
 | 1 | Deck contains exactly 15 slides | 15 | 15 | **PASS** |
-| 2 | Slide ids unique and sequential | 15 unique | 15 unique | **PASS** |
+| 2 | Slide ids are unique and sequential | 15 unique | 15 unique | **PASS** |
 | 3 | `Home` jumps to slide 1 | 0 | 0 | **PASS** |
 | 4 | `→` advances one slide | 1 | 1 | **PASS** |
 | 5 | `←` goes back one slide | 0 | 0 | **PASS** |
@@ -35,13 +38,13 @@ print media.
 | 11 | `O` opens the slide overview | open | open | **PASS** |
 | 12 | Overview lists all 15 slides | 15 | 15 | **PASS** |
 | 13 | `Esc` closes the overview | closed | closed | **PASS** |
-| 14 | `N` opens the notes for the current slide | slide 4 content | slide 4 content | **PASS** |
+| 14 | `N` opens the notes for the current slide | slide 4 content | slide 4 content (case-insensitive header) | **PASS** |
 | 15 | Notes contain a main message and a transition | both | both | **PASS** |
-| 16 | MVP board: "Show suggested" distributes all 10 features | 3,3,2,2 | 3,3,2,2 (total 10) | **PASS** |
+| 16 | MVP board: "Suggested split" distributes all 10 features | 3,3,2,2 | 3,3,2,2 (total 10) | **PASS** |
 | 17 | MVP board: the move-to menu updates the counts | 2,3,2,3 | 2,3,2,3 | **PASS** |
 | 18 | MVP board: drag and drop moves a feature into a bucket | Must = 1 | 1,0,0,0 | **PASS** |
-| 19 | MVP board: Reset empties every bucket | 0,0,0,0 | 0,0,0,0 | **PASS** |
-| 20 | MVP board: Reset returns all 10 to the pool | 10 | 10 | **PASS** |
+| 19 | MVP board: "Clear board" empties every bucket | 0,0,0,0 | 0,0,0,0 | **PASS** |
+| 20 | MVP board: "Clear board" returns all 10 to the pool | 10 | 10 | **PASS** |
 | 21 | `S` opens the stack selector | open | open | **PASS** |
 | 22 | Selector: mobile + cloud + GenAI + simple → Gemini on Firebase | Gemini path | Gemini via Firebase AI Logic | **PASS** |
 | 23 | Selector: offline + traditional ML → ML Kit and LiteRT | ML Kit, then LiteRT | ML Kit, then LiteRT | **PASS** |
@@ -55,12 +58,12 @@ print media.
 | 31 | CLEAR "Show all" reveals all five letters | 5 | 5 | **PASS** |
 | 32 | The assembled prompt contains all five sections | 5 sections | 5 sections | **PASS** |
 | 33 | CLEAR Reset hides every letter again | 0 | 0 | **PASS** |
-| 34 | Every image loads | 18 / 18 | 18 / 18 | **PASS** |
+| 34 | Every image loads | 15 images, 0 broken | 15 of 15 loaded | **PASS** |
 | 35 | Every image has alt text | 0 missing | 0 missing | **PASS** |
-| 36 | Image count | 18 `<img>` (12 files, 6 re-used) | 18 | **PASS** |
+| 36 | Image count | 15 `<img>` elements (13 files, 2 re-used) | 15 | **PASS** |
 | 37 | Diagram logos render inside the SVG | all sized | all sized | **PASS** |
 | 38 | Diagrams reference the supplied logo files | 4 logo files | 4 logo files | **PASS** |
-| 39 | Every external link opens in a new tab with `rel=noopener` | 26 / 26 | 26 / 26 | **PASS** |
+| 39 | Every external link opens in a new tab with `rel=noopener` | 23 links, 0 violations | 23 of 23 valid | **PASS** |
 | 40 | No tracking parameters on any link | 0 | 0 | **PASS** |
 | 41 | Slide counter is an `aria-live` region | polite | polite | **PASS** |
 | 42 | The active slide has an accessible label | present | present | **PASS** |
@@ -100,7 +103,10 @@ downscale.
 
 ## 3. External link check — `tools/link-check.mjs`
 
-21 unique external URLs, checked with a real browser navigation.
+The slides contain **23 external anchors** pointing at **19 unique URLs**
+(several docs are linked from both slide 08 and the closing slide). The link
+script checks the 22 documentation/contact URLs it tracks; the remaining
+anchor is a duplicate. Results:
 
 | URL | Status |
 |---|---|
@@ -121,6 +127,7 @@ downscale.
 | ai.google.dev/gemini-api/docs/function-calling | 200 |
 | ai.google.dev/gemini-api/docs/structured-output | 200 |
 | ai.google.dev/gemini-api/docs/vision | 200 |
+| **docs.google.com/.../Free Developer Stack Handbook** | **200** |
 | **linkedin.com/in/arron-parejas/** | **999 — see note** |
 | github.com/darknecrocities/Helios | 200 |
 | huggingface.co/Darknecrocities/Helios | 200 |
@@ -135,23 +142,28 @@ Because automated verification could not confirm it, the same URL is also
 written out as a text link beside the QR code on slide 15, so the contact
 detail works even if the code is not scanned.
 
+The handbook URL was added to the link script and returned **200**. Its
+document title was verified as **Free Developer Stack Handbook**.
+
 ---
 
 ## 4. Asset verification
 
 | Check | Result |
 |---|---|
-| Supplied assets in `assets/images/` | 12 |
-| Assets rendered on at least one slide | **12 of 12** |
+| Supplied assets in `assets/images/` | 13 |
+| Assets rendered on at least one slide | **13 of 13** |
 | Assets unused | 0 |
-| Images with `naturalWidth > 0` | 18 of 18 `<img>` + all 7 SVG marks |
-| Images with alt text | 18 of 18 |
+| `<img>` placements | 15 (Gemini and Helios each used twice) |
+| Images with `naturalWidth > 0` | 15 of 15 `<img>` + all SVG logo marks |
+| Images with alt text | 15 of 15 |
 | Aspect ratios preserved | All — `contain` for logos and screenshots, `cover` for photographs, crops measured from the source pixels |
 | Originals modified | 0 — verified byte sizes and pixel dimensions after the build |
 | Optimized derivatives | 3, all in `assets/images/optimized/`, aspect ratio identical to the source |
 
-The QR code was decoded from the **live, rendered slide 15**, not from the
-file, and returns the LinkedIn URL above.
+Both QR codes were decoded from the **live, rendered slide 15**, not from the
+files: the handbook code returns the Google Docs URL above, and the socials
+code returns the LinkedIn URL.
 
 ---
 
@@ -162,8 +174,9 @@ file, and returns the LinkedIn URL above.
 | Export tool | `tools/export-pdf.mjs` (headless Chromium, print stylesheet) |
 | Pages | 15 — one per slide |
 | Page size | 1920 × 1080 px (16:9), `@page { size: 1920px 1080px; margin: 0 }` |
-| File size | 4.34 MB, `dist/from-idea-to-mvp.pdf` |
-| Images present in the export | Yes — all photographs and logos render |
+| File size | 4.35 MB, `dist/from-idea-to-mvp.pdf` |
+| Images present in the export | Yes — all photographs, logos and both QR codes render |
+| CLEAR slide | The exporter clicks "Show all" before printing; page 12 text was extracted from the generated PDF and contains all five letters and the full assembled prompt |
 | Slides inspected in print media | 15 of 15 (screenshot of every slide in print media) |
 | Page 1 inspected from the generated PDF file itself | Yes — renders correctly |
 
@@ -172,29 +185,48 @@ assumed.
 
 ---
 
-## 6. Defects found and fixed
+## 6. `file://` verification
 
-Every item below was found by looking at a rendered screenshot or by a failing
-automated check, and was fixed and re-verified.
+| Check | Result |
+|---|---|
+| Double-clicking `index.html` | Redirects to `standalone.html`, preserving the hash |
+| `index.html#/9` over `file://` | Opens `standalone.html#/9`, active slide is `slide-9` |
+| Slides in the standalone build | 15 |
+| `<img>` elements in the standalone build | 15, zero broken |
+| Overflow in the standalone build | none |
+| Navigation in the standalone build | `Home` → slide 1, `→` → slide 2 |
+| Console errors on direct `standalone.html` open | none |
+| Console errors on the `index.html` redirect path | none from the deck; the only aborted request is the cross-origin Google Fonts stylesheet when the browser cancels it during redirect |
+
+The redirect guard and the dynamic module loader are both in `index.html`;
+`tools/build-standalone.mjs` removes the guard and inlines the bundled module
+graph so the standalone copy does not redirect to itself.
+
+---
+
+## 7. Defects found and fixed during the redesign
+
+Every item below was found by looking at a rendered screenshot, by a failing
+automated check, or by opening the deck over `file://`, and was fixed and
+re-verified.
 
 | # | Slide / area | Defect found | Fix applied | Re-verified |
 |---|---|---|---|---|
-| 1 | 10, 13 | `.body-row` was scoped to `.s3`, so slides 10 and 13 lost their grid layout. The S10 architecture diagram overflowed the slide by **602 px** and ran under the slide counter. | Moved `.body-row` to `components.css` as a global class. | Layout sweep clean at 8 viewports |
-| 2 | 05 | The MVP board overflowed the slide by **267 px**. The pool column was too narrow, so feature labels wrapped to three lines, and the hint text overlapped the pool. | Redesigned the board: a full-width unsorted strip of compact chips above four side-by-side buckets; shortened the move-to menu labels; removed the overlapping hint. | Overflow now 0; drag, menu, suggest and reset all pass |
-| 3 | 07 | The decision-tree SVG had broken geometry: logos overlapped the row labels ("Computer Vision" ran into the ML Kit mark), the tool names overlapped the descriptions, and every description was clipped off the right edge of the slide. | Rewrote the diagram on a fixed coordinate system with dedicated columns for the need, the arrow, the mark, the tool name and the description. | Inspected — no overlap, nothing clipped |
-| 4 | 07 | Product marks and wordmarks were both shown, so "ML Kit" appeared twice and the marks were illegible at 36 px. | Measured the artwork bounds of each logo from the source pixels (`tools/logo-bounds.mjs`, `tools/logo-crop.mjs`) and cropped each mark with a nested SVG `viewBox`, so the mark and the text label sit side by side. | Inspected — marks legible, no duplication |
-| 5 | 10 | "Client SDK for Gemini" overflowed its box, and a rotated "data + auth" label collided with the connector line. | Widened the middle column, reduced the diagram's sub-label size to 19 px, and moved the flow labels into a legend under the diagram. | Inspected — no overflow, no collision |
-| 6 | 08 | The ecosystem cards were top-aligned inside a stretched grid, leaving a ~350 px empty band, and the documentation links were orphaned in a separate row at the bottom. | Gave each card a one-line description and pinned it to the card foot; moved the documentation links into a labelled "Official docs" band that belongs to the slide. | Inspected — the map fills the frame |
-| 7 | 06, 12, 13, 14, 15 | Large empty bands at the bottom of the slide: content did not fill the 1920 × 1080 frame, leaving the deck looking unfinished. | Rebalanced each slide — S06 links anchored to the card foot, S12 gained a live prompt panel, S13 gained a PR checklist, S14 gained per-card deliverables and a "definition of done" band, S15 recomposed. | Inspected slide by slide |
-| 8 | 04 | The "vague idea" card was 460 px tall with ~200 px of empty space below a single sentence. | Added the three vague answers ("Who? Everyone." etc.) so the card contrasts with the clear statement beside it. | Inspected — balanced |
-| 9 | 02 | The four stat labels wrapped unevenly (one to three lines, the rest to one), breaking the baseline alignment. | Shortened the labels to "AppBuildersPH", "GitHub · Philippines", "hackathon wins", "projects". | Inspected — aligned |
-| 10 | 15 | The closing headline used a large purple-to-pink gradient across two lines, which read as the generic "purple AI gradient" the brief asks to avoid. | Made the closing headline solid ink and moved the gradient to a single Gemini sparkle. The gradient now appears only on the word "MVP" on slide 01. | Inspected — on brand |
-| 11 | 12 | The CLEAR cards had a ~200 px void between the description and the example box. | Added a "why it matters" line to each letter and kept the examples aligned along the card foot. | Inspected — even rhythm |
-| 12 | PDF | Box shadows rasterised as hard-edged rectangles around every card, and the `background-clip: text` gradient on "MVP" was clipped mid-word with a visible rectangle edge. | Added `css/print.css`: shadows are disabled in print, and the gradient word falls back to solid Google blue in the PDF only. | PDF page 1 inspected from the file; all 15 slides inspected in print media |
-| 13 | 02 | The `width`/`height` attributes on three images did not match the files actually referenced — the portrait said 1200 × 1500 (file is 720 × 900) and the two hackathon derivatives said 1600 × 1067 (file is 1600 × 1066). | Corrected the attributes to the real dimensions. | Verified against `sips` output |
-| 14 | 02 | The portrait derivative was 641 KB at 960 × 1200 — larger than needed for a 420 × 730 slot. | Re-derived at 720 × 900 (402 KB), aspect ratio 0.8 preserved exactly. | Verified against `sips` output |
-| 15 | all | The `.ctrl` class used by the slide 05 and 12 headers was dropped when `components.css` was restructured. | Restored the rule in `components.css`. | Screenshot inspection |
-| 16 | test tooling | The QA scripts read `window.__deck` before the ES module finished executing, which made the suite flaky under parallel load. | Added `waitForFunction(() => window.__deck)` to all four scripts. | Suite now stable across repeated runs |
+| 1 | 01 | Hero image sat too low against the title baseline. | Vertically centred the cover art column. | Screenshot |
+| 2 | 03 | The slide still carried three photographs and left a large empty lower half. | Made slide 03 purely typographic — four-step rule, three mistakes, closing line — and centred the block vertically. | Screenshot at 1920 and 1366 |
+| 3 | 04 | The definition list was stranded at the bottom, and the two comparison labels did not share a baseline. | Top-aligned the comparison columns with a consistent top offset; the arrow spans the full row height; the definition list follows the content instead of being pushed down. | Screenshot |
+| 4 | 06 | The three resource columns left a dead middle band; the design specimen floated. | Restructured into three ruled resource rows beside a full-height type specimen (display "Aa", sample line, swatches, action). | Screenshot |
+| 5 | 08 | Chips were pushed to the floor of each cell and the 3×2 grid left ragged gaps. | Rebuilt as a 2×3 ruled grid with description → chips order; blended the white-backed Firebase and Google Cloud logos with `mix-blend-mode: multiply`. | Screenshot |
+| 6 | 09 | Dark Gemini and Helios screenshots sat in white letterboxes. | Added dark/black frame variants matched to each image's own background; darkened captions on dark frames. | Screenshot |
+| 7 | 11 | The comparison block sat high and the "what's missing" list was pushed to the bottom. | Centred the comparison block and let the list follow its content. | Screenshot |
+| 8 | 13 | Six foundations in two columns left the right column short; the code panel stretched into an empty black void. | Made the foundations one full-height column and sized the code panel to its content. | Screenshot |
+| 9 | 14 | Sprint phases did not fill the available height, and the four columns read as unrelated blocks. | Let the phases fill the height, added vertical column rules and anchored deliverables at the bottom. | Screenshot |
+| 10 | 05 | The MVP board opened unsorted, so the slide communicated nothing until the presenter clicked. | Default state is now the suggested 3/3/2/2 split; controls renamed "Suggested split" and "Clear board"; clear still returns all ten features to the pool for a live exercise. | Automated tests 16–20 |
+| 11 | all | Opening `index.html` from the filesystem produced a blank page because browsers block ES modules over `file://`. | Added a `file://` redirect to the bundled `standalone.html`; switched to a dynamic module loader so no module fetch is attempted on `file://`; added `npm run build` and `start.command`. | Direct `file://` test |
+| 12 | all | Metadata colour `#928B7C` measured only 2.98:1 on the paper background. | Darkened `--ink-3` to `#6F6759` (4.91:1). | Contrast calculation |
+| 13 | QA | The notes assertion was case-sensitive while CSS uppercases the header. | Made the check case-insensitive. | 48/48 |
+| 14 | PDF | The static PDF showed the CLEAR slide with all five letters hidden. | The exporter clicks "Show all" before printing; page 12 text was extracted from the PDF and verified. | PDF text extraction |
+| 15 | 15 / 08 | The supplied Free Developer Stack Handbook QR was not used. | Added the handbook QR (190 px) beside the socials QR on slide 15, with a written link, and a "Free Stack Handbook" link in slide 08's docs row. | QR decode + link check |
 
 ### Not defects — deliberate decisions
 
@@ -204,47 +236,49 @@ automated check, and was fixed and re-verified.
 | Faces of other people in the hackathon photographs | `caffeine_hackathon.jpg` and `skydev_hackathon.jpg` show attendees and judges; `bitpyre_hackathon.jpg` shows the BitPyre team. These are public photos of the speaker's own hackathon history and are used unmodified and uncropped. Flagged for the speaker's review. |
 | Missing EasyLense, GDG, Stitch, Gemini and AI Edge imagery | No file for these exists in the supplied folder. Nothing was fabricated: those products appear as text wordmarks, and Gemini and Google AI Edge use drawn marks. Documented in `docs/ASSET_INVENTORY.md`. |
 | The LinkedIn link cannot be auto-verified | LinkedIn blocks automated clients. The URL comes from the speaker's own QR code and is also written out as text on slide 15. |
+| Slide 03 has no photographs | Deliberate typographic composition; all photographs remain on slide 02 and all supplied images are still used. |
 | The PDF shows "MVP" in solid blue rather than the Gemini gradient | Chromium's PDF rasteriser clips `background-clip: text` gradients. The live deck keeps the full gradient; only the PDF fallback is flattened. |
 
 ---
 
-## 7. Visual inspection checklist
+## 8. Visual inspection checklist
 
 Every one of the 15 slides was screenshotted and reviewed at 1920 × 1080, and
-again in print media.
+again in print media. The final full-deck pass reported zero overflow and zero
+console/network errors.
 
 | Looked for | Outcome |
 |---|---|
-| Misaligned text | Fixed on slides 02, 04, 07, 10 and 14. No remaining misalignment. |
-| Uneven spacing | Fixed on slides 05, 06, 08, 12, 13 and 14. |
-| Poor image composition | The portrait crop was retuned to `object-position: 50% 28%`; the SkyDev crop keeps the sponsor banner; the BitPyre frame is never cropped. |
-| Inconsistent backgrounds | One beige canvas throughout; slides 01 and 15 add the same family of soft radial washes. |
-| Clipped elements | Zero after the `.body-row` and diagram fixes. |
-| Excessive empty areas | Fixed on slides 04, 06, 08, 12, 13, 14 and 15. |
-| Overloaded slides | Slide 02 carries the most material; the hierarchy was tuned (60 px title, 27 px roles) so it still reads as an editorial spread. |
-| Unreadable content | Checked at 1366 × 768 and 640 × 480. Smallest body text is 19 px on a 1920 canvas. |
-| Broken diagrams | Both SVG diagrams rebuilt and re-inspected. |
+| Misaligned text | Fixed on slides 01, 04, 06, 08 and 11. No remaining misalignment. |
+| Uneven spacing | Fixed on slides 03, 06, 08, 11, 13 and 14. |
+| Poor image composition | The portrait crop is tuned to `object-position: 50% 28%`; the SkyDev crop keeps the sponsor banner; the BitPyre frame is never cropped; dark screenshots use matched dark frames. |
+| Inconsistent backgrounds | One paper canvas throughout; no cards, shadows or radial washes. |
+| Clipped elements | Zero after the layout fixes. |
+| Excessive empty areas | Fixed on slides 03, 04, 06, 08, 11, 13 and 14. |
+| Overloaded slides | Slide 02 carries the most material; the hierarchy was tuned so it still reads as an editorial spread. |
+| Unreadable content | Checked at 1366 × 768 and 640 × 480. Smallest body text is 16–17 px on a 1920 canvas; metadata is 4.9:1 or darker. |
+| Broken diagrams | Both SVG diagrams re-inspected; logo marks and labels do not overlap. |
 | Logo legibility | Every supplied logo is shown at a size where its mark is readable; the 225 px Google Cloud file is never blown up. |
 
 ---
 
-## 8. Accessibility verification
+## 9. Accessibility verification
 
 | Requirement | How it was checked | Result |
 |---|---|---|
 | Keyboard navigation | Every shortcut exercised in the automated suite | **PASS** |
-| Visible focus states | `:focus-visible` ring (3 px, 3 px offset) on every interactive element | **PASS** |
+| Visible focus states | `:focus-visible` ring (2 px, 3 px offset) on every interactive element | **PASS** |
 | Reduced motion | Second browser context with `reducedMotion: "reduce"` | Transitions and animations collapse to 0.00001 s |
-| Alt text | Enumerated in the suite — 18 of 18 images | **PASS** |
+| Alt text | Enumerated in the suite — 15 of 15 images | **PASS** |
 | ARIA live slide counter | `aria-live="polite"` on `#counter-label` | **PASS** |
 | Hidden inactive slides | `aria-hidden="true"` on 14 slides | **PASS** |
 | Inert inactive slides | `inert` on 14 slides | **PASS** |
 | Overlay focus handling | Focus moves into an open overlay and is trapped while it is open, then restored on close | **PASS** |
-| Colour contrast | `#5F6368` on `#F5F1E8` ≈ 6.4:1; muted `#6F6759` ≈ 5.2:1 | Both pass WCAG AA |
+| Colour contrast | Body `#666154` on `#F4F0E7` ≈ 5.4:1; metadata `#6F6759` ≈ 4.9:1; primary ink ≈ 15.3:1 | All pass WCAG AA |
 
 ---
 
-## 9. Outstanding items for the speaker
+## 10. Outstanding items for the speaker
 
 These are not defects in the build — they are decisions only the speaker can
 make.
@@ -262,10 +296,13 @@ make.
    `github.com/darknecrocities/Helios`, `huggingface.co/Darknecrocities/Helios`
    and `domodomo.site` (all confirmed reachable). Add any further links you
    want on slide 15.
+6. **Confirm the handbook is public.** The supplied QR and the written link
+   both resolve to the *Free Developer Stack Handbook* Google Doc; anyone with
+   the link can open it. Change the sharing setting if that is not intended.
 
 ---
 
-## 10. Reproducing this report
+## 11. Reproducing this report
 
 ```bash
 cd /Users/arronkianparejas/xavier
@@ -275,6 +312,7 @@ npm run qa             # terminal 2 — 48 checks
 npm run qa:responsive  # 8 viewport sizes
 node tools/link-check.mjs
 node tools/verify-qr.mjs
+npm run build          # regenerate standalone.html
 npm run pdf            # regenerate dist/from-idea-to-mvp.pdf
 ```
 

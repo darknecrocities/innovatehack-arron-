@@ -74,8 +74,9 @@ await page.evaluate(() => window.__deck.nav.show(3));
 await page.keyboard.press("n");
 await page.waitForTimeout(300);
 const notesText = await page.locator("#notes").innerText().catch(() => "");
+const notesHasSlide4 = notesText.toLowerCase().includes("slide 4");
 record("N opens speaker notes for the current slide", "notes show slide 4 content",
-  notesText.includes("Slide 4"), notesText.includes("Slide 4"));
+  notesText.slice(0, 48), notesHasSlide4);
 record("Notes include a main message and a transition", "message + transition",
   notesText.includes("MAIN MESSAGE") && notesText.includes("TRANSITION"),
   notesText.includes("MAIN MESSAGE") && notesText.includes("TRANSITION"));
@@ -89,7 +90,7 @@ await page.waitForTimeout(400);
 await page.click('[data-mvp="suggest"]');
 await page.waitForTimeout(300);
 let counts = await page.locator(".bucket .count").allInnerTexts();
-record("MVP board: 'Show suggested' distributes all 10 features", "3,3,2,2 across four buckets", counts.join(","),
+record("MVP board: 'Suggested split' distributes all 10 features", "3,3,2,2 across four buckets", counts.join(","),
   counts.join(",") === "3,3,2,2" && counts.reduce((a, b) => a + Number(b), 0) === 10);
 
 await page.selectOption('.feat[data-id="sos"] select', "wont");
@@ -117,10 +118,10 @@ record("MVP board: drag and drop moves a feature into a bucket", "Must Have coun
 await page.click('[data-mvp="reset"]');
 await page.waitForTimeout(300);
 counts = await page.locator(".bucket .count").allInnerTexts();
-record("MVP board: Reset empties every bucket", "0,0,0,0", counts.join(","),
+record("MVP board: Clear board empties every bucket", "0,0,0,0", counts.join(","),
   counts.join(",") === "0,0,0,0");
 const poolCount = await page.locator(".mvp-pool .feat").count();
-record("MVP board: Reset returns all features to the pool", "10 unsorted", String(poolCount), poolCount === 10);
+record("MVP board: Clear board returns all features to the pool", "10 unsorted", String(poolCount), poolCount === 10);
 
 /* ------------------------------------------- 6. stack selector (slide 07) */
 
@@ -205,7 +206,7 @@ record("Every image loads", `${images.length} images, 0 broken`, `${images.lengt
   broken.length === 0, broken.map((b) => b.src).join(", "));
 const noAlt = images.filter((i) => !i.alt.trim());
 record("Every image has alt text", "0 missing", `${noAlt.length} missing`, noAlt.length === 0);
-record("Image count", "18 <img> elements (12 files, 6 re-used)", String(images.length), images.length === 18);
+record("Image count", "15 <img> elements (13 files, 2 re-used)", String(images.length), images.length === 15);
 
 // SVG <image> references inside the diagrams (slide 07 and 10) load the logo files too
 const svgImages = await page.evaluate(() =>

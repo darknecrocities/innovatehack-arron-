@@ -25,6 +25,10 @@ await page.evaluate(async () => {
 });
 await page.waitForTimeout(1500);
 
+// Print the CLEAR framework fully revealed so the static PDF is readable.
+await page.evaluate(() => document.querySelector('[data-clear="all"]')?.click());
+await page.waitForTimeout(400);
+
 const broken = await page.evaluate(() =>
   [...document.querySelectorAll("#stage img")].filter((i) => !i.naturalWidth).map((i) => i.src));
 if (broken.length) {

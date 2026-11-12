@@ -6,15 +6,20 @@ Google Developer Groups on Campus — Xavier Ateneo.
 **Speaker:** Arron Kian Parejas · **Date:** November 16, 2026 · **Platform:** Google Meet
 **Session:** *From Idea to MVP — Scoping, Stack Selection, and Building with Google AI Tools*
 
-Built with plain HTML, CSS and vanilla JavaScript. No build step, no framework,
-no bundler.
+Built with plain HTML, CSS and vanilla JavaScript. No framework and no runtime
+build step. A small optional build (`npm run build`) creates a single-file
+`standalone.html` so the deck also opens by double-clicking from the filesystem.
 
 ---
 
 ## 1. Run it locally
 
-The deck uses ES modules, so it must be served over HTTP (opening `index.html`
-from the filesystem will not work).
+### The quick way
+
+Double-click **`start.command`**. It starts a local server on port 8899 and
+opens the deck in your browser.
+
+Or serve it yourself:
 
 ```bash
 cd /Users/arronkianparejas/xavier
@@ -25,6 +30,21 @@ Then open **<http://localhost:8899/>**.
 
 Any static server works — `npx serve`, `php -S localhost:8899`,
 `npx http-server`, or VS Code's *Live Server* extension.
+
+### Opening the file directly
+
+Browsers block ES modules over `file://`. If you double-click `index.html`, it
+detects the `file:` protocol and redirects to **`standalone.html`**, a bundled
+copy with all CSS and JavaScript inlined. Hash links are preserved, so
+`index.html#/9` still opens slide 9.
+
+`standalone.html` is generated — after changing any CSS or JavaScript, rebuild
+it:
+
+```bash
+npm install   # once; installs esbuild
+npm run build
+```
 
 > **First run only:** the deck fetches Google Fonts (Google Sans Flex, Inter,
 > JetBrains Mono) from the network. It still works offline, but it falls back
@@ -85,8 +105,9 @@ from the same source so the two can never drift apart.
 
 ### Slide 05 — MVP prioritisation board
 
-Ten sample features for an emergency-reporting platform start in an **Unsorted**
-row. Put them into **Must Have**, **Should Have**, **Could Have**, or
+Ten sample features for an emergency-reporting platform open in the speaker's
+**suggested split** — Must 3, Should 3, Could 2, Won't 2 — so the slide reads
+immediately. Move them into **Must Have**, **Should Have**, **Could Have**, or
 **Won't Have · Deferred**.
 
 - **Pointer:** drag a chip into a bucket. The bucket highlights while you drag.
@@ -94,8 +115,9 @@ row. Put them into **Must Have**, **Should Have**, **Could Have**, or
   (`Unsorted` / `Must` / `Should` / `Could` / `Won't`). Tab to a chip, open the
   menu, choose a bucket. Focus returns to the chip after the move.
 - The coloured count in each bucket header updates live.
-- **Show suggested** applies the speaker's own suggested split
-  (3 / 3 / 2 / 2). **Reset** empties every bucket.
+- **Suggested split** restores the 3 / 3 / 2 / 2 arrangement.
+  **Clear board** returns all ten features to the unsorted pool for a live
+  exercise.
 
 ### Slide 07 — Stack selector
 
@@ -156,8 +178,9 @@ RESPONSE` pipeline while it is on screen. All animation is disabled under
 7. **Have a fallback.** `dist/from-idea-to-mvp.pdf` is a 15-page 16:9 PDF
    backup of the same deck. Upload it to Drive as a second tab, so if the
    browser or the network fails you can present from the PDF.
-8. **Check the QR code.** Slide 15 shows a QR code that resolves to the
-   speaker's LinkedIn profile, with the URL written out beside it. Test it
+8. **Check the QR codes.** Slide 15 shows two codes: the larger one opens the
+   **Free Developer Stack Handbook**, and the smaller one opens the speaker's
+   LinkedIn profile. Both URLs are written out beside the codes. Test them
    with a phone camera on the same screen-share setup before going live.
 
 ---
@@ -165,13 +188,15 @@ RESPONSE` pipeline while it is on screen. All animation is disabled under
 ## 6. Project layout
 
 ```
-index.html                 Entry point — the stage and the overlay shells
+index.html                 Entry point — the stage, overlay shells, file:// guard
+standalone.html            Generated single-file build (open directly, no server)
+start.command              Double-click launcher: server + browser
 css/
   variables.css            Design tokens: palette, type, shape, motion
   reset.css                Minimal reset and base element styles
   typography.css           Scale, headings, the Gemini gradient wordmark
   presentation.css         Stage, progress bar, counter, overlay chrome
-  components.css           Cards, chips, flows, tables, MVP board, CLEAR
+  components.css           Frames, rows, flows, tables, MVP board, CLEAR
   slides.css               Per-slide layout for all 15 slides
   animations.css           Keyframes and the reduced-motion override
   print.css                One 1920x1080 page per slide for PDF export
@@ -192,14 +217,18 @@ js/
     part1.js part2.js part3.js   The slide markup, split for readability
     notes.js               Presenter notes (source of docs/SPEAKER_NOTES.md)
 assets/
-  images/                  The 12 supplied images, unmodified
+  images/                  The 13 supplied images, unmodified
   images/optimized/        Lighter derivatives used where a photo is large
   asset-manifest.json      Every asset, its dimensions and its slide placement
 docs/
+  DESIGN_MINIMAL.md        The typographic design system and per-slide layout
   ASSET_INVENTORY.md       Full inventory, placement map and usage report
   SPEAKER_NOTES.md         The full script (generated from js/content/notes.js)
   PRESENTATION_PLAN.md     Narrative arc, design system, rule tables
-tools/                     QA, capture and export scripts (dev only)
+tools/
+  build-standalone.mjs     Bundles standalone.html with esbuild
+  qa.mjs, responsive-test.mjs, link-check.mjs, ...
+  export-pdf.mjs           Generates dist/from-idea-to-mvp.pdf
 dist/                      Generated PDF backup
 ```
 
@@ -208,13 +237,14 @@ dist/                      Generated PDF backup
 ## 7. Development and QA
 
 The `tools/` directory holds the verification scripts. They need
-`npm install` once (Playwright) and a server running on port 8899.
+`npm install` once (Playwright and esbuild) and a server running on port 8899.
 
 ```bash
 npm install          # once
 npm run serve        # in another terminal
 npm run qa           # 48 end-to-end checks
 npm run qa:responsive # 8 viewport sizes
+npm run build        # regenerate standalone.html after CSS/JS changes
 npm run notes        # regenerate docs/SPEAKER_NOTES.md
 npm run pdf          # regenerate dist/from-idea-to-mvp.pdf
 ```
@@ -223,6 +253,7 @@ Other useful scripts:
 
 | Script | Purpose |
 |---|---|
+| `tools/build-standalone.mjs` | Bundle CSS + JS into `standalone.html` for `file://` use |
 | `tools/capture.mjs <w> <h> <tag> <dir>` | Screenshot every slide and report layout overflow |
 | `tools/print-shots.mjs <dir>` | Screenshot every slide in print media |
 | `tools/responsive-test.mjs` | Check 16:9 scaling and clipping at 8 viewport sizes |
@@ -245,14 +276,14 @@ Results and defects found are recorded in **`QA_REPORT.md`**.
 - Meaningful `alt` text on every image; decorative graphics are hidden from
   assistive technology; diagrams carry a full text description.
 - `prefers-reduced-motion` disables animation and transitions.
-- Body text measures about 6.4:1 contrast on the beige canvas; the muted
-  secondary line about 5.2:1. Both pass WCAG AA.
+- Body text measures about 5.4:1 contrast on the paper canvas; metadata about
+  4.9:1 and primary ink about 15.3:1. All pass WCAG AA.
 
 ---
 
 ## 9. Content and assets
 
-- All 12 supplied images are used on at least one slide. Placement, cropping
+- All 13 supplied images are used on at least one slide. Placement, cropping
   decisions and the usage report are in **`docs/ASSET_INVENTORY.md`**; the
   machine-readable version is **`assets/asset-manifest.json`**.
 - Original image files are untouched. Lighter derivatives live in
@@ -260,6 +291,9 @@ Results and defects found are recorded in **`QA_REPORT.md`**.
 - No achievement, statistic or credential was invented. Where a logo does not
   exist in the supplied folder, the deck uses a **text wordmark**, not a
   fabricated graphic.
+- Slide 15 carries two QR codes — the Free Developer Stack Handbook and the
+  speaker's LinkedIn profile — with both URLs written out in text. The handbook
+  is also linked from slide 08.
 - All external links point to official documentation, open in a new tab, and
   carry no tracking parameters.
 

@@ -13,6 +13,7 @@ const URLS = [
   "https://ai.google.dev/gemini-api/docs/structured-output",
   "https://ai.google.dev/gemini-api/docs/vision",
   "https://www.linkedin.com/in/arron-parejas/",
+  "https://docs.google.com/document/d/1hxBY6auIP5fya0ir9FhvKsGnrCcVYjRnaIrMpx8I9Nw/edit",
   "https://github.com/darknecrocities/Helios",
   "https://huggingface.co/Darknecrocities/Helios",
   "https://domodomo.site",

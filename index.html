@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>From Idea to MVP · InnovateHack+ 2.0</title>
   <meta name="description" content="From Idea to MVP: Scoping, Stack Selection, and Building with Google AI Tools. Arron Kian Parejas at InnovateHack+ 2.0.">
+  <script>
+    // Browsers block ES modules on file:// (origin "null"). Double-clicking
+    // index.html therefore opens the pre-bundled single-file build instead.
+    if (location.protocol === "file:") location.replace("standalone.html" + location.hash);
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -34,6 +39,15 @@
       <div id="selector" class="overlay" aria-hidden="true"></div>
     </main>
   </div>
-  <script type="module" src="js/app.js"></script>
+  <script>
+    // Load the module only over HTTP. On file:// the head guard above opens
+    // the pre-bundled standalone.html instead, so no module fetch is attempted.
+    if (location.protocol !== "file:") {
+      const s = document.createElement("script");
+      s.type = "module";
+      s.src = "js/app.js";
+      document.body.appendChild(s);
+    }
+  </script>
 </body>
 </html>

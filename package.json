@@ -6,15 +6,24 @@
   "type": "module",
   "scripts": {
     "serve": "python3 -m http.server 8899",
+    "start": "open http://localhost:8899/",
+    "build": "node tools/build-standalone.mjs",
     "qa": "node tools/qa.mjs",
     "qa:responsive": "node tools/responsive-test.mjs",
     "qa:capture": "node tools/capture.mjs 1920 1080 1920x1080 /tmp/shots/1920x1080",
     "notes": "node tools/build-notes.mjs",
     "pdf": "node tools/export-pdf.mjs"
   },
-  "keywords": ["presentation", "keynote", "gdg", "google-ai", "gemini"],
+  "keywords": [
+    "presentation",
+    "keynote",
+    "gdg",
+    "google-ai",
+    "gemini"
+  ],
   "license": "MIT",
   "devDependencies": {
+    "esbuild": "^0.28.2",
     "playwright": "^1.65.0"
   }
 }

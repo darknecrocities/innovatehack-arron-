@@ -65,13 +65,13 @@ const TREE = [
 ];
 
 const TREE_W = 1680;
-const ROW_H = 94;
-const ROW_GAP = 18;
-const ROOT_W = 300;
-const ROW_X = 400;
-const MARK_X = 730;   // left edge of the product-mark column
-const MARK_H = 44;
-const TEXT_X = 812;   // left edge of the tool wordmark / description column
+const ROW_H = 92;
+const ROW_GAP = 14;
+const ROOT_W = 340;
+const ROW_X = 420;
+const MARK_X = 700;   // left edge of the product-mark column
+const MARK_H = 38;
+const TEXT_X = 786;   // left edge of the tool wordmark / description column
 
 export function buildTree(root) {
   const H = TREE.length * ROW_H + (TREE.length - 1) * ROW_GAP;
@@ -87,31 +87,32 @@ export function buildTree(root) {
     inner += `<path class="edge" d="M ${ROOT_W} ${rootCY} C ${ROOT_W + 70} ${rootCY}, ${ROW_X - 70} ${cy}, ${ROW_X} ${cy}"/>`;
   });
 
-  // root node
+  // root statement, set as type rather than a boxed node
   inner += `<g class="node root">
-    <rect x="0" y="${rootY}" width="${ROOT_W}" height="${rootH}" rx="24"/>
-    <text x="${ROOT_W / 2}" y="${rootY + 52}" text-anchor="middle">What does your</text>
-    <text x="${ROOT_W / 2}" y="${rootY + 86}" text-anchor="middle">problem need?</text>
+    <line class="root-rule" x1="0" y1="${rootCY - 68}" x2="0" y2="${rootCY + 58}"/>
+    <text x="26" y="${rootCY - 10}">What does your</text>
+    <text x="26" y="${rootCY + 30}">problem need?</text>
   </g>`;
 
-  // rows
+  // rows, separated by hairlines
   TREE.forEach((t, i) => {
     const y = i * (ROW_H + ROW_GAP);
-    const markTop = y + 17;
+    const markTop = y + (ROW_H - MARK_H) / 2;
 
     let icon = "";
-    if (t.mark === "gemini") icon = sparkle(MARK_X + 4, markTop, MARK_H / 24);
-    else if (t.mark === "edge") icon = `<circle cx="${MARK_X + MARK_H / 2}" cy="${markTop + MARK_H / 2}" r="14" fill="#34A853"/>`;
+    if (t.mark === "gemini") icon = sparkle(MARK_X + 2, markTop, MARK_H / 24);
+    else if (t.mark === "edge") icon = `<circle cx="${MARK_X + MARK_H / 2}" cy="${markTop + MARK_H / 2}" r="11" fill="#34A853"/>`;
     else icon = mark(MARK_X, markTop, MARK_H, t.mark);
 
     inner += `<g class="node row" tabindex="0" data-tree="${i}">
       <title>${t.need} leads to ${t.tool}. ${t.when}</title>
-      <rect x="${ROW_X}" y="${y}" width="${TREE_W - ROW_X}" height="${ROW_H}" rx="22"/>
-      <text class="need" x="${ROW_X + 28}" y="${y + 50}">${t.need}</text>
-      <text class="arrow" x="686" y="${y + 50}">→</text>
+      <rect x="${ROW_X}" y="${y}" width="${TREE_W - ROW_X}" height="${ROW_H}" rx="0"/>
+      <text class="need" x="${ROW_X}" y="${y + 44}">${t.need}</text>
+      <text class="arrow" x="670" y="${y + 44}">→</text>
       ${icon}
-      <text class="tool" x="${TEXT_X}" y="${y + 50}">${t.tool}</text>
-      <text class="sub" x="${TEXT_X}" y="${y + 78}">${t.when}</text>
+      <text class="tool" x="${TEXT_X}" y="${y + 39}">${t.tool}</text>
+      <text class="sub" x="${TEXT_X}" y="${y + 64}">${t.when}</text>
+      <line class="row-line" x1="${ROW_X}" y1="${y + ROW_H}" x2="${TREE_W}" y2="${y + ROW_H}"/>
     </g>`;
   });
 

@@ -1,0 +1,2615 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>From Idea to MVP · InnovateHack+ 2.0</title>
+  <meta name="description" content="From Idea to MVP: Scoping, Stack Selection, and Building with Google AI Tools. Arron Kian Parejas at InnovateHack+ 2.0.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+  <style>
+:root {
+  /* Paper — warm beige, the identity of the deck */
+  --bg: #F4F0E7;
+  --bg-2: #FBF8F1;
+  --surface: #FFFFFF;
+  --ink: #1B1A16;
+  --ink-2: #666154;
+  --ink-3: #6F6759;
+  --line: #DBD3C2;
+  --line-strong: #B9B09C;
+
+  /* Google accents — used as small signals, never as fields */
+  --blue: #4285F4;
+  --red: #EA4335;
+  --yellow: #FBBC05;
+  --green: #34A853;
+
+  /* Shape — sharp by default; pills only where something is interactive */
+  --radius: 0;
+  --radius-sm: 0;
+  --radius-pill: 999px;
+
+  /* Type */
+  --font-display: "Google Sans Flex", "Google Sans", "Product Sans", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "Google Sans Code", "JetBrains Mono", ui-monospace, monospace;
+
+  /* Motion */
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --shadow: none;
+  --shadow-lift: none;
+
+  /* Layout */
+  --pad-x: 112px;
+  --pad-y: 80px;
+
+  /* Retained for the SVG diagrams */
+  --gemini: linear-gradient(102deg, #4285F4 0%, #7C86D9 30%, #D97C86 60%, #FBBC05 88%);
+  --gemini-soft: linear-gradient(102deg, #4285F4 0%, #D97C86 55%, #FBBC05 100%);
+}
+
+</style>
+  <style>
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; overflow: hidden; background: var(--bg); color: var(--ink); }
+body { font-family: var(--font-body); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+h1, h2, h3, h4, p, ul, ol, figure, dl, dd { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+img, svg { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; cursor: pointer; border: 0; background: none; }
+a { color: inherit; }
+::selection { background: var(--ink); color: var(--bg); }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+</style>
+  <style>
+/* Editorial type scale. Mono labels and hairlines carry the structure. */
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font: 500 14px/1 var(--font-mono);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.eyebrow::before {
+  content: "";
+  width: 26px;
+  height: 1px;
+  background: var(--line-strong);
+  flex: none;
+}
+
+.h-xl {
+  font: 500 148px/.92 var(--font-display);
+  letter-spacing: -.045em;
+}
+.h-lg {
+  font: 500 64px/1.04 var(--font-display);
+  letter-spacing: -.035em;
+}
+.h-md {
+  font: 500 38px/1.12 var(--font-display);
+  letter-spacing: -.025em;
+}
+
+.lead {
+  font: 400 30px/1.4 var(--font-body);
+  color: var(--ink-2);
+  max-width: 900px;
+}
+.body {
+  font: 400 22px/1.45 var(--font-body);
+  color: var(--ink-2);
+}
+.small {
+  font: 400 18px/1.45 var(--font-body);
+  color: var(--ink-2);
+}
+.fine {
+  font: 400 14px/1.5 var(--font-body);
+  color: var(--ink-3);
+}
+.label {
+  font: 500 11px/1.2 var(--font-mono);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.mono { font-family: var(--font-mono); }
+
+.statement {
+  font: 400 40px/1.25 var(--font-display);
+  letter-spacing: -.025em;
+  color: var(--ink);
+}
+.quote {
+  font: 500 36px/1.28 var(--font-display);
+  letter-spacing: -.025em;
+}
+
+.accent-blue { color: var(--blue); }
+.accent-red { color: var(--red); }
+.accent-green { color: var(--green); }
+
+/* The word "MVP" is a solid accent, not a gradient: cleaner in print. */
+.grad-text {
+  color: var(--blue);
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+
+</style>
+  <style>
+#viewport {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #E7E0D0;
+}
+
+#stage {
+  width: 1920px;
+  height: 1080px;
+  position: relative;
+  flex: none;
+  transform-origin: center center;
+  background: var(--bg);
+  overflow: hidden;
+  box-shadow: none;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  padding: var(--pad-y) var(--pad-x) 96px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(28px);
+  transition: opacity .45s var(--ease), transform .45s var(--ease), visibility 0s .45s;
+  background: var(--bg);
+}
+.slide.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+}
+.slide.is-past { transform: translateX(-28px); }
+
+.slide-head {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 1500px;
+  flex: none;
+}
+.slide-head.head-row {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  max-width: none;
+  gap: 48px;
+}
+.slide-head.head-row > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ---------------------------------------------------------------- chrome */
+
+#progress {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 2px;
+  width: 100%;
+  background: transparent;
+  z-index: 20;
+}
+#progress-bar {
+  height: 100%;
+  width: 0;
+  background: var(--ink);
+  transition: width .4s var(--ease);
+}
+
+#counter {
+  position: absolute;
+  right: 56px;
+  bottom: 28px;
+  z-index: 20;
+  font: 500 13px var(--font-mono);
+  letter-spacing: .08em;
+  color: var(--ink-2);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+#counter-label { min-width: 62px; text-align: center; }
+#counter button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  font-size: 17px;
+  line-height: 1;
+  color: var(--ink-2);
+  transition: background .2s, color .2s, border-color .2s;
+}
+#counter button:hover { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+
+#brand {
+  position: absolute;
+  left: var(--pad-x);
+  bottom: 34px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font: 500 11px var(--font-mono);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+#brand::before {
+  content: "";
+  width: 18px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue) 25%, var(--red) 25% 50%, var(--yellow) 50% 75%, var(--green) 75%);
+  flex: none;
+}
+
+#help {
+  position: absolute;
+  left: 50%;
+  bottom: 36px;
+  transform: translateX(-50%);
+  z-index: 20;
+  font: 500 11px var(--font-mono);
+  letter-spacing: .08em;
+  color: var(--ink-3);
+  opacity: 0;
+  transition: opacity .3s;
+}
+#help.show { opacity: 1; }
+
+/* --------------------------------------------------------------- overlays */
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: none;
+}
+.overlay.is-open { display: block; }
+
+#overview {
+  background: rgba(244, 240, 231, .98);
+  padding: 64px var(--pad-x);
+  overflow: auto;
+}
+#overview .grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 64px;
+}
+#overview button {
+  text-align: left;
+  padding: 18px 0;
+  border-top: 1px solid var(--line);
+  background: transparent;
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  min-height: 0;
+}
+#overview button .n {
+  font: 500 11px var(--font-mono);
+  letter-spacing: .12em;
+  color: var(--ink-3);
+  flex: none;
+}
+#overview button .t {
+  font: 500 21px/1.25 var(--font-display);
+  letter-spacing: -.01em;
+}
+#overview button:hover .t { color: var(--blue); }
+#overview button.is-current .n { color: var(--blue); }
+#overview button.is-current .t { color: var(--blue); }
+
+#notes {
+  left: auto;
+  width: 640px;
+  background: var(--bg);
+  border-left: 1px solid var(--line-strong);
+  padding: 52px 48px;
+  overflow: auto;
+}
+#notes h3 {
+  font: 500 34px/1.1 var(--font-display);
+  letter-spacing: -.02em;
+  margin-bottom: 12px;
+}
+#notes h4 {
+  font: 500 11px var(--font-mono);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 28px 0 8px;
+}
+#notes p, #notes li { font: 400 18px/1.5 var(--font-body); }
+#notes li { list-style: disc; margin-left: 20px; }
+#notes .time {
+  font: 500 11px var(--font-mono);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+#notes .btn { float: right; }
+
+</style>
+  <style>
+/* ============================================================ media frames */
+
+.photo, .shot {
+  border-radius: 0;
+  overflow: hidden;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  position: relative;
+  box-shadow: none;
+}
+.photo img { width: 100%; height: 100%; object-fit: cover; }
+.shot img { width: 100%; height: 100%; object-fit: contain; }
+.shot.light { background: #fff; }
+.shot.yellow { background: var(--bg-2); }
+.shot.dark { background: #0C0F18; }
+.shot.black { background: #000; }
+.cap {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  font: 500 10px/1 var(--font-mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  background: rgba(244, 240, 231, .93);
+  color: var(--ink-2);
+  padding: 7px 9px;
+  border-radius: 0;
+}
+.shot.dark .cap { background: rgba(12, 15, 24, .92); color: rgba(244, 240, 231, .8); }
+.caption {
+  font: 500 10px/1.4 var(--font-mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-top: 10px;
+}
+
+/* ================================================================== atoms */
+
+.tag {
+  font: 500 11px/1.2 var(--font-mono);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.tag.b { color: var(--blue); }
+.tag.r { color: var(--red); }
+.tag.g { color: var(--green); }
+.tag.y { color: #A67C00; }
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  border: 1px solid var(--line);
+  font: 500 14px/1 var(--font-body);
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.chip .dot { width: 6px; height: 6px; border-radius: 50%; flex: none; }
+.dot.b { background: var(--blue); }
+.dot.r { background: var(--red); }
+.dot.y { background: var(--yellow); }
+.dot.g { background: var(--green); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+.ctrl { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+
+.btn {
+  padding: 9px 16px;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  font: 500 14px/1 var(--font-body);
+  transition: background .2s, color .2s, border-color .2s;
+}
+.btn:hover { background: var(--ink); color: var(--bg); }
+.btn.ghost { border-color: var(--line-strong); color: var(--ink-2); }
+.btn.ghost:hover { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.btn.sel, .btn[aria-pressed="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
+}
+
+.link {
+  text-decoration: none;
+  border-bottom: 1px solid var(--line-strong);
+  padding-bottom: 2px;
+  font: 500 15px/1.4 var(--font-body);
+  color: var(--ink-2);
+  transition: color .2s, border-color .2s;
+}
+.link::after { content: " ↗"; font-size: .85em; color: var(--ink-3); }
+.link:hover { color: var(--ink); border-color: var(--ink); }
+
+/* ================================================================== rules */
+
+.rule { display: flex; align-items: center; gap: 5px; }
+.rule i { width: 34px; height: 3px; display: block; flex: none; }
+.rule span {
+  margin-left: 14px;
+  font: 500 11px/1.3 var(--font-mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* =================================================================== rows */
+
+.rows { display: flex; flex-direction: column; }
+.rows > li {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 16px;
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+  align-items: baseline;
+}
+.rows > li:last-child { border-bottom: 1px solid var(--line); }
+.rows .idx {
+  font: 500 11px/1.4 var(--font-mono);
+  letter-spacing: .12em;
+  color: var(--ink-3);
+}
+.rows h3 { font: 500 24px/1.15 var(--font-display); letter-spacing: -.015em; }
+.rows p { font: 400 17px/1.45 var(--font-body); color: var(--ink-2); margin-top: 4px; }
+.rows .link { font-size: 13px; margin-top: 6px; display: inline-block; }
+
+/* =================================================================== flow */
+
+.flow {
+  display: flex;
+  align-items: stretch;
+  flex: none;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.flow .step {
+  flex: 1;
+  background: none;
+  border-radius: 0;
+  padding: 16px 24px 14px 0;
+  box-shadow: none;
+  font: 500 19px/1.15 var(--font-display);
+  letter-spacing: .005em;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  position: relative;
+}
+.flow .step small {
+  font: 400 13px/1.3 var(--font-body);
+  color: var(--ink-2);
+}
+.flow .step i {
+  font: 500 10px/1 var(--font-mono);
+  letter-spacing: .14em;
+  color: var(--ink-3);
+  font-style: normal;
+  margin-bottom: 3px;
+}
+.flow .arrow {
+  width: 34px;
+  display: grid;
+  place-items: center;
+  color: var(--ink-3);
+  font-size: 15px;
+  flex: none;
+}
+.flow .step.hot { outline: none; color: var(--blue); }
+.flow .step.hot::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: calc(100% - 34px);
+  height: 2px;
+  background: var(--blue);
+}
+
+/* =================================================================== code */
+
+pre.code {
+  background: var(--ink);
+  color: var(--bg);
+  border-radius: 0;
+  padding: 26px 30px;
+  font: 400 18px/1.55 var(--font-mono);
+  white-space: pre-wrap;
+  margin: 0;
+}
+pre.code .k { color: #8AB4F8; }
+pre.code .s { color: #FDE293; }
+pre.code .c { color: #9AA0A6; }
+.panel-dark { background: var(--ink); color: var(--bg); }
+.panel-dark .tag { color: #8AB4F8; }
+.panel-dark pre.code { background: transparent; padding: 0; color: var(--bg); }
+.panel-dark .fine { color: rgba(244, 240, 231, .55); }
+
+/* ================================================================ MVP board */
+
+.mvp { display: grid; grid-template-rows: auto 1fr; gap: 26px; flex: 1; min-height: 0; }
+.mvp-pool {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px 10px;
+  align-content: flex-start;
+  padding: 0 0 20px;
+  border-bottom: 1px solid var(--line-strong);
+}
+.mvp-pool .tag { width: 100%; margin-bottom: 4px; }
+
+.mvp-buckets { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; min-height: 0; }
+.bucket {
+  padding: 0 24px;
+  border-left: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+  transition: background .2s;
+}
+.bucket:first-child { border-left: 0; padding-left: 0; }
+.bucket:last-child { padding-right: 0; }
+.bucket.over { background: rgba(66, 133, 244, .045); }
+.bucket header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  font: 500 18px/1.2 var(--font-display);
+  padding-bottom: 13px;
+  border-bottom: 1px solid var(--line-strong);
+}
+.bucket .bucket-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: 2px;
+}
+.bucket .count {
+  font: 500 11px/1 var(--font-mono);
+  color: var(--ink-3);
+  min-width: 0;
+  padding: 0;
+  background: none;
+}
+.bucket .items { display: flex; flex-direction: column; min-height: 0; overflow: auto; }
+.bucket .feat {
+  width: 100%;
+  border-radius: 0;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 0;
+  font: 400 15px/1.3 var(--font-body);
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  box-shadow: none;
+}
+.bucket .feat select { width: auto; max-width: 74px; margin-left: auto; font-size: 11px; }
+.bucket .empty { font: 400 14px/1.4 var(--font-body); color: var(--ink-3); padding: 10px 0; }
+
+.feat {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 8px 7px 13px;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  box-shadow: none;
+  font: 500 14px/1.2 var(--font-body);
+  cursor: grab;
+}
+.feat:focus-visible { border-color: var(--blue); }
+.feat.dragging { opacity: .35; }
+.feat select {
+  font: 500 11px var(--font-body);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line);
+  background: var(--bg);
+  padding: 3px 5px;
+  cursor: pointer;
+  color: var(--ink-2);
+}
+
+/* ============================================================ stack selector */
+
+#selector .selector-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(27, 26, 22, .3);
+}
+#selector .selector-panel {
+  position: absolute;
+  left: 140px;
+  right: 140px;
+  top: 78px;
+  bottom: 78px;
+  background: var(--bg);
+  border: 1px solid var(--line-strong);
+  padding: 42px 52px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.selector-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 32px; }
+.selector-head > div { display: flex; flex-direction: column; gap: 8px; }
+.sel-wrap { display: grid; grid-template-columns: 520px 1fr; gap: 64px; flex: 1; min-height: 0; }
+.sel-questions { display: flex; flex-direction: column; gap: 0; }
+.q {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+}
+.q .small { font: 500 15px/1.3 var(--font-body); color: var(--ink); }
+.q .row { display: flex; gap: 8px; }
+.q .row .btn { flex: 1; padding: 8px; font-size: 13px; }
+
+.rec {
+  border-left: 1px solid var(--line);
+  padding: 0 0 0 40px;
+  background: transparent;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-height: 0;
+}
+.rec .rec-summary {
+  font: 500 34px/1.15 var(--font-display);
+  letter-spacing: -.025em;
+  color: var(--ink);
+}
+.rec ul { display: flex; flex-direction: column; }
+.rec li {
+  font: 400 18px/1.45 var(--font-body);
+  color: var(--ink-2);
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+}
+.rec li b { color: var(--ink); font-family: var(--font-display); font-weight: 500; }
+
+/* ========================================================== CLEAR framework */
+
+.clear { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; min-height: 0; }
+.letter {
+  padding: 0 24px;
+  border-left: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  opacity: .28;
+  position: relative;
+  transition: opacity .4s var(--ease), transform .4s var(--ease);
+}
+.letter:first-child { border-left: 0; padding-left: 0; }
+.letter:last-child { padding-right: 0; }
+.letter::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 24px;
+  height: 2px;
+  background: var(--c, var(--ink));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .4s var(--ease);
+}
+.letter:last-child::before { right: 0; }
+.letter.on { opacity: 1; }
+.letter.on::before { transform: scaleX(1); }
+.letter .big {
+  font: 400 104px/.9 var(--font-display);
+  letter-spacing: -.05em;
+  color: var(--ink);
+  margin-top: 16px;
+}
+.letter h3 { font: 500 23px/1.15 var(--font-display); letter-spacing: -.015em; }
+.letter p { font: 400 16px/1.4 var(--font-body); color: var(--ink-2); }
+.letter .why { font-size: 14px; color: var(--ink-3); }
+.letter .ex {
+  margin-top: auto;
+  font: 400 13px/1.45 var(--font-mono);
+  color: var(--ink-2);
+  background: none;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  padding: 11px 0 0;
+}
+
+.clear-prompt {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 32px;
+  align-items: start;
+  background: transparent;
+  border-top: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
+  padding: 18px 0;
+  box-shadow: none;
+}
+.clear-prompt .tag { padding-top: 3px; }
+.clear-prompt pre.code {
+  background: transparent;
+  color: var(--ink);
+  padding: 0;
+  font-size: 16px;
+  line-height: 1.55;
+}
+.clear-prompt pre.code .k { color: var(--blue); font-weight: 500; }
+.clear-prompt .placeholder { color: var(--ink-3); }
+
+/* ================================================================ diagrams */
+
+.diagram { width: 100%; height: 100%; }
+.diagram text { font-family: var(--font-display); }
+.edge { fill: none; stroke: var(--line-strong); stroke-width: 1.5; }
+.edge.flow { stroke-width: 1.5; stroke-dasharray: 7 7; animation: dash 1.4s linear infinite; }
+.edge.flow.blue { stroke: var(--blue); }
+.edge.flow.green { stroke: var(--green); }
+
+.node rect { fill: transparent; stroke: transparent; }
+.node text { fill: var(--ink); font-size: 21px; font-weight: 500; }
+.node .sub { fill: var(--ink-2); font-size: 14px; font-weight: 400; font-family: var(--font-body); }
+.node .need { font-size: 21px; fill: var(--ink); font-weight: 500; }
+.node .arrow { font-size: 16px; fill: var(--ink-3); font-weight: 400; }
+.node .tool { font-size: 23px; font-weight: 500; fill: var(--ink); }
+.node.hot rect { stroke: var(--line-strong); stroke-width: 1; fill: var(--bg-2); }
+.node.root rect { fill: transparent; stroke: transparent; }
+.node.root text { fill: var(--ink); font-size: 34px; font-weight: 500; letter-spacing: -.025em; }
+.root-rule { stroke: var(--blue); stroke-width: 2; }
+.row-line { stroke: var(--line); stroke-width: 1; }
+.node.arch text { font-size: 20px; }
+.node.arch .sub { font-size: 14px; }
+.node.arch rect { fill: var(--bg); stroke: var(--line-strong); stroke-width: 1; }
+.zone { fill: none; stroke-width: 1; stroke-dasharray: 5 5; }
+.zone.green { stroke: var(--green); }
+.zone.blue { stroke: var(--blue); }
+.zone-label { font-size: 12px; font-weight: 500; letter-spacing: .16em; font-family: var(--font-mono); }
+.zone-label.green { fill: var(--green); }
+.zone-label.blue { fill: var(--blue); }
+
+.arch-legend { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; }
+.arch-legend li { display: flex; align-items: center; gap: 10px; font: 400 13px/1.4 var(--font-body); color: var(--ink-2); }
+.arch-legend .key { width: 24px; height: 0; border-top: 1px dashed var(--blue); flex: none; }
+.arch-legend .key.green { border-color: var(--green); }
+
+/* ================================================================= tables */
+
+.table { width: 100%; border-collapse: collapse; font: 400 17px/1.4 var(--font-body); }
+.table th {
+  text-align: left;
+  font: 500 10px var(--font-mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 0 16px 10px 0;
+  border-bottom: 1px solid var(--line-strong);
+}
+.table td {
+  padding: 13px 16px 13px 0;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+  color: var(--ink-2);
+}
+.table td:first-child { font: 500 17px var(--font-display); color: var(--ink); width: 106px; }
+.table th:last-child, .table td:last-child { padding-right: 0; }
+
+</style>
+  <style>
+/* Slide-specific compositions. Type, rules and whitespace do the work. */
+
+/* S01 — cover */
+.s1 { justify-content: center; }
+.s1 .cover {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 600px;
+  gap: 90px;
+  align-items: center;
+  flex: 1;
+  min-height: 0;
+}
+.s1 .cover-copy { display: flex; flex-direction: column; align-items: flex-start; }
+.s1 .h-xl { margin-top: 34px; }
+.s1 .lead { margin-top: 32px; max-width: 780px; }
+.s1 .cover-meta {
+  display: flex;
+  gap: 64px;
+  margin-top: 52px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  width: 100%;
+}
+.s1 .cover-meta div { display: flex; flex-direction: column; gap: 6px; }
+.s1 .cover-meta b { font: 500 21px/1.2 var(--font-display); }
+.s1 .cover-meta div > span:last-child { font: 400 15px/1.3 var(--font-body); color: var(--ink-2); }
+.s1 .cover-meta .label { margin-bottom: 2px; }
+.s1 .rule { margin-top: 38px; }
+.s1 .cover-art { align-self: center; display: flex; flex-direction: column; }
+.s1 .cover-art img {
+  width: 100%;
+  height: auto;
+  max-height: 360px;
+  aspect-ratio: 2436 / 1200;
+  object-fit: contain;
+  border: 1px solid var(--line);
+  background: #0B0F19;
+}
+.s1 .cover-art .caption { margin-top: 10px; }
+
+/* S02 — speaker */
+.s2 .profile {
+  display: grid;
+  grid-template-columns: 340px minmax(0, 1fr) 500px;
+  gap: 52px;
+  flex: 1;
+  min-height: 0;
+}
+.s2 .portrait { height: 100%; }
+.s2 .portrait img { object-position: 50% 26%; }
+.s2 .profile-body { display: flex; flex-direction: column; justify-content: space-between; gap: 24px; min-height: 0; }
+.s2 .profile-body .statement { font-size: 30px; line-height: 1.3; }
+.s2 .roles { margin-top: auto; }
+.s2 .roles li { grid-template-columns: 38px 1fr; padding: 10px 0; }
+.s2 .roles li:last-child { border-bottom: 1px solid var(--line); }
+.s2 .roles li > span:last-child { font: 500 18px/1.25 var(--font-display); }
+.s2 .gallery { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 12px; min-height: 0; }
+.s2 .gallery figure { min-height: 0; }
+.s2 .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 48px; flex: none; }
+.s2 .stat { border-top: 1px solid var(--line-strong); padding-top: 14px; }
+.s2 .stat b { display: block; font: 500 44px/1 var(--font-display); letter-spacing: -.03em; }
+.s2 .stat span {
+  display: block;
+  font: 500 10px/1.4 var(--font-mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin-top: 8px;
+}
+
+/* S03 — mindset */
+.s3 .mindset {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 100px;
+  flex: 1;
+  align-items: start;
+  align-content: center;
+  min-height: 0;
+}
+.s3 .mindset .statement { max-width: 640px; }
+.s3 .mistakes li { grid-template-columns: 46px 1fr; padding: 20px 0; }
+.s3 .mistakes h3 { font-size: 29px; }
+.s3 .mistakes p { font-size: 18px; }
+
+/* S04 — problem */
+.s4 .questions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; flex: none; }
+.s4 .questions > div {
+  border-top: 1px solid var(--line-strong);
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.s4 .questions h3 { font: 500 27px/1.15 var(--font-display); letter-spacing: -.015em; }
+.s4 .questions p { font: 400 17px/1.4 var(--font-body); color: var(--ink-2); }
+.s4 .compare {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 80px minmax(0, 1.25fr);
+  flex: 1;
+  min-height: 0;
+  align-items: start;
+}
+.s4 .compare-side { display: flex; flex-direction: column; gap: 16px; padding-top: 84px; }
+.s4 .compare-side:first-child { padding-right: 40px; }
+.s4 .compare-side:last-child { padding-left: 40px; }
+.s4 .compare-arrow {
+  display: grid;
+  place-items: center;
+  align-self: stretch;
+  font-size: 26px;
+  color: var(--ink-3);
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+}
+.s4 .quote { font-size: 38px; }
+.s4 .small-quote { font-size: 26px; line-height: 1.42; }
+.s4 .dash-list { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+.s4 .dash-list li { display: flex; gap: 10px; font: 400 18px/1.45 var(--font-body); color: var(--ink-2); }
+.s4 .dash-list li::before { content: "—"; color: var(--red); flex: none; }
+.s4 .def-list { display: flex; flex-direction: column; margin-top: 30px; }
+.s4 .def-list > div {
+  display: grid;
+  grid-template-columns: 74px 1fr;
+  gap: 14px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+}
+.s4 .def-list dt {
+  font: 500 10px/1.5 var(--font-mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.s4 .def-list dd { margin: 0; font: 400 16px/1.4 var(--font-body); color: var(--ink-2); }
+
+/* S06 — design */
+.s6 .design-lab {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 520px;
+  gap: 80px;
+  flex: 1;
+  min-height: 0;
+}
+.s6 .resources-list { display: flex; flex-direction: column; min-height: 0; }
+.s6 .resource {
+  flex: 1;
+  border-top: 1px solid var(--line-strong);
+  padding: 18px 0;
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 24px;
+  align-items: center;
+  min-height: 0;
+}
+.s6 .resource:last-child { border-bottom: 1px solid var(--line); }
+.s6 .resource h3 { font: 500 28px/1.15 var(--font-display); letter-spacing: -.015em; }
+.s6 .resource p { font: 400 17px/1.45 var(--font-body); color: var(--ink-2); margin-top: 5px; }
+.s6 .resource .link { margin-top: 10px; display: inline-block; }
+.s6 .specimen {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0;
+  border-top: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line);
+  padding: 30px 0;
+  width: 100%;
+}
+.s6 .specimen-head { display: flex; justify-content: space-between; width: 100%; }
+.s6 .specimen-display {
+  font: 500 150px/.8 var(--font-display);
+  letter-spacing: -.06em;
+  color: var(--ink);
+}
+.s6 .specimen-type {
+  font: 500 48px/1.05 var(--font-display);
+  letter-spacing: -.025em;
+}
+.s6 .specimen-foot { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+.s6 .specimen .label { margin-left: 0; }
+.s6 .swatches { display: flex; gap: 6px; }
+.s6 .swatches i { width: 38px; height: 38px; display: block; border: 1px solid rgba(0, 0, 0, .08); }
+
+/* S07 — stack tree */
+.s7 .tree-root { flex: 1; min-height: 0; }
+
+/* S08 — toolkit */
+.s8 .eco {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 1fr;
+  column-gap: 80px;
+  row-gap: 0;
+  flex: 1;
+  min-height: 0;
+}
+.s8 .tool {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid var(--line-strong);
+  padding: 18px 0 20px;
+  min-height: 0;
+}
+.s8 .tool:nth-last-child(-n+2) { border-bottom: 1px solid var(--line); }
+.s8 .tool h3 { font: 500 26px/1.15 var(--font-display); letter-spacing: -.015em; }
+.s8 .tool p { font: 400 16px/1.45 var(--font-body); color: var(--ink-2); max-width: 620px; }
+.s8 .tool .chips { margin-top: 4px; }
+.s8 .tool .logo { max-height: 36px; width: auto; mix-blend-mode: multiply; }
+.s8 .tool .logo.tall { max-height: 52px; }
+.s8 .resources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 18px;
+  align-items: baseline;
+  flex: none;
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+}
+.s8 .resources .tag { margin-right: 6px; }
+.s8 .resources .link { font-size: 13px; }
+
+/* S09 — Google AI */
+.s9 .ai-split { display: grid; grid-template-columns: minmax(0, 1fr) 540px; gap: 72px; flex: 1; min-height: 0; }
+.s9 .capabilities li { grid-template-columns: 46px 1fr; padding: 13px 0; }
+.s9 .capabilities h3 { font-size: 23px; }
+.s9 .capabilities p { font-size: 16px; }
+.s9 .capabilities .link { font-size: 12px; margin-top: 4px; }
+.s9 .shots { display: grid; grid-template-rows: .9fr 1fr 1fr; gap: 14px; min-height: 0; }
+.s9 .shots figure { min-height: 0; }
+
+/* S10 — cloud vs device */
+.s10 .arch-split { display: grid; grid-template-columns: minmax(0, 1fr) 620px; gap: 72px; flex: 1; min-height: 0; }
+.s10 .arch-wrap { display: grid; grid-template-rows: 1fr auto; gap: 18px; min-height: 0; }
+.s10 .arch-legend { list-style: none; padding: 0; margin: 0; }
+.s10 .arch-side { display: flex; flex-direction: column; justify-content: center; gap: 26px; min-height: 0; }
+.s10 .arch-labels { display: flex; flex-direction: column; gap: 7px; border-top: 1px solid var(--line); padding-top: 14px; }
+
+/* S11 — prompting */
+.s11 .prompt-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  flex: 1;
+  min-height: 0;
+  align-items: start;
+  align-content: center;
+}
+.s11 .prompt-side { display: flex; flex-direction: column; gap: 20px; min-height: 0; }
+.s11 .weak {
+  font: 400 38px/1.35 var(--font-mono);
+  letter-spacing: -.02em;
+  color: var(--ink);
+  margin-top: 18px;
+  max-width: 620px;
+}
+.s11 .x-list { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+.s11 .x-list li { display: flex; gap: 11px; font: 400 17px/1.4 var(--font-body); color: var(--ink-2); }
+.s11 .x-list li::before { content: "×"; color: var(--red); font-weight: 600; flex: none; }
+.s11 .prompt-dark { padding: 30px 34px; }
+.s11 .prompt-dark pre.code { font-size: 17px; line-height: 1.55; }
+
+/* S12 — CLEAR */
+.s12 .clear { flex: 1; }
+.s12 .clear-prompt { flex: none; }
+
+/* S13 — team */
+.s13 .team-split { display: grid; grid-template-columns: minmax(0, 1fr) 620px; gap: 72px; flex: 1; min-height: 0; }
+.s13 .foundations {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.s13 .foundations li {
+  flex: 1;
+  grid-template-columns: 38px 1fr;
+  padding: 14px 0;
+  align-items: center;
+}
+.s13 .foundations h3 { font-size: 22px; }
+.s13 .foundations p { font-size: 16px; }
+.s13 .team-split pre.code { font-size: 17px; line-height: 1.55; align-self: start; }
+
+/* S14 — sprint */
+.s14 .sprint-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; flex: 1; min-height: 0; }
+.s14 .phase {
+  border-top: 1px solid var(--line-strong);
+  border-left: 1px solid var(--line);
+  padding: 16px 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.s14 .phase:first-child { border-left: 0; padding-left: 0; }
+.s14 .phase:last-child { padding-right: 0; }
+.s14 .phase h3 { font: 500 24px/1.15 var(--font-display); letter-spacing: -.015em; }
+.s14 .phase p { font: 400 16px/1.45 var(--font-body); color: var(--ink-2); }
+.s14 .deliverable {
+  margin-top: auto;
+  font: 500 10px/1.5 var(--font-mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  border-top: 1px solid var(--line);
+  padding-top: 9px;
+}
+.s14 .done-row {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 40px;
+  align-items: start;
+  border-top: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
+  padding: 18px 0;
+  flex: none;
+  margin-top: auto;
+}
+.s14 .done-row ul { display: grid; grid-template-columns: 1fr 1fr; gap: 7px 32px; }
+.s14 .done-row li { display: flex; gap: 9px; font: 400 15px/1.4 var(--font-body); color: var(--ink-2); }
+.s14 .done-row li::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background: var(--green);
+  border-radius: 50%;
+  margin-top: 7px;
+  flex: none;
+}
+
+/* S15 — closing */
+.s15 .close {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 470px;
+  gap: 90px;
+  flex: 1;
+  align-items: center;
+  min-height: 0;
+}
+.s15 .close-title { font-size: 112px; margin-top: 28px; }
+.s15 .checks { display: flex; flex-direction: column; margin-top: 38px; }
+.s15 .checks li {
+  font: 500 23px/1.2 var(--font-display);
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  padding: 11px 0;
+  border-top: 1px solid var(--line);
+}
+.s15 .checks li:last-child { border-bottom: 1px solid var(--line); }
+.s15 .checks li::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background: var(--green);
+  border-radius: 50%;
+  flex: none;
+}
+.s15 .close-side { display: flex; flex-direction: column; gap: 22px; }
+.s15 .handbook {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr);
+  gap: 22px;
+  align-items: center;
+  border-top: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line);
+  padding: 18px 0;
+}
+.s15 .handbook .qr { width: 190px; }
+.s15 .handbook-copy { display: flex; flex-direction: column; gap: 7px; }
+.s15 .handbook-copy b { font: 500 21px/1.15 var(--font-display); letter-spacing: -.015em; }
+.s15 .handbook-copy p { font: 400 14px/1.45 var(--font-body); color: var(--ink-2); }
+.s15 .handbook-copy .link { align-self: flex-start; font-size: 13px; margin-top: 2px; }
+.s15 .close-social { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 18px; align-items: center; }
+.s15 .close-social .qr { width: 92px; }
+.s15 .close-meta { display: flex; flex-direction: column; gap: 4px; }
+.s15 .close-meta b { font: 500 20px/1.2 var(--font-display); }
+.s15 .close-meta span { font: 400 14px/1.3 var(--font-body); color: var(--ink-2); }
+.s15 .links { display: flex; flex-direction: column; gap: 7px; margin-top: 12px; }
+.s15 .links .link { align-self: flex-start; font-size: 13px; }
+.s15 .qr { display: flex; flex-direction: column; gap: 7px; border: 1px solid var(--line); padding: 9px; background: #fff; }
+.s15 .qr img { width: 100%; height: auto; }
+.s15 .qr .caption { margin: 0; text-align: center; color: var(--ink-3); }
+
+</style>
+  <style>
+@keyframes dash { to { stroke-dashoffset: -20; } }
+@keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+.slide.is-active [data-rise] { animation: rise .7s var(--ease) both; animation-delay: calc(var(--i, 0) * 90ms + 150ms); }
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+.star { animation: spin-slow 40s linear infinite; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
+  .slide { transform: none !important; }
+}
+
+</style>
+  <style media="print">
+/* Print / PDF export.
+   Every slide becomes its own 1920x1080 page so the exported PDF matches the
+   on-screen composition exactly. Used by tools/export-pdf.mjs. */
+
+@page {
+  size: 1920px 1080px;
+  margin: 0;
+}
+
+@media print {
+  html, body {
+    height: auto;
+    overflow: visible;
+    background: #fff;
+  }
+
+  #viewport {
+    position: static;
+    display: block;
+    background: #fff;
+  }
+
+  #stage {
+    position: static;
+    width: 1920px;
+    height: auto;
+    transform: none !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+  }
+
+  .slide {
+    position: relative !important;
+    inset: auto !important;
+    width: 1920px;
+    height: 1080px;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+    break-after: page;
+    page-break-after: always;
+    overflow: hidden;
+  }
+
+  .slide:last-of-type {
+    break-after: auto;
+    page-break-after: auto;
+  }
+
+  /* chrome that belongs to the live app, not to the slides */
+  #progress,
+  #counter,
+  #brand,
+  #help,
+  .overlay {
+    display: none !important;
+  }
+
+  /* Blurred shadows rasterise as hard rectangles in PDF; flat panels print cleaner. */
+  .card,
+  .photo,
+  .shot,
+  .chip,
+  .feat,
+  .bucket,
+  .letter,
+  .rec,
+  .mock,
+  .clear-prompt,
+  #notes button,
+  #counter button {
+    box-shadow: none !important;
+  }
+
+  /* keep the entry animations from freezing content at opacity 0 */
+  .slide.is-active [data-rise],
+  .slide [data-rise] {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Chromium's PDF rasteriser renders background-clip:text gradients as a
+     clipped rectangle. Fall back to a solid brand colour in the PDF only. */
+  .grad-text {
+    background: none !important;
+    color: var(--blue) !important;
+    -webkit-text-fill-color: var(--blue) !important;
+    padding-bottom: 0 !important;
+  }
+}
+
+</style>
+</head>
+<body>
+  <div id="viewport">
+    <main id="stage" aria-label="From Idea to MVP presentation">
+      <div id="progress" role="progressbar" aria-label="Presentation progress"><div id="progress-bar"></div></div>
+      <div id="brand" aria-hidden="true">InnovateHack+ 2.0 · From Idea to MVP</div>
+      <div id="counter">
+        <button id="btn-prev" aria-label="Previous slide">‹</button>
+        <span id="counter-label" aria-live="polite">1 / 15</span>
+        <button id="btn-next" aria-label="Next slide">›</button>
+        <button id="btn-overview" aria-label="Slide overview">▦</button>
+      </div>
+      <div id="help" role="note">← → navigate · Space next · O overview · N notes · S stack selector · F fullscreen · ? help</div>
+      <aside id="overview" class="overlay" aria-hidden="true" aria-label="Slide overview"></aside>
+      <aside id="notes" class="overlay" aria-hidden="true" aria-label="Speaker notes"></aside>
+      <div id="selector" class="overlay" aria-hidden="true"></div>
+    </main>
+  </div>
+  <script>
+(() => {
+  // js/content/part1.js
+  var part1 = [
+    {
+      id: 1,
+      title: "From Idea to MVP",
+      cls: "s1",
+      html: `
+  <div class="cover">
+    <div class="cover-copy">
+      <div class="eyebrow" data-rise style="--i:0">InnovateHack+ 2.0 \xB7 GDG on Campus Xavier Ateneo</div>
+      <h1 class="h-xl" data-rise style="--i:1">From Idea<br>to <span class="grad-text">MVP</span></h1>
+      <p class="lead" data-rise style="--i:2">Scoping, Stack Selection, and Building with Google AI Tools</p>
+      <div class="cover-meta" data-rise style="--i:3">
+        <div><span class="label">Speaker</span><b>Arron Kian Parejas</b><span>AI Engineer</span></div>
+        <div><span class="label">Date</span><b>November 16, 2026</b><span>Google Meet</span></div>
+        <div><span class="label">Format</span><b>45 minutes</b><span>15 slides \xB7 bring your own idea</span></div>
+      </div>
+      <div class="rule" data-rise style="--i:4">
+        <i style="background:#4285F4"></i><i style="background:#EA4335"></i><i style="background:#FBBC05"></i><i style="background:#34A853"></i>
+        <span>From idea to working product</span>
+      </div>
+    </div>
+    <figure class="cover-art" data-rise style="--i:2">
+      <img src="assets/images/gemini_argon.png" alt="Gemini 4 Argon, Google Cloud title card with the Gemini sparkle logo" width="2436" height="1200">
+      <figcaption class="caption">Gemini on Google Cloud</figcaption>
+    </figure>
+  </div>`
+    },
+    {
+      id: 2,
+      title: "Meet Your Speaker",
+      cls: "s2",
+      html: `
+  <header class="slide-head">
+    <div class="eyebrow">Meet your speaker</div>
+    <h2 class="h-lg">A builder. An engineer.<br>An open-source contributor.</h2>
+  </header>
+  <div class="profile">
+    <figure class="photo portrait"><img src="assets/images/optimized/arron_profile.png" alt="Dithered black-and-white portrait of Arron Kian Parejas" width="720" height="900"></figure>
+    <div class="profile-body">
+      <p class="statement">A practical method for turning an idea into working software.</p>
+      <ul class="rows roles">
+        <li><span class="idx">01</span><span>AI Engineer</span></li>
+        <li><span class="idx">02</span><span>ML Engineering Intern @ FlyRank.ai</span></li>
+        <li><span class="idx">03</span><span>Founder of DomoDomo</span></li>
+        <li><span class="idx">04</span><span>Builder of Helios, an open-source language model</span></li>
+        <li><span class="idx">05</span><span>Former GDG on Campus HAU Chapter Lead</span></li>
+        <li><span class="idx">06</span><span>Open-source contributor</span></li>
+        <li><span class="idx">07</span><span>Ship-A-Little winner, Shipaton 2026</span></li>
+      </ul>
+    </div>
+    <div class="gallery">
+      <figure class="photo"><img src="assets/images/optimized/caffeine_hackathon.jpg" alt="Caffeine hackathon stage group holding first-place certificates" width="1600" height="1066"><figcaption class="cap">Caffeine Hackathon</figcaption></figure>
+      <figure class="shot"><img src="assets/images/bitpyre_hackathon.jpg" alt="AppCon 2024 Top 20 Teams: BitPyre of Holy Angel University on stage" width="940" height="788"><figcaption class="cap">AppCon 2024</figcaption></figure>
+      <figure class="photo"><img src="assets/images/optimized/skydev_hackathon.jpg" alt="SkyDev Automate the Future hackathon group holding certificates" width="1600" height="1066" style="object-position:60% 50%"><figcaption class="cap">SkyDev</figcaption></figure>
+      <figure class="shot"><img src="assets/images/helios_hf_downloadscount.png" alt="Helios model page on Hugging Face showing 2,256 downloads last month" width="2048" height="1160"><figcaption class="cap">Helios on Hugging Face</figcaption></figure>
+    </div>
+  </div>
+  <div class="stats-row">
+    <div class="stat"><b>Top 1</b><span>AppBuildersPH</span></div>
+    <div class="stat"><b>Top 7</b><span>GitHub \xB7 Philippines</span></div>
+    <div class="stat"><b>7</b><span>hackathon wins</span></div>
+    <div class="stat"><b>182+</b><span>projects</span></div>
+  </div>`
+    },
+    {
+      id: 3,
+      title: "The Hackathon Mindset",
+      cls: "s3",
+      html: `
+  <header class="slide-head">
+    <div class="eyebrow">The hackathon mindset</div>
+    <h2 class="h-lg">Great ideas don't automatically<br>become great products.</h2>
+  </header>
+  <div class="flow" data-stagger>
+    <div class="step"><i>01</i>IDEA</div><div class="arrow">\u2192</div>
+    <div class="step"><i>02</i>EXECUTION</div><div class="arrow">\u2192</div>
+    <div class="step"><i>03</i>VALIDATION</div><div class="arrow">\u2192</div>
+    <div class="step"><i>04</i>PRODUCT</div>
+  </div>
+  <div class="mindset">
+    <p class="statement">The idea is the easy part. What separates a demo from a product is the discipline between them.</p>
+    <ol class="rows mistakes">
+      <li><span class="idx">01</span><div><h3>Overengineering</h3><p>A perfect system nobody can demo.</p></div></li>
+      <li><span class="idx">02</span><div><h3>Technology before requirements</h3><p>Picking the stack before knowing the problem.</p></div></li>
+      <li><span class="idx">03</span><div><h3>Shipping untested code</h3><p>Features that fail live on demo day.</p></div></li>
+    </ol>
+  </div>`
+    },
+    {
+      id: 4,
+      title: "Start With the Problem",
+      cls: "s4",
+      html: `
+  <header class="slide-head">
+    <div class="eyebrow">Start with the problem</div>
+    <h2 class="h-lg">Understand the problem<br>before choosing the technology.</h2>
+  </header>
+  <div class="questions">
+    <div><span class="tag b">Who</span><h3>Who are we helping?</h3><p>A specific person, not "everyone".</p></div>
+    <div><span class="tag r">What</span><h3>What problem are we solving?</h3><p>One pain point you can observe.</p></div>
+    <div><span class="tag g">Why</span><h3>Why does it matter?</h3><p>The cost of leaving it unsolved.</p></div>
+  </div>
+  <div class="compare">
+    <div class="compare-side">
+      <span class="tag r">Vague idea</span>
+      <p class="quote">"Let's build an app for disasters."</p>
+      <ul class="dash-list">
+        <li>Who? Everyone.</li>
+        <li>Problem? "Disasters".</li>
+        <li>Why? Because it's a good idea.</li>
+      </ul>
+    </div>
+    <div class="compare-arrow" aria-hidden="true">\u2192</div>
+    <div class="compare-side">
+      <span class="tag g">Clear problem statement</span>
+      <p class="quote small-quote">Barangay residents in flood-prone areas can't report emergencies fast enough, so responders lack accurate locations. We help them send a located report in under 30 seconds.</p>
+      <dl class="def-list">
+        <div><dt>Who</dt><dd>Residents of flood-prone barangays</dd></div>
+        <div><dt>What</dt><dd>A located report in under 30 seconds</dd></div>
+        <div><dt>Why</dt><dd>Responders lose time and act on the wrong location</dd></div>
+      </dl>
+      <p class="fine">Illustrative example for this talk.</p>
+    </div>
+  </div>`
+    },
+    {
+      id: 5,
+      title: "Define Your MVP",
+      cls: "s5",
+      html: `
+  <header class="slide-head head-row">
+    <div><div class="eyebrow">Define your MVP</div><h2 class="h-lg">Build less. Deliver more.</h2></div>
+    <div class="ctrl"><span class="label">Emergency reporting platform</span><button class="btn ghost" data-mvp="suggest">Suggested split</button><button class="btn ghost" data-mvp="reset">Clear board</button></div>
+  </header>
+  <div class="mvp" id="mvp-root"></div>`
+    }
+  ];
+
+  // js/content/part2.js
+  var L = (href, t) => `<a class="link" href="${href}" target="_blank" rel="noopener noreferrer">${t}</a>`;
+  var part2 = [
+    {
+      id: 6,
+      title: "Design Before You Code",
+      cls: "s6",
+      html: `
+  <header class="slide-head">
+    <div class="eyebrow">Design before you code</div>
+    <h2 class="h-lg">Prototype the experience first.</h2>
+  </header>
+  <div class="flow">
+    <div class="step"><i>01</i>PROMPT<small>Describe the screen</small></div><div class="arrow">\u2192</div>
+    <div class="step"><i>02</i>DESIGN<small>Generate UI options</small></div><div class="arrow">\u2192</div>
+    <div class="step"><i>03</i>PROTOTYPE<small>Click through the flow</small></div><div class="arrow">\u2192</div>
+    <div class="step"><i>04</i>IMPLEMENT<small>Build in code</small></div>
+  </div>
+  <div class="design-lab">
+    <div class="resources-list">
+      <div class="resource"><span class="tag b">Google Stitch</span><div><h3>From prompt to UI</h3><p>Turn a text description into screen designs you can iterate on.</p>${L("https://stitch.withgoogle.com", "stitch.withgoogle.com")}</div></div>
+      <div class="resource"><span class="tag r">Material Design</span><div><h3>Components and tokens</h3><p>Proven patterns for color, shape, motion, and accessibility.</p>${L("https://m3.material.io", "m3.material.io")}</div></div>
+      <div class="resource"><span class="tag g">Google Fonts</span><div><h3>Type that ships</h3><p>Free, fast, open-source fonts for web and mobile apps.</p>${L("https://fonts.google.com", "fonts.google.com")}</div></div>
+    </div>
+    <div class="specimen" aria-label="Illustration of a design system: color swatches and a type sample">
+      <div class="specimen-head"><span class="label">Type specimen</span><span class="label">Inter</span></div>
+      <div class="specimen-display" aria-hidden="true">Aa</div>
+      <div class="specimen-type">Report an emergency</div>
+      <div class="specimen-foot">
+        <div class="swatches"><i style="background:#4285F4"></i><i style="background:#EA4335"></i><i style="background:#FBBC05"></i><i style="background:#34A853"></i><i style="background:#F4F0E7;border:1px solid var(--line)"></i></div>
+        <div class="label">16/24 \xB7 4.5:1 contrast</div>
+        <span class="btn ghost">Send report</span>
+      </div>
+    </div>
+  </div>`
+    },
+    {
+      id: 7,
+      title: "Choose Your Tech Stack",
+      cls: "s7",
+      html: `
+  <header class="slide-head head-row">
+    <div><div class="eyebrow">Choose your tech stack</div><h2 class="h-lg">The right tool depends<br>on the problem.</h2></div>
+    <button class="btn" data-open="selector">Try the stack selector (S)</button>
+  </header>
+  <div id="tree-root" class="tree-root"></div>`
+    },
+    {
+      id: 8,
+      title: "The Google Developer Toolkit",
+      cls: "s8",
+      html: `
+  <header class="slide-head">
+    <div class="eyebrow">The Google developer toolkit</div>
+    <h2 class="h-lg">A toolkit for modern builders.</h2>
+  </header>
+  <div class="eco">
+    <div class="tool"><span class="tag b">Design</span><h3>Design</h3><p>Describe a screen and get editable designs, then build on proven components.</p><div class="chips"><span class="chip">Stitch</span><span class="chip">Material Design</span><span class="chip">Google Fonts</span></div></div>
+    <div class="tool"><span class="tag r">Development</span><h3>Development</h3><p>One codebase for Android, iOS, and web, with a fast UI loop.</p><div class="chips"><img class="logo" src="assets/images/flutter_logo.png" alt="Flutter logo" width="953" height="272"></div></div>
+    <div class="tool"><span class="tag y">Backend</span><h3>Backend</h3><p>Auth, database, storage, and functions without running servers.</p><div class="chips"><img class="logo tall" src="assets/images/firebase_logo.png" alt="Firebase logo" width="640" height="640"></div></div>
+    <div class="tool"><span class="tag g">Generative AI</span><h3>Generative AI</h3><p>Prompt, test, and ship generative models from a client or a backend.</p><div class="chips"><span class="chip">Gemini</span><span class="chip">Google AI Studio</span><span class="chip">Firebase AI Logic</span></div></div>
+    <div class="tool"><span class="tag b">Mobile ML</span><h3>Mobile ML</h3><p>Ready-made on-device APIs, or run your own model with LiteRT.</p><div class="chips"><img class="logo" src="assets/images/google_ml_kit.png" alt="Google ML Kit logo" width="1600" height="468"><span class="chip">Google AI Edge</span><span class="chip">LiteRT</span></div></div>
+    <div class="tool"><span class="tag r">Cloud</span><h3>Cloud</h3><p>Custom services, model training, and analytics at scale.</p><div class="chips"><img class="logo tall" src="assets/images/Google_cloud.png" alt="Google Cloud logo" width="225" height="225"><span class="chip">Cloud Run</span><span class="chip">Vertex AI</span><span class="chip">BigQuery</span></div></div>
+  </div>
+  <div class="resources">
+    <span class="tag b">Official docs</span>
+    ${L("https://ai.google.dev/gemini-api/docs", "Gemini API")}${L("https://aistudio.google.com", "AI Studio")}${L("https://firebase.google.com/docs/ai-logic", "Firebase AI Logic")}${L("https://developers.google.com/ml-kit", "ML Kit")}${L("https://ai.google.dev/edge", "Google AI Edge")}${L("https://docs.flutter.dev", "Flutter")}${L("https://firebase.google.com/docs", "Firebase")}${L("https://cloud.google.com/run/docs", "Cloud Run")}${L("https://stitch.withgoogle.com", "Stitch")}${L("https://docs.google.com/document/d/1hxBY6auIP5fya0ir9FhvKsGnrCcVYjRnaIrMpx8I9Nw/edit", "Free Stack Handbook")}
+  </div>`
+    },
+    {
+      id: 9,
+      title: "Build With Google AI",
+      cls: "s9",
+      html: `
+  <header class="slide-head">
+    <div class="eyebrow">Build with Google AI</div>
+    <h2 class="h-lg">Give your application intelligence.</h2>
+  </header>
+  <div class="flow" id="ai-flow">
+    <div class="step"><i>01</i>APPLICATION</div><div class="arrow">\u2192</div>
+    <div class="step"><i>02</i>AI SERVICE</div><div class="arrow">\u2192</div>
+    <div class="step"><i>03</i>VALIDATION</div><div class="arrow">\u2192</div>
+    <div class="step"><i>04</i>RESPONSE</div>
+  </div>
+  <div class="ai-split">
+    <ul class="rows capabilities">
+      <li><span class="idx">01</span><div><h3>Gemini API</h3><p>Call Gemini models from your backend.</p>${L("https://ai.google.dev/gemini-api/docs", "Docs")}</div></li>
+      <li><span class="idx">02</span><div><h3>Firebase AI Logic</h3><p>Call Gemini from mobile and web apps.</p>${L("https://firebase.google.com/docs/ai-logic", "Docs")}</div></li>
+      <li><span class="idx">03</span><div><h3>Function calling</h3><p>The model requests; your code acts.</p>${L("https://ai.google.dev/gemini-api/docs/function-calling", "Docs")}</div></li>
+      <li><span class="idx">04</span><div><h3>Structured outputs</h3><p>JSON that matches your schema.</p>${L("https://ai.google.dev/gemini-api/docs/structured-output", "Docs")}</div></li>
+      <li><span class="idx">05</span><div><h3>Multimodal AI</h3><p>Text, images, audio, and video in one request. Always validate what comes back.</p>${L("https://ai.google.dev/gemini-api/docs/vision", "Docs")}</div></li>
+    </ul>
+    <div class="shots">
+      <figure class="shot dark black"><img src="assets/images/gemini_argon.png" alt="Gemini 4 Argon, Google Cloud title card with the Gemini sparkle logo" width="2436" height="1200"><figcaption class="cap">Gemini on Google Cloud</figcaption></figure>
+      <figure class="shot"><img src="assets/images/appbuilders_top1.png" alt="DomoDomo, an all-in-one agentic tool hub, ranked first on the AppBuilders leaderboard" width="2104" height="752"><figcaption class="cap">DomoDomo</figcaption></figure>
+      <figure class="shot dark"><img src="assets/images/helios_hf_downloadscount.png" alt="Helios open-weight model page on Hugging Face" width="2048" height="1160"><figcaption class="cap">Helios</figcaption></figure>
+    </div>
+  </div>`
+    },
+    {
+      id: 10,
+      title: "Cloud AI vs On-Device AI",
+      cls: "s10",
+      html: `
+  <header class="slide-head">
+    <div class="eyebrow">Cloud AI vs on-device AI</div>
+    <h2 class="h-lg">Where should your AI run?</h2>
+  </header>
+  <div class="arch-split">
+    <div class="arch-wrap">
+      <div id="arch-root" style="min-height:0"></div>
+      <ul class="arch-legend">
+        <li><span class="key green"></span>Flutter \u2192 ML Kit: on-device inference</li>
+        <li><span class="key"></span>Flutter \u2192 Firebase: data + auth</li>
+        <li><span class="key"></span>Flutter \u2192 Firebase AI Logic \u2192 Gemini</li>
+        <li><span class="key"></span>Firebase \u2192 Google Cloud: services</li>
+      </ul>
+    </div>
+    <div class="arch-side">
+      <table class="table" aria-label="Cloud versus on-device AI comparison">
+        <thead><tr><th></th><th>Cloud</th><th>On-device</th></tr></thead>
+        <tbody>
+          <tr><td>Latency</td><td>Network round trip</td><td>Immediate, local</td></tr>
+          <tr><td>Connectivity</td><td>Internet required</td><td>Works offline</td></tr>
+          <tr><td>Privacy</td><td>Data leaves the device</td><td>Data stays local</td></tr>
+          <tr><td>Constraints</td><td>Usage costs and quotas</td><td>Memory, battery, model size</td></tr>
+        </tbody>
+      </table>
+      <div class="arch-labels">
+        <span class="label">Cloud \xB7 Gemini API</span>
+        <span class="label">Device \xB7 ML Kit / AI Edge / LiteRT</span>
+      </div>
+      <p class="small">Helios ships LiteRT and ONNX tags on Hugging Face \u2014 on-device formats matter for real projects.</p>
+    </div>
+  </div>`
+    }
+  ];
+
+  // js/content/part3.js
+  var L2 = (href, t) => `<a class="link" href="${href}" target="_blank" rel="noopener noreferrer">${t}</a>`;
+  var part3 = [
+    {
+      id: 11,
+      title: "Prompting Is Engineering",
+      cls: "s11",
+      html: `
+  <header class="slide-head">
+    <div class="eyebrow">Prompting is engineering</div>
+    <h2 class="h-lg">Better instructions.<br>Better engineering.</h2>
+  </header>
+  <div class="prompt-compare">
+    <div class="prompt-side">
+      <span class="tag r">Weak prompt</span>
+      <p class="weak">"Build me an AI-powered application."</p>
+      <ul class="x-list">
+        <li>No context, so you get generic code</li>
+        <li>No constraints, so it overengineers</li>
+        <li>No definition of done, so you cannot test it</li>
+      </ul>
+    </div>
+    <div class="prompt-side prompt-dark">
+      <span class="tag b">Structured prompt</span>
+      <pre class="code"><span class="k">Context:</span> Flutter app for barangay flood reports.
+<span class="k">Constraints:</span> Firebase backend, 3-day sprint,
+  works on low-end Android.
+<span class="k">Expected outcome:</span> User submits a located
+  report in under 30 seconds.
+<span class="k">Architecture:</span> Flutter UI, Firestore,
+  Gemini via Firebase AI Logic for triage.
+<span class="k">Testing:</span> Unit tests for validation,
+  one end-to-end submit flow.</pre>
+      <p class="fine">Illustrative prompt for this talk.</p>
+    </div>
+  </div>`
+    },
+    {
+      id: 12,
+      title: "The CLEAR Framework",
+      cls: "s12",
+      html: `
+  <header class="slide-head head-row">
+    <div><div class="eyebrow">The CLEAR framework</div><h2 class="h-lg">Structure your prompts.</h2></div>
+    <div class="ctrl"><button class="btn" data-clear="next">Reveal next (\u2192 / R)</button><button class="btn ghost" data-clear="all">Show all</button><button class="btn ghost" data-clear="reset">Reset</button></div>
+  </header>
+  <div class="clear" id="clear-root"></div>
+  <div class="clear-prompt">
+    <span class="tag b">Prompt so far</span>
+    <pre class="code" id="clear-text" aria-live="polite"></pre>
+  </div>`
+    },
+    {
+      id: 13,
+      title: "Set Up Your Team",
+      cls: "s13",
+      html: `
+  <header class="slide-head">
+    <div class="eyebrow">Set up your team</div>
+    <h2 class="h-lg">Good engineering starts<br>with good foundations.</h2>
+  </header>
+  <div class="team-split">
+    <ol class="rows foundations">
+      <li><span class="idx">01</span><div><h3>GitHub repository</h3><p>One shared source of truth.</p></div></li>
+      <li><span class="idx">02</span><div><h3>Feature branches</h3><p>One branch per task.</p></div></li>
+      <li><span class="idx">03</span><div><h3>Pull requests</h3><p>Review before merging.</p></div></li>
+      <li><span class="idx">04</span><div><h3>Environment variables</h3><p>Keys stay out of Git.</p></div></li>
+      <li><span class="idx">05</span><div><h3>Shared documentation</h3><p>README, setup, decisions.</p></div></li>
+      <li><span class="idx">06</span><div><h3>Task ownership</h3><p>Every task has one owner.</p></div></li>
+    </ol>
+    <pre class="code" aria-label="Example repository layout and pull request checklist"><span class="k">my-mvp/</span>
+\u251C\u2500\u2500 <span class="k">lib/</span>            <span class="c"># app code</span>
+\u251C\u2500\u2500 <span class="k">test/</span>           <span class="c"># unit tests</span>
+\u251C\u2500\u2500 <span class="k">docs/</span>           <span class="c"># decisions, setup</span>
+\u251C\u2500\u2500 .env.example    <span class="c"># names only, no secrets</span>
+\u251C\u2500\u2500 .gitignore      <span class="c"># ignores .env</span>
+\u2514\u2500\u2500 README.md
+
+<span class="c">main        stable, always demo-ready
+\u2514\u2500 feat/report-form   \u2192 PR \u2192 review \u2192 merge
+\u2514\u2500 feat/triage-ai     \u2192 PR \u2192 review \u2192 merge</span>
+
+<span class="k">PR checklist</span>
+  [ ] branch named feat/\u2026
+  [ ] tests pass locally
+  [ ] README updated
+  [ ] no secrets committed</pre>
+  </div>`
+    },
+    {
+      id: 14,
+      title: "From Sprint to Ship",
+      cls: "s14",
+      html: `
+  <header class="slide-head">
+    <div class="eyebrow">From sprint to ship</div>
+    <h2 class="h-lg">Every sprint needs a deliverable.</h2>
+  </header>
+  <div class="flow">
+    <div class="step"><i>01</i>IDEATION</div><div class="arrow">\u2192</div>
+    <div class="step"><i>02</i>SETUP</div><div class="arrow">\u2192</div>
+    <div class="step"><i>03</i>BUILD</div><div class="arrow">\u2192</div>
+    <div class="step"><i>04</i>TEST</div><div class="arrow">\u2192</div>
+    <div class="step"><i>05</i>DEPLOY</div>
+  </div>
+  <div class="sprint-grid">
+    <div class="phase"><span class="tag b">Days 1\u20132</span><h3>Feature development</h3><p>Build the one core flow end to end.</p><span class="deliverable">Deliverable \u2014 one working flow</span></div>
+    <div class="phase"><span class="tag r">Day 2\u20133</span><h3>Integration testing</h3><p>Connect UI, backend, and AI.</p><span class="deliverable">Deliverable \u2014 end-to-end run</span></div>
+    <div class="phase"><span class="tag y">Day 3</span><h3>Bug fixing</h3><p>Fix what breaks the demo first.</p><span class="deliverable">Deliverable \u2014 a green demo</span></div>
+    <div class="phase"><span class="tag g">Day 3\u20134</span><h3>Demo preparation</h3><p>Rehearse, record a backup, deploy.</p><span class="deliverable">Deliverable \u2014 deployed and recorded</span></div>
+  </div>
+  <div class="done-row">
+    <span class="tag b">Definition of done</span>
+    <ul>
+      <li>One flow you can demo in 60 seconds</li>
+      <li>A recorded backup video</li>
+      <li>No secrets in the repository</li>
+      <li>A README that says how to run it</li>
+    </ul>
+  </div>`
+    },
+    {
+      id: 15,
+      title: "Build Something That Matters",
+      cls: "s15",
+      html: `
+  <div class="close">
+    <div class="close-copy">
+      <div class="eyebrow">Thank you \xB7 Q&amp;A</div>
+      <h2 class="h-xl close-title">Build something<br>that matters.</h2>
+      <ul class="checks">
+        <li>Understand the problem.</li>
+        <li>Choose the right tools.</li>
+        <li>Engineer the solution.</li>
+        <li>Validate everything.</li>
+        <li>Ship something that works.</li>
+      </ul>
+    </div>
+    <div class="close-side">
+      <div class="handbook">
+        <figure class="qr">
+          <img src="assets/images/handbook_qr.png" alt="QR code linking to the Free Developer Stack Handbook" width="400" height="400">
+          <figcaption class="caption">Scan to open</figcaption>
+        </figure>
+        <div class="handbook-copy">
+          <span class="label">Free developer stack handbook</span>
+          <b>200+ free &amp; open-source tools</b>
+          <p>A link-rich directory of Google technologies, APIs, AI, UI/UX, and full-stack development.</p>
+          ${L2("https://docs.google.com/document/d/1hxBY6auIP5fya0ir9FhvKsGnrCcVYjRnaIrMpx8I9Nw/edit", "Open the handbook")}
+        </div>
+      </div>
+      <div class="close-social">
+        <figure class="qr">
+          <img src="assets/images/Arron_qr_socials_links.png" alt="QR code linking to Arron Kian Parejas's LinkedIn profile" width="400" height="400">
+          <figcaption class="caption">Socials</figcaption>
+        </figure>
+        <div>
+          <div class="close-meta"><b>Arron Kian Parejas</b><span>AI Engineer</span></div>
+          <div class="links">
+            ${L2("https://www.linkedin.com/in/arron-parejas/", "LinkedIn")}
+            ${L2("https://github.com/darknecrocities/Helios", "Helios on GitHub")}
+            ${L2("https://huggingface.co/Darknecrocities/Helios", "Helios on Hugging Face")}
+            ${L2("https://domodomo.site", "DomoDomo")}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`
+    }
+  ];
+
+  // js/slides.js
+  var slides = [...part1, ...part2, ...part3];
+  function renderSlides(stage2) {
+    const frag = document.createDocumentFragment();
+    slides.forEach((s, i) => {
+      const el = document.createElement("section");
+      el.className = `slide ${s.cls}`;
+      el.id = `slide-${s.id}`;
+      el.dataset.index = String(i);
+      el.setAttribute("aria-label", `Slide ${s.id} of ${slides.length}: ${s.title}`);
+      el.setAttribute("aria-hidden", "true");
+      el.innerHTML = s.html;
+      frag.appendChild(el);
+    });
+    stage2.prepend(frag);
+    return [...stage2.querySelectorAll(".slide")];
+  }
+
+  // js/navigation.js
+  function createNavigation({ slideEls: slideEls2, onChange, stepHandlers: stepHandlers2 = {}, overlays: overlays2 }) {
+    let current = 0;
+    const total = slideEls2.length;
+    const bar = document.getElementById("progress-bar");
+    const label = document.getElementById("counter-label");
+    const help = document.getElementById("help");
+    function show(i, { silent = false } = {}) {
+      i = Math.max(0, Math.min(total - 1, i));
+      slideEls2.forEach((el, idx) => {
+        el.classList.toggle("is-active", idx === i);
+        el.classList.toggle("is-past", idx < i);
+        el.setAttribute("aria-hidden", String(idx !== i));
+        el.inert = idx !== i;
+      });
+      current = i;
+      bar.style.width = `${(i + 1) / total * 100}%`;
+      label.textContent = `${i + 1} / ${total}`;
+      if (location.hash !== `#/${i + 1}`) history.replaceState(null, "", `#/${i + 1}`);
+      if (!silent) onChange?.(i);
+    }
+    const id = () => current + 1;
+    function next() {
+      if (stepHandlers2[id()]?.forward?.()) return;
+      show(current + 1);
+    }
+    function prev() {
+      if (stepHandlers2[id()]?.back?.()) return;
+      show(current - 1);
+    }
+    function toggleFullscreen() {
+      if (document.fullscreenElement) document.exitFullscreen();
+      else document.documentElement.requestFullscreen?.().catch(() => {
+      });
+    }
+    document.addEventListener("keydown", (e) => {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      const tag = e.target.tagName;
+      const interactive = tag === "BUTTON" || tag === "A" || tag === "SELECT" || tag === "INPUT";
+      const k = e.key;
+      if (k === "Escape") {
+        overlays2.closeAll();
+        help.classList.remove("show");
+        return;
+      }
+      if (overlays2.anyOpen() && !["n", "N", "o", "O", "s", "S"].includes(k)) return;
+      if (tag === "SELECT" && k.startsWith("Arrow")) return;
+      switch (k) {
+        case "ArrowRight":
+          e.preventDefault();
+          next();
+          break;
+        case "ArrowLeft":
+          e.preventDefault();
+          prev();
+          break;
+        case " ":
+          if (interactive) return;
+          e.preventDefault();
+          next();
+          break;
+        case "Home":
+          e.preventDefault();
+          show(0);
+          break;
+        case "End":
+          e.preventDefault();
+          show(total - 1);
+          break;
+        case "f":
+        case "F":
+          toggleFullscreen();
+          break;
+        case "n":
+        case "N":
+          overlays2.toggle("notes");
+          break;
+        case "o":
+        case "O":
+          overlays2.toggle("overview");
+          break;
+        case "s":
+        case "S":
+          overlays2.toggle("selector");
+          break;
+        case "r":
+        case "R":
+          stepHandlers2[id()]?.forward?.();
+          break;
+        case "?":
+        case "/":
+          help.classList.toggle("show");
+          break;
+        default:
+          return;
+      }
+    });
+    document.getElementById("btn-prev").addEventListener("click", prev);
+    document.getElementById("btn-next").addEventListener("click", next);
+    document.getElementById("btn-overview").addEventListener("click", () => overlays2.toggle("overview"));
+    const start = parseInt((location.hash.match(/#\/(\d+)/) || [])[1] || "1", 10) - 1;
+    show(Number.isFinite(start) ? start : 0);
+    window.addEventListener("hashchange", () => {
+      const n = parseInt((location.hash.match(/#\/(\d+)/) || [])[1] || "1", 10) - 1;
+      if (n !== current) show(n);
+    });
+    return { show, next, prev, get current() {
+      return current;
+    } };
+  }
+
+  // js/content/notes.js
+  var notes = [
+    {
+      minutes: 2,
+      message: "This talk is a practical path from a raw idea to a working MVP.",
+      explain: ["Welcome the GDG on Campus Xavier Ateneo organizers and participants.", "Say what they will leave with: a scoping method, a stack decision process, and ways to use Google AI tools."],
+      points: ["Hackathons reward finished, demonstrable work.", "We will go from problem to scope to stack to AI to team workflow.", "Everything today is meant to be used in your next 3\u20134 day sprint."],
+      story: "Open with the Gemini slide: AI tools are changing how fast we can build, but the fundamentals of scoping and validating still decide who ships.",
+      transition: "Before the how, a quick word on who is talking and why this advice comes from the field."
+    },
+    {
+      minutes: 4,
+      message: "The advice comes from repeated shipping, not theory.",
+      explain: ["Current roles: AI Engineer, ML Engineering Intern at FlyRank.ai, founder of DomoDomo, builder of Helios.", "Community: former GDG on Campus HAU Chapter Lead and open-source contributor.", "Recognition: Top 1 AppBuildersPH, Top 7 GitHub developers in the Philippines, seven hackathon championship wins, Ship-A-Little winner at Shipaton 2026, 182+ projects."],
+      points: ["Point to the AppBuilders leaderboard where DomoDomo ranks first.", "Point to the Helios page: an open-weight model with LiteRT and ONNX tags.", "Name the hackathon photos: Caffeine, SkyDev, and AppCon 2024 with BitPyre of Holy Angel University."],
+      story: "Pick one hackathon photo and tell what the team cut from scope that weekend [Your detail]. Keep it under 60 seconds.",
+      transition: "Winning and losing hackathons taught me the same lesson: great ideas are not enough."
+    },
+    {
+      minutes: 3,
+      message: "Great ideas do not automatically become great products.",
+      explain: ["Walk through IDEA \u2192 EXECUTION \u2192 VALIDATION \u2192 PRODUCT.", "Cover the three mistakes: overengineering, choosing technology before requirements, shipping untested code."],
+      points: ["Judges see a demo, not your architecture diagram.", "A stack chosen first forces the problem to fit the tool.", "Untested code fails at the worst moment: live."],
+      story: "Share a time you saw a team (or yourself) hit one of these mistakes [Your detail]. Keep it concrete and brief.",
+      transition: "The fix for all three starts earlier: with the problem."
+    },
+    {
+      minutes: 3,
+      message: "Define the problem before you choose the technology.",
+      explain: ["Three questions: who, what, why.", "Use the vague-to-clear example: disaster app versus a located report in under 30 seconds for flood-prone barangays."],
+      points: ["A specific user makes decisions easier.", "A measurable outcome gives you a test for done.", "Say clearly that the example is illustrative."],
+      story: "Ask the audience to type a vague idea in chat and rewrite one live into a problem statement.",
+      transition: "With a clear problem, we can decide what the first version includes and what it does not."
+    },
+    {
+      minutes: 4,
+      message: "An MVP is the smallest thing that proves your idea works.",
+      explain: ["Explain Must, Should, Could, Won't (shown as Deferred in counts).", "Use the interactive board with the emergency reporting platform. It opens on the suggested split."],
+      points: ["Must: one-tap report, location. Without these the product does not work.", "Be ruthless: analytics and social sharing rarely belong in the first demo.", "Use 'Clear board' to run the exercise live, then 'Suggested split' to restore the example."],
+      story: "Let two volunteers sort features by dragging while you narrate trade-offs. Ask who would move a feature and why.",
+      transition: "Once scope is clear, design the experience before writing code."
+    },
+    {
+      minutes: 3,
+      message: "Prototype the experience first.",
+      explain: ["PROMPT \u2192 DESIGN \u2192 PROTOTYPE \u2192 IMPLEMENT.", "Google Stitch for generating UI from prompts, Material Design for components and patterns, Google Fonts for typography."],
+      points: ["Changing a prototype is cheaper than changing code.", "Material gives accessibility and consistency for free.", "Verify current Stitch features before the talk; the product evolves."],
+      story: "Describe how this very presentation uses a small design system: a palette and type scale defined once.",
+      transition: "Design in hand, now choose the stack that fits the problem."
+    },
+    {
+      minutes: 4,
+      message: "The right tool depends on the problem.",
+      explain: ["Walk the tree: Mobile \u2192 Flutter, Backend \u2192 Firebase, Generative AI \u2192 Gemini, Computer Vision \u2192 ML Kit, Offline AI \u2192 Google AI Edge, Custom infrastructure \u2192 Google Cloud.", "Open the stack selector (S) and answer its four questions with the audience."],
+      points: ["Each choice maps to a need, not a trend.", "Combine tools: Flutter + Firebase + Gemini is a common MVP stack.", "The selector gives a starting point, not a rule."],
+      story: "Run the selector twice with opposite answers (cloud/GenAI vs offline/traditional ML) and compare results.",
+      transition: "Let's zoom out to the whole toolkit."
+    },
+    {
+      minutes: 3,
+      message: "Google offers a connected toolkit for builders.",
+      explain: ["Design: Stitch, Material. Development: Flutter. Backend: Firebase.", "Generative AI: Gemini, Google AI Studio, Firebase AI Logic. Mobile ML: ML Kit, Google AI Edge, AI Edge Gallery, LiteRT.", "Cloud: Google Cloud, Cloud Run, Vertex AI, BigQuery.", "Point to the Free Stack Handbook link at the bottom: a directory of free and open-source tools, APIs and docs."],
+      points: ["You do not need all of it. Pick the minimum.", "AI Studio is a fast place to try prompts before coding.", "Links on the slide go to official docs; the handbook is the take-home directory."],
+      story: "Mention that Helios carries a LiteRT tag on Hugging Face, so on-device formats matter in real projects.",
+      transition: "Now let's look at how an app actually uses AI safely."
+    },
+    {
+      minutes: 4,
+      message: "Add intelligence with a safe request pipeline.",
+      explain: ["APPLICATION \u2192 AI SERVICE \u2192 VALIDATION \u2192 RESPONSE.", "Gemini API, Firebase AI Logic, function calling, structured outputs, multimodal inputs."],
+      points: ["Structured output makes responses parseable.", "Function calling lets the model request actions that your code controls.", "Never trust model output without validation."],
+      story: "Use DomoDomo (an all-in-one agentic tool hub) as the example of an AI product where validation matters [Your detail on how DomoDomo validates outputs]. Reference Helios as the model side of your work.",
+      transition: "A key architecture decision: where does the model run?"
+    },
+    {
+      minutes: 3,
+      message: "Choose cloud or on-device AI by latency, connectivity, privacy, and constraints.",
+      explain: ["Follow the diagram: Flutter app uses Firebase AI Logic to reach Gemini in the cloud, or ML Kit and LiteRT on the device.", "Walk the comparison table."],
+      points: ["Cloud: strongest models, needs network, has cost.", "On-device: fast, private, offline, limited by hardware.", "Hybrid is valid: on-device first, cloud fallback."],
+      story: "Ask: would a field responder app work with no signal? That points to on-device.",
+      transition: "Whichever you choose, you will tell AI tools what to build, so let's talk prompts."
+    },
+    {
+      minutes: 3,
+      message: "Prompting is engineering.",
+      explain: ["Compare the weak prompt with the structured prompt.", "Point out context, constraints, expected outcome, architecture, and testing."],
+      points: ["Vague prompts produce generic code.", "Constraints prevent overengineering.", "Testing requirements make the output verifiable."],
+      story: "Show how the same request improves when each part is added.",
+      transition: "To make this repeatable, use a framework: CLEAR."
+    },
+    {
+      minutes: 3,
+      message: "CLEAR gives every prompt a repeatable structure.",
+      explain: ["Reveal C, L, E, A, R one at a time (press \u2192 or R).", "C Context, L Limitations, E Expected outcome, A Architecture, R Requirements.", "Point at the bottom of the slide: the prompt assembles itself as each letter is revealed."],
+      points: ["Pause after each letter and ask for an example.", "Use the same example (flood report) across all five.", "Save your CLEAR prompts in the repo docs."],
+      story: "Ask the audience for a limitation (e.g., 'no paid APIs') and add it live.",
+      transition: "Good prompts need a good team workflow to land in."
+    },
+    {
+      minutes: 2,
+      message: "Foundations prevent chaos in a short sprint.",
+      explain: ["Repository, feature branches, pull requests, environment variables, shared docs, task ownership.", "Walk the repo diagram."],
+      points: ["Never commit secrets; commit .env.example.", "Small pull requests are easier to review.", "One owner per task avoids duplicate work."],
+      story: "Share one workflow rule that saved your team time [Your detail].",
+      transition: "Now put it on a calendar."
+    },
+    {
+      minutes: 2,
+      message: "Every sprint must end with a deliverable.",
+      explain: ["IDEATION \u2192 SETUP \u2192 BUILD \u2192 TEST \u2192 DEPLOY.", "A 3\u20134 day cycle: feature development, integration testing, bug fixing, demo preparation.", "Each phase ends with a named deliverable, and the band at the bottom is the definition of done."],
+      points: ["Test integration early, not on the last night.", "Fix demo-breaking bugs first.", "Record a backup demo."],
+      story: "Describe how you prepare a demo backup before presenting [Your detail].",
+      transition: "Let me close with the four things to remember."
+    },
+    {
+      minutes: 2,
+      message: "Build something that matters.",
+      explain: ["Understand the problem, choose the right tools, engineer the solution, validate everything, ship something that works.", "Invite questions and point to the two QR codes: the Free Developer Stack Handbook and the LinkedIn profile, with both URLs written out."],
+      points: ["Repeat the five lines slowly.", "Tell the audience to scan the handbook QR for the full directory of free and open-source tools, APIs and docs.", "Share where to find Helios and DomoDomo.", "Thank GDG on Campus Xavier Ateneo."],
+      story: "End with an invitation: pick one idea this week and write its problem statement.",
+      transition: "Open the floor for Q&A."
+    }
+  ];
+
+  // js/presenter.js
+  var esc = (s) => s.replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[c]);
+  function createOverlays({ goTo, getCurrent }) {
+    const els = {
+      notes: document.getElementById("notes"),
+      overview: document.getElementById("overview"),
+      selector: document.getElementById("selector")
+    };
+    let lastFocus = null;
+    const isOpen = (n) => els[n].classList.contains("is-open");
+    const anyOpen = () => Object.keys(els).some(isOpen);
+    function closeAll() {
+      Object.values(els).forEach((el) => {
+        el.classList.remove("is-open");
+        el.setAttribute("aria-hidden", "true");
+      });
+      lastFocus?.focus?.();
+      lastFocus = null;
+    }
+    function open(name) {
+      if (!anyOpen()) lastFocus = document.activeElement;
+      Object.entries(els).forEach(([n, el]) => {
+        const on = n === name;
+        el.classList.toggle("is-open", on);
+        el.setAttribute("aria-hidden", String(!on));
+      });
+      if (name === "notes") renderNotes(getCurrent());
+      if (name === "overview") renderOverview(getCurrent());
+      const focusable = els[name].querySelector("button, select, [tabindex]");
+      focusable?.focus();
+    }
+    function toggle(name) {
+      isOpen(name) ? closeAll() : open(name);
+    }
+    function renderNotes(i) {
+      const n = notes[i], s = slides[i];
+      const list = (a) => `<ul>${a.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`;
+      els.notes.innerHTML = `
+      <button class="btn ghost" data-close style="float:right;padding:8px 18px;font-size:20px" aria-label="Close notes">Close (Esc)</button>
+      <p class="time">Slide ${s.id} \xB7 about ${n.minutes} min</p>
+      <h3>${esc(s.title)}</h3>
+      <h4>Main message</h4><p>${esc(n.message)}</p>
+      <h4>Explain</h4>${list(n.explain)}
+      <h4>Talking points</h4>${list(n.points)}
+      <h4>Example or story</h4><p>${esc(n.story)}</p>
+      <h4>Transition</h4><p>${esc(n.transition)}</p>`;
+    }
+    function renderOverview(cur) {
+      els.overview.innerHTML = `<div class="eyebrow" style="margin-bottom:28px">Slide overview \xB7 click a slide or press Esc</div><div class="grid">${slides.map((s, i) => `<button data-go="${i}" class="${i === cur ? "is-current" : ""}"><span class="n">${String(s.id).padStart(2, "0")}</span><span class="t">${esc(s.title)}</span></button>`).join("")}</div>`;
+    }
+    els.overview.addEventListener("click", (e) => {
+      const b = e.target.closest("[data-go]");
+      if (b) {
+        closeAll();
+        goTo(Number(b.dataset.go));
+      }
+    });
+    Object.values(els).forEach((el) => el.addEventListener("click", (e) => {
+      if (e.target.closest("[data-close]")) closeAll();
+    }));
+    document.addEventListener("click", (e) => {
+      const o = e.target.closest("[data-open]");
+      if (o) open(o.dataset.open);
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key !== "Tab") return;
+      const panel = Object.values(els).find((el) => el.classList.contains("is-open"));
+      if (!panel) return;
+      const items = [...panel.querySelectorAll("button, a[href], select, input, [tabindex]:not([tabindex='-1'])")].filter((el) => el.getClientRects().length > 0);
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    });
+    return { toggle, open, closeAll, anyOpen, refresh: (i) => {
+      if (isOpen("notes")) renderNotes(i);
+    } };
+  }
+
+  // js/interactions/mvp.js
+  var FEATURES = [
+    { id: "sos", label: "One-tap emergency report", suggest: "must" },
+    { id: "gps", label: "Automatic GPS location", suggest: "must" },
+    { id: "dash", label: "Responder dashboard", suggest: "must" },
+    { id: "photo", label: "Photo attachment", suggest: "should" },
+    { id: "status", label: "Live report status", suggest: "should" },
+    { id: "push", label: "Push notifications", suggest: "should" },
+    { id: "voice", label: "Voice reporting", suggest: "could" },
+    { id: "lang", label: "Multi-language support", suggest: "could" },
+    { id: "stats", label: "Analytics dashboard", suggest: "wont" },
+    { id: "share", label: "Social media sharing", suggest: "wont" }
+  ];
+  var BUCKETS = [
+    { id: "must", name: "Must Have", short: "Must", color: "var(--green)" },
+    { id: "should", name: "Should Have", short: "Should", color: "var(--blue)" },
+    { id: "could", name: "Could Have", short: "Could", color: "var(--yellow)" },
+    { id: "wont", name: "Won't Have \xB7 Deferred", short: "Won't", color: "var(--red)" }
+  ];
+  function initMvp(root) {
+    if (!root) return;
+    const state = Object.fromEntries(FEATURES.map((f) => [f.id, f.suggest]));
+    let dragId = null;
+    const featHtml = (f, compact) => `
+    <div class="feat" draggable="true" tabindex="0" data-id="${f.id}" aria-label="${f.label}">
+      <span>${f.label}</span>
+      <select aria-label="Move ${f.label} to" data-move="${f.id}">
+        <option value="pool" ${state[f.id] === "pool" ? "selected" : ""}>Unsorted</option>
+        ${BUCKETS.map((b) => `<option value="${b.id}" ${state[f.id] === b.id ? "selected" : ""}>${b.short}</option>`).join("")}
+      </select>
+    </div>`;
+    function render() {
+      const pool = FEATURES.filter((f) => state[f.id] === "pool");
+      root.innerHTML = `
+      <div class="mvp-pool" data-bucket="pool" aria-label="Unsorted features">
+        <span class="tag b">${pool.length ? `Unsorted features (${pool.length}) \u2014 drag one into a bucket, or use its menu` : "All features sorted \u2014 clear the board to start again"}</span>
+        ${pool.map((f) => featHtml(f)).join("")}
+      </div>
+      <div class="mvp-buckets">
+        ${BUCKETS.map((b) => {
+        const items = FEATURES.filter((f) => state[f.id] === b.id);
+        return `<div class="bucket" data-bucket="${b.id}" aria-label="${b.name}">
+            <header><span><i class="bucket-dot" style="background:${b.color}"></i>${b.name}</span><span class="count" aria-label="${items.length} features">${items.length}</span></header>
+            <div class="items">${items.map((f) => featHtml(f)).join("") || '<p class="empty">Empty</p>'}</div>
+          </div>`;
+      }).join("")}
+      </div>`;
+    }
+    root.addEventListener("dragstart", (e) => {
+      const f = e.target.closest(".feat");
+      if (!f) return;
+      dragId = f.dataset.id;
+      f.classList.add("dragging");
+      e.dataTransfer.setData("text/plain", dragId);
+      e.dataTransfer.effectAllowed = "move";
+    });
+    root.addEventListener("dragend", () => {
+      dragId = null;
+      root.querySelectorAll(".dragging,.over").forEach((n) => n.classList.remove("dragging", "over"));
+    });
+    root.addEventListener("dragover", (e) => {
+      const b = e.target.closest("[data-bucket]");
+      if (!b) return;
+      e.preventDefault();
+      root.querySelectorAll(".over").forEach((n) => n.classList.remove("over"));
+      b.classList.add("over");
+    });
+    root.addEventListener("drop", (e) => {
+      const b = e.target.closest("[data-bucket]");
+      if (!b || !dragId) return;
+      e.preventDefault();
+      state[dragId] = b.dataset.bucket;
+      render();
+    });
+    root.addEventListener("change", (e) => {
+      const s = e.target.closest("[data-move]");
+      if (!s) return;
+      state[s.dataset.move] = s.value;
+      render();
+      root.querySelector(`[data-id="${s.dataset.move}"] select`)?.focus();
+    });
+    const slide = root.closest(".slide");
+    slide.addEventListener("click", (e) => {
+      const a = e.target.closest("[data-mvp]")?.dataset.mvp;
+      if (a === "suggest") FEATURES.forEach((f) => state[f.id] = f.suggest);
+      else if (a === "reset") FEATURES.forEach((f) => state[f.id] = "pool");
+      else return;
+      render();
+    });
+    render();
+  }
+
+  // js/interactions/clear.js
+  var CLEAR = [
+    { k: "C", t: "Context", d: "Who is it for and what exists already?", w: "Without context, the model guesses at your product.", ex: "Flutter app for barangay flood reports." },
+    { k: "L", t: "Limitations", d: "Time, budget, stack, devices.", w: "Limits are what stop the output from overengineering.", ex: "3-day sprint. Firebase. Low-end Android." },
+    { k: "E", t: "Expected outcome", d: "A result you can check.", w: "A checkable outcome is what you can write a test against.", ex: "Located report sent in under 30 seconds." },
+    { k: "A", t: "Architecture", d: "How the pieces connect.", w: "A diagram beats a paragraph when you mean 'these two'.", ex: "Flutter UI \u2192 Firestore \u2192 Gemini triage." },
+    { k: "R", t: "Requirements", d: "Tests and quality bars.", w: "Requirements survive the next person who touches the code.", ex: "Validation unit tests + one end-to-end flow." }
+  ];
+  var COLORS = ["var(--blue)", "var(--red)", "var(--yellow)", "var(--green)", "var(--blue)"];
+  var PROMPT = [
+    "<span class='k'>Context:</span> Flutter app for barangay flood reports.",
+    "<span class='k'>Limitations:</span> 3-day sprint. Firebase. Low-end Android.",
+    "<span class='k'>Expected outcome:</span> Located report sent in under 30 seconds.",
+    "<span class='k'>Architecture:</span> Flutter UI \u2192 Firestore \u2192 Gemini triage.",
+    "<span class='k'>Requirements:</span> Validation unit tests + one end-to-end flow."
+  ];
+  function initClear(root) {
+    if (!root) return { forward: () => false, back: () => false };
+    let shown = 0;
+    const out = document.getElementById("clear-text");
+    root.innerHTML = CLEAR.map((c, i) => `
+    <div class="letter" data-i="${i}" style="--c:${COLORS[i]}">
+      <div class="big">${c.k}</div>
+      <h3>${c.t}</h3><p>${c.d}</p><p class="why">${c.w}</p><div class="ex">${c.ex}</div>
+    </div>`).join("");
+    const cards = [...root.querySelectorAll(".letter")];
+    const paint = () => {
+      cards.forEach((el, i) => el.classList.toggle("on", i < shown));
+      if (out) {
+        out.innerHTML = shown ? PROMPT.slice(0, shown).join("\n") : '<span class="placeholder">Reveal a letter to start building the prompt.</span>';
+      }
+    };
+    const api = {
+      forward() {
+        if (shown >= CLEAR.length) return false;
+        shown++;
+        paint();
+        return true;
+      },
+      back() {
+        if (shown <= 0) return false;
+        shown--;
+        paint();
+        return true;
+      },
+      all() {
+        shown = CLEAR.length;
+        paint();
+      },
+      reset() {
+        shown = 0;
+        paint();
+      }
+    };
+    root.closest(".slide").addEventListener("click", (e) => {
+      const a = e.target.closest("[data-clear]")?.dataset.clear;
+      if (a === "next") api.forward();
+      else if (a === "all") api.all();
+      else if (a === "reset") api.reset();
+    });
+    paint();
+    return api;
+  }
+
+  // js/interactions/selector.js
+  var QUESTIONS = [
+    { key: "platform", q: "Platform", opts: [["web", "Web"], ["mobile", "Mobile"]] },
+    { key: "runtime", q: "Where does AI run?", opts: [["cloud", "Cloud"], ["offline", "Offline"]] },
+    { key: "ai", q: "Type of AI", opts: [["genai", "Generative AI"], ["ml", "Traditional ML"]] },
+    { key: "backend", q: "Backend", opts: [["simple", "Simple"], ["advanced", "Advanced"]] }
+  ];
+  function recommend(a) {
+    const items = [];
+    let summary;
+    if (a.platform === "mobile") {
+      items.push(["Flutter", "One codebase for Android and iOS, with fast iteration."]);
+    } else {
+      items.push(["Flutter (web) or a standard web stack", "Flutter can target the web; a plain HTML/JS front end is fine for simple pages."]);
+    }
+    if (a.backend === "simple") {
+      items.push(["Firebase", "Authentication, Firestore, and hosting without running servers."]);
+    } else {
+      items.push(["Google Cloud with Cloud Run", "Custom services, containers, and scaling control. Keep Firebase for auth if useful."]);
+    }
+    if (a.ai === "genai" && a.runtime === "cloud") {
+      const tool = a.backend === "simple" ? "Gemini via Firebase AI Logic" : "Gemini API (or Vertex AI)";
+      items.push([tool, "Hosted generative models with structured output and function calling."]);
+      summary = "Flutter + Firebase + Gemini";
+    } else if (a.ai === "genai") {
+      items.push(["Google AI Edge", "Run generative models on the device. Needs capable hardware; you can try models in AI Edge Gallery."]);
+      summary = "Flutter + Firebase + Google AI Edge";
+    } else if (a.runtime === "cloud") {
+      items.push([
+        a.backend === "simple" ? "Vertex AI (when you need a custom model)" : "Vertex AI with BigQuery",
+        "Train and serve custom models; BigQuery for analysis of larger data."
+      ]);
+      summary = "Flutter + Firebase + Vertex AI";
+    } else {
+      items.push(["ML Kit, then LiteRT", "ML Kit for ready-made vision and text APIs; LiteRT to run your own model on the device."]);
+      summary = "Flutter + Firebase + ML Kit / LiteRT";
+    }
+    let note = "A starting point, not a rule. Validate it against your problem statement.";
+    if (a.platform === "web" && a.runtime === "offline") {
+      summary = "Web front end + Firebase + ML Kit / LiteRT";
+      note = "Offline on-device AI is strongest on mobile. For web, consider a hybrid with a cloud fallback.";
+    }
+    return { items, note, summary };
+  }
+  function initSelector(root) {
+    const answers = { platform: "mobile", runtime: "cloud", ai: "genai", backend: "simple" };
+    function render() {
+      const rec = recommend(answers);
+      root.innerHTML = `
+      <div class="selector-scrim" data-close></div>
+      <div class="selector-panel" role="dialog" aria-modal="true" aria-label="Stack selector">
+        <div class="selector-head">
+          <div><span class="label">Interactive</span><h2 class="h-md">Stack selector</h2></div>
+          <button class="btn ghost" data-close>Close (Esc)</button>
+        </div>
+        <div class="sel-wrap">
+          <div class="sel-questions">
+            ${QUESTIONS.map((q) => `<div class="q"><span class="small">${q.q}</span><div class="row">${q.opts.map(([v, l]) => `<button class="btn ghost" data-k="${q.key}" data-v="${v}" aria-pressed="${answers[q.key] === v}">${l}</button>`).join("")}</div></div>`).join("")}
+          </div>
+          <div class="rec" aria-live="polite"><span class="tag b">Recommended stack</span>
+            <p class="rec-summary">${rec.summary}</p>
+            <ul>${rec.items.map(([n, d]) => `<li><b>${n}</b><br>${d}</li>`).join("")}</ul>
+            <p class="small">${rec.note}</p></div>
+        </div>
+      </div>`;
+    }
+    root.addEventListener("click", (e) => {
+      const b = e.target.closest("[data-k]");
+      if (!b) return;
+      answers[b.dataset.k] = b.dataset.v;
+      render();
+      root.querySelector(`[data-k="${b.dataset.k}"][data-v="${b.dataset.v}"]`)?.focus();
+    });
+    render();
+  }
+
+  // js/interactions.js
+  function initInteractions() {
+    initMvp(document.getElementById("mvp-root"));
+    initSelector(document.getElementById("selector"));
+    const clear = initClear(document.getElementById("clear-root"));
+    return { 12: { forward: () => clear.forward(), back: () => clear.back() } };
+  }
+
+  // js/diagrams.js
+  var NS = "http://www.w3.org/2000/svg";
+  var SPARK = "M12 0C13 7 17 11 24 12C17 13 13 17 12 24C11 17 7 13 0 12C7 11 11 7 12 0Z";
+  var defs = `<defs>
+  <linearGradient id="gem" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#4285F4"/><stop offset=".5" stop-color="#7C86D9"/><stop offset="1" stop-color="#D97C86"/>
+  </linearGradient>
+  <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M 0 0 L 10 5 L 0 10 z" fill="#4285F4"/>
+  </marker>
+  <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M 0 0 L 10 5 L 0 10 z" fill="#34A853"/>
+  </marker>
+</defs>`;
+  var sparkle = (x, y, s = 2) => `<g transform="translate(${x} ${y}) scale(${s})"><path d="${SPARK}" fill="url(#gem)"/></g>`;
+  var MARKS = {
+    flutter: { src: "assets/images/flutter_logo.png", iw: 953, ih: 272, crop: [4, 4, 214, 264] },
+    firebase: { src: "assets/images/firebase_logo.png", iw: 640, ih: 640, crop: [211, 117, 219, 273] },
+    mlkit: { src: "assets/images/google_ml_kit.png", iw: 1600, ih: 468, crop: [0, 54, 496, 360] },
+    gcloud: { src: "assets/images/Google_cloud.png", iw: 225, ih: 225, crop: [52, 41, 121, 98] }
+  };
+  function mark(x, y, h, key) {
+    const m = MARKS[key];
+    const [cx, cy, cw, ch] = m.crop;
+    const w = Math.round(h * (cw / ch));
+    return `<svg x="${x}" y="${y}" width="${w}" height="${h}" viewBox="${cx} ${cy} ${cw} ${ch}" preserveAspectRatio="xMidYMid meet"><image href="${m.src}" x="0" y="0" width="${m.iw}" height="${m.ih}"/></svg>`;
+  }
+  function svg(viewBox, inner, label) {
+    const s = document.createElementNS(NS, "svg");
+    s.setAttribute("viewBox", viewBox);
+    s.setAttribute("class", "diagram");
+    s.setAttribute("role", "img");
+    s.setAttribute("aria-label", label);
+    s.setAttribute("preserveAspectRatio", "xMidYMid meet");
+    s.innerHTML = defs + inner;
+    return s;
+  }
+  var TREE = [
+    { need: "Mobile", tool: "Flutter", mark: "flutter", when: "One codebase for Android and iOS, with fast UI iteration." },
+    { need: "Backend", tool: "Firebase", mark: "firebase", when: "Managed Auth, Firestore, and Hosting without running servers." },
+    { need: "Generative AI", tool: "Gemini", mark: "gemini", when: "Text, image, and structured output via the API or Firebase AI Logic." },
+    { need: "Computer Vision", tool: "ML Kit", mark: "mlkit", when: "Ready-made on-device APIs for text, barcode, and face detection." },
+    { need: "Offline AI", tool: "Google AI Edge", mark: "edge", when: "Run models on the device with LiteRT, no connection needed." },
+    { need: "Custom Infrastructure", tool: "Google Cloud", mark: "gcloud", when: "Cloud Run, Vertex AI, and BigQuery for custom services at scale." }
+  ];
+  var TREE_W = 1680;
+  var ROW_H = 92;
+  var ROW_GAP = 14;
+  var ROOT_W = 340;
+  var ROW_X = 420;
+  var MARK_X = 700;
+  var MARK_H = 38;
+  var TEXT_X = 786;
+  function buildTree(root) {
+    const H = TREE.length * ROW_H + (TREE.length - 1) * ROW_GAP;
+    const rootH = 116;
+    const rootY = (H - rootH) / 2;
+    const rootCY = rootY + rootH / 2;
+    let inner = "";
+    TREE.forEach((t, i) => {
+      const cy = i * (ROW_H + ROW_GAP) + ROW_H / 2;
+      inner += `<path class="edge" d="M ${ROOT_W} ${rootCY} C ${ROOT_W + 70} ${rootCY}, ${ROW_X - 70} ${cy}, ${ROW_X} ${cy}"/>`;
+    });
+    inner += `<g class="node root">
+    <line class="root-rule" x1="0" y1="${rootCY - 68}" x2="0" y2="${rootCY + 58}"/>
+    <text x="26" y="${rootCY - 10}">What does your</text>
+    <text x="26" y="${rootCY + 30}">problem need?</text>
+  </g>`;
+    TREE.forEach((t, i) => {
+      const y = i * (ROW_H + ROW_GAP);
+      const markTop = y + (ROW_H - MARK_H) / 2;
+      let icon = "";
+      if (t.mark === "gemini") icon = sparkle(MARK_X + 2, markTop, MARK_H / 24);
+      else if (t.mark === "edge") icon = `<circle cx="${MARK_X + MARK_H / 2}" cy="${markTop + MARK_H / 2}" r="11" fill="#34A853"/>`;
+      else icon = mark(MARK_X, markTop, MARK_H, t.mark);
+      inner += `<g class="node row" tabindex="0" data-tree="${i}">
+      <title>${t.need} leads to ${t.tool}. ${t.when}</title>
+      <rect x="${ROW_X}" y="${y}" width="${TREE_W - ROW_X}" height="${ROW_H}" rx="0"/>
+      <text class="need" x="${ROW_X}" y="${y + 44}">${t.need}</text>
+      <text class="arrow" x="670" y="${y + 44}">\u2192</text>
+      ${icon}
+      <text class="tool" x="${TEXT_X}" y="${y + 39}">${t.tool}</text>
+      <text class="sub" x="${TEXT_X}" y="${y + 64}">${t.when}</text>
+      <line class="row-line" x1="${ROW_X}" y1="${y + ROW_H}" x2="${TREE_W}" y2="${y + ROW_H}"/>
+    </g>`;
+    });
+    const s = svg(
+      `0 0 ${TREE_W} ${H}`,
+      inner,
+      "Decision tree: Mobile leads to Flutter, Backend to Firebase, Generative AI to Gemini, Computer Vision to ML Kit, Offline AI to Google AI Edge, and Custom Infrastructure to Google Cloud."
+    );
+    s.addEventListener("pointerover", (e) => highlight(s, e.target.closest("[data-tree]")));
+    s.addEventListener("focusin", (e) => highlight(s, e.target.closest("[data-tree]")));
+    s.addEventListener("pointerleave", () => highlight(s, null));
+    root.replaceChildren(s);
+  }
+  function highlight(s, node) {
+    s.querySelectorAll("[data-tree]").forEach((n) => n.classList.toggle("hot", n === node));
+  }
+  function buildArch(root) {
+    const box = (x, y, w, h, title, subs, id, markSvg = "") => `
+    <g class="node arch" data-n="${id}">
+      <title>${title}</title>
+      <rect x="${x}" y="${y}" width="${w}" height="${h}" rx="20"/>
+      ${markSvg}
+      <text x="${x + (markSvg ? 78 : 22)}" y="${y + 44}">${title}</text>
+      ${subs.map((t, i) => `<text class="sub" x="${x + 22}" y="${y + 78 + i * 26}">${t}</text>`).join("")}
+    </g>`;
+    const inner = `
+    <rect class="zone green" x="0" y="0" width="290" height="540" rx="26"/>
+    <text class="zone-label green" x="22" y="36">ON DEVICE</text>
+    <rect class="zone blue" x="320" y="0" width="580" height="540" rx="26"/>
+    <text class="zone-label blue" x="342" y="36">CLOUD</text>
+
+    <path class="edge flow green" d="M 145 396 L 145 168" marker-end="url(#arrow-green)"/>
+    <path class="edge flow blue" d="M 274 424 C 314 424, 314 148, 340 148" marker-end="url(#arrow-blue)"/>
+    <path class="edge flow blue" d="M 274 470 L 340 470" marker-end="url(#arrow-blue)"/>
+    <path class="edge flow blue" d="M 620 148 L 630 148" marker-end="url(#arrow-blue)"/>
+    <path class="edge flow blue" d="M 620 448 L 630 448" marker-end="url(#arrow-blue)"/>
+
+    ${box(16, 64, 258, 104, "ML Kit", ["On-device APIs"], "mlkit", mark(36, 82, 30, "mlkit"))}
+    ${box(16, 396, 258, 104, "Flutter app", ["UI and app logic"], "flutter", mark(36, 414, 30, "flutter"))}
+    ${box(340, 96, 280, 104, "Firebase", ["Auth \xB7 Firestore"], "fb")}
+    ${box(340, 396, 280, 104, "Firebase AI Logic", ["Client SDK for Gemini"], "ail")}
+    ${box(630, 88, 256, 120, "Google Cloud", ["Cloud Run \xB7 Vertex AI", "BigQuery"], "gc")}
+    ${box(630, 396, 256, 104, "Gemini", ["Cloud inference"], "gem", sparkle(648, 414, 1.25))}
+  `;
+    const s = svg(
+      "0 0 900 540",
+      inner,
+      "Architecture: the Flutter app uses ML Kit on the device, Firebase for data and authentication, Firebase AI Logic to reach Gemini in the cloud, and Google Cloud services behind Firebase."
+    );
+    root.replaceChildren(s);
+  }
+  function initDiagrams() {
+    const t = document.getElementById("tree-root");
+    const a = document.getElementById("arch-root");
+    if (t) buildTree(t);
+    if (a) buildArch(a);
+  }
+
+  // js/animations.js
+  var reduced = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function fitStage(stage2) {
+    const fit = () => {
+      const s = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+      stage2.style.transform = `scale(${s})`;
+      stage2.style.margin = `${-(1080 * (1 - s)) / 2}px ${-(1920 * (1 - s)) / 2}px`;
+    };
+    fit();
+    window.addEventListener("resize", fit);
+    document.addEventListener("fullscreenchange", () => setTimeout(fit, 50));
+  }
+  function createFlowAnimator() {
+    let timer = null;
+    const steps = () => [...document.querySelectorAll("#ai-flow .step")];
+    const stop = () => {
+      clearInterval(timer);
+      timer = null;
+      steps().forEach((s) => s.classList.remove("hot"));
+    };
+    return {
+      onSlide(index) {
+        stop();
+        if (index !== 8) return;
+        const els = steps();
+        if (reduced()) {
+          els.forEach((s) => s.classList.add("hot"));
+          return;
+        }
+        let i = 0;
+        const tick = () => {
+          els.forEach((s, n) => s.classList.toggle("hot", n === i));
+          i = (i + 1) % els.length;
+        };
+        tick();
+        timer = setInterval(tick, 1100);
+      }
+    };
+  }
+
+  // js/asset-manager.js
+  var imageStatus = [];
+  function manageImages(root) {
+    root.querySelectorAll("img").forEach((img) => {
+      img.decoding = "async";
+      const slide = img.closest(".slide");
+      const record = (ok) => imageStatus.push({ src: img.getAttribute("src"), slide: slide ? Number(slide.id.replace("slide-", "")) : null, ok, w: img.naturalWidth, h: img.naturalHeight });
+      const fail = () => {
+        record(false);
+        console.error(`Image failed to load: ${img.getAttribute("src")}`);
+        img.alt = `${img.alt} (image unavailable)`;
+        img.style.visibility = "hidden";
+      };
+      img.addEventListener("error", fail, { once: true });
+      if (img.complete) img.naturalWidth ? record(true) : fail();
+      else img.addEventListener("load", () => record(true), { once: true });
+    });
+    window.__imageStatus = imageStatus;
+  }
+
+  // js/app.js
+  var stage = document.getElementById("stage");
+  var slideEls = renderSlides(stage);
+  manageImages(stage);
+  initDiagrams();
+  var stepHandlers = initInteractions();
+  fitStage(stage);
+  var flow = createFlowAnimator();
+  var nav;
+  var overlays = createOverlays({ goTo: (i) => nav.show(i), getCurrent: () => nav.current });
+  nav = createNavigation({
+    slideEls,
+    stepHandlers,
+    overlays,
+    onChange: (i) => {
+      flow.onSlide(i);
+      overlays.refresh(i);
+    }
+  });
+  flow.onSlide(nav.current);
+  document.title = `${slides[nav.current].title} \xB7 From Idea to MVP`;
+  window.__deck = { nav, total: slides.length };
+})();
+
+</script>
+</body>
+</html>

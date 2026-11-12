@@ -23,8 +23,8 @@ export function initClear(root) {
   const out = document.getElementById("clear-text");
 
   root.innerHTML = CLEAR.map((c, i) => `
-    <div class="letter" data-i="${i}">
-      <div class="big" style="color:${COLORS[i]}">${c.k}</div>
+    <div class="letter" data-i="${i}" style="--c:${COLORS[i]}">
+      <div class="big">${c.k}</div>
       <h3>${c.t}</h3><p>${c.d}</p><p class="why">${c.w}</p><div class="ex">${c.ex}</div>
     </div>`).join("");
 

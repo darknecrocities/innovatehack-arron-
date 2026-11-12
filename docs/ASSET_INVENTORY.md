@@ -2,8 +2,8 @@
 
 **Project:** From Idea to MVP — InnovateHack+ 2.0 (GDG on Campus Xavier Ateneo)
 **Speaker:** Arron Kian Parejas
-**Inventory date:** November 11, 2026
-**Source folder:** `assets/images/` (12 supplied files, all inspected visually)
+**Inventory date:** November 12, 2026
+**Source folder:** `assets/images/` (13 supplied files, all inspected visually)
 **Machine-readable manifest:** `assets/asset-manifest.json`
 
 Every supplied image is used. Nothing was generated to replace a supplied
@@ -28,55 +28,66 @@ derivative was needed it lives in `assets/images/optimized/`.
 | 10 | `google_ml_kit.png` | PNG | 1600 × 468 | 3.419:1 | 57 KB | Google ML Kit logo — blue "M" glyph + wordmark, transparent background |
 | 11 | `Google_cloud.png` | PNG | 225 × 225 | 1:1 | 9.4 KB | Google Cloud logo — multicolor cloud above the wordmark, white background. **Lowest-resolution asset in the set** |
 | 12 | `Arron_qr_socials_links.png` | PNG | 400 × 400 | 1:1 | 15 KB | QR code, **white modules on a dark navy** (`#0B0F19`) background |
+| 13 | `handbook_qr.png` | PNG | 400 × 400 | 1:1 | 35 KB | Panda-illustrated QR code for the **Free Developer Stack Handbook** |
 
 ### Optimized derivatives (`assets/images/optimized/`)
 
 | File | Dimensions | Size | Why |
 |---|---|---|---|
 | `arron_profile.png` | 720 × 900 | 402 KB | The original is 1.36 MB at 4488 × 5608; the slide renders it at roughly 420 × 730 px. Aspect ratio preserved exactly (0.8). |
-| `caffeine_hackathon.jpg` | 1600 × 1066 | 266 KB | Slightly smaller derivative for the large photo slots. |
+| `caffeine_hackathon.jpg` | 1600 × 1066 | 266 KB | Slightly smaller derivative for the large photo slot. |
 | `skydev_hackathon.jpg` | 1600 × 1066 | 379 KB | 37 % lighter than the 605 KB original, at the size actually rendered. |
 
 ---
 
 ## 2. Placement
 
+Slide 3 is deliberately **typographic** — it has no photographs. The hackathon
+images are gathered on slide 2 as one gallery, and the project screenshots sit
+on slide 9. Logos appear as full lockups on slide 8 and as cropped marks inside
+the SVG decision tree (slide 7) and architecture diagram (slide 10).
+
 | File | Slides | Placement | Object-fit | Cropping |
 |---|---|---|---|---|
-| `gemini_argon.png` | 01, 09 | Hero panel (01), Gemini context panel (09) | `contain` | None |
+| `gemini_argon.png` | 01, 09 | Hero panel (01), Gemini context panel (09) | `contain` | None — sharp black frame |
 | `arron_profile.png` | 02 | Main portrait, left column | `cover` | `object-position: 50% 28%` keeps the face in frame |
-| `appbuilders_top1.png` | 02, 09 | Recognition strip (02) and DomoDomo context (09) | `contain` | None — the leaderboard must stay readable |
-| `caffeine_hackathon.jpg` | 02, 03 | Full-width gallery tile (02), hero tile (03) | `cover` | Mild crop only |
-| `bitpyre_hackathon.jpg` | 02, 03 | Gallery tile (02), second gallery tile (03) | `contain` | None — the printed yellow frame and caption are part of the artwork |
-| `skydev_hackathon.jpg` | 02, 03 | Gallery tile (02), gallery tile (03) | `cover` | `object-position: 60% 50%` avoids cutting the sponsor banner |
-| `helios_hf_downloadscount.png` | 02, 09, 10 | Gallery tile (02), model panel (09), referenced by text on 10 | `contain` | None; `object-position: top` keeps the model header visible |
-| `flutter_logo.png` | 07, 08 | Decision-tree row mark (07), ecosystem card (08) | `contain` | Mark cropped from the wordmark on 07 only |
-| `firebase_logo.png` | 07, 08 | Decision-tree row mark (07), ecosystem card (08) | `contain` | Flame cropped from the wordmark on 07 only |
-| `google_ml_kit.png` | 07, 08, 10 | Decision-tree row mark (07), ecosystem card (08), architecture box (10) | `contain` | "M" glyph cropped from the wordmark on 07 and 10 |
-| `Google_cloud.png` | 07, 08 | Decision-tree row mark (07), ecosystem card (08) | `contain` | Cloud cropped from the wordmark on 07 only |
-| `Arron_qr_socials_links.png` | 15 | Contact card | `contain` | None |
+| `appbuilders_top1.png` | 09 | DomoDomo context panel | `contain` | None — the leaderboard must stay readable |
+| `caffeine_hackathon.jpg` | 02 | Gallery tile | `cover` | Mild crop only |
+| `bitpyre_hackathon.jpg` | 02 | Gallery tile | `contain` | None — the printed yellow frame and caption are part of the artwork |
+| `skydev_hackathon.jpg` | 02 | Gallery tile | `cover` | `object-position: 60% 50%` avoids cutting the sponsor banner |
+| `helios_hf_downloadscount.png` | 02, 09 | Gallery tile (02), model panel (09) | `contain` | None; dark frame, `object-position: top` keeps the model header visible |
+| `flutter_logo.png` | 07, 08, 10 | Decision-tree mark (07), toolkit card (08), architecture box (10) | `contain` | Mark cropped from the wordmark on 07 and 10 only |
+| `firebase_logo.png` | 07, 08 | Decision-tree mark (07), toolkit card (08) | `contain` | Flame cropped from the wordmark on 07 only |
+| `google_ml_kit.png` | 07, 08, 10 | Decision-tree mark (07), toolkit card (08), architecture box (10) | `contain` | "M" glyph cropped from the wordmark on 07 and 10 |
+| `Google_cloud.png` | 07, 08 | Decision-tree mark (07), toolkit card (08) | `contain` | Cloud cropped from the wordmark on 07 only |
+| `Arron_qr_socials_links.png` | 15 | Contact QR, beside the handbook QR | `contain` | None |
+| `handbook_qr.png` | 15 | Primary QR, with a text link | `contain` | None |
 
-**Every one of the 12 supplied files appears on at least one slide.** Ten of the
-twelve appear on more than one.
+**Every one of the 13 supplied files appears on at least one slide.** The deck
+renders 15 `<img>` elements (Gemini and Helios are each used twice) plus six
+SVG `<image>` marks drawn from the four logo files.
 
 ---
 
 ## 3. How dark artwork is handled on a beige canvas
 
 Four assets are dark (the portrait, the Gemini title card, the Helios
-screenshot and the QR code). They are **not** recoloured or inverted. Instead
-each is framed as a rounded "window" so the beige canvas stays dominant:
+screenshot and the socials QR). They are **not** recoloured or inverted.
+Instead each is framed as a sharp-cornered "window" so the beige canvas stays
+dominant:
 
-- `.photo` / `.shot` share one radius (`--radius: 28px`) and one shadow.
+- `.photo` / `.shot` use `--radius: 0` — no rounded cards or shadows.
 - The portrait is a black panel with a white dithered subject — high contrast
   against beige, so it reads as a deliberate inset.
-- The Gemini title card keeps its own black field; it is placed on a white card
-  on slide 01.
-- The Helios screenshot is a dark UI capture shown with `contain` on a dark
-  frame so no edge is cropped.
-- The QR code is white-on-navy, which scans correctly and is shown on a white
-  card. **Verified: it decodes to `https://www.linkedin.com/in/arron-parejas/`
-  from the live slide.**
+- The Gemini title card is pure black (`#000`), so the image meets its frame
+  edge-to-edge with no visible letterbox.
+- The Helios screenshot sits in a dark frame (`#0C0F18`) matched to its own
+  background, so the dark UI capture shows no white bands.
+- The socials QR is white-on-navy and scans correctly inside a thin paper frame.
+- The handbook QR is dark-on-paper and sits in a matching paper frame.
+  **Verified: it decodes to
+  `https://docs.google.com/document/d/1hxBY6auIP5fya0ir9FhvKsGnrCcVYjRnaIrMpx8I9Nw/edit?usp=sharing`
+  and the document title is "Free Developer Stack Handbook".**
 
 ---
 
@@ -98,6 +109,10 @@ The crop rectangles were measured from the actual pixel data of the supplied
 files (see `tools/logo-bounds.mjs` and `tools/logo-crop.mjs`), not estimated.
 No logo file was edited.
 
+On slide 08 the square white-backed logos (Firebase, Google Cloud) are blended
+with `mix-blend-mode: multiply`, so their white backgrounds disappear into the
+paper without altering the files.
+
 Where no supplied logo exists — Gemini, Google AI Studio, Firebase AI Logic,
 Google AI Edge, AI Edge Gallery, LiteRT, Vertex AI, BigQuery, Cloud Run,
 Stitch, Material Design, Google Fonts — the slide uses a **text wordmark**, not
@@ -115,11 +130,11 @@ to fill these slots.
 | Expected asset | Where it would have gone | What is shown instead |
 |---|---|---|
 | EasyLense computer-vision screenshots | Slide 10 | The ML Kit logo in the on-device zone, plus a text reference to the Helios LiteRT tag |
-| DomoDomo-only app screenshots | Slides 02, 09 | The supplied AppBuilders collage, which contains the DomoDomo site and mockups |
-| GDG on Campus group photographs | Slide 02 | Not replaced. Slide 02 uses the portrait, three hackathon photographs and the AppBuilders collage |
+| DomoDomo-only app screenshots | Slide 09 | The supplied AppBuilders collage, which contains the DomoDomo site and mockups |
+| GDG on Campus group photographs | Slide 02 | Not replaced. Slide 02 uses the portrait, three hackathon photographs and no invented imagery |
 | Stitch / Material / Gemini / AI Studio / AI Edge / LiteRT logos | Slides 07, 08, 09, 10 | Text wordmarks in the Google four-colour system; Gemini and AI Edge use drawn marks |
-| Certificate close-ups | Slide 02 | The AppBuilders collage carries the AppBuilders #1 and UPAMATE recognition |
-| App UI screenshots | Slide 06 | A natively drawn design-system strip (swatches, type sample, button) — drawn, not a fabricated screenshot |
+| Certificate close-ups | Slide 02 | The AppBuilders collage carries the AppBuilders #1 recognition |
+| App UI screenshots | Slide 06 | A natively drawn type specimen (display glyph, sample line, swatches, button) — drawn, not a fabricated screenshot |
 
 ### Two items for the speaker to confirm
 
@@ -136,28 +151,28 @@ to fill these slots.
 
 ## 6. Post-build usage report
 
-Re-checked against the rendered presentation after the build. Every asset was
-confirmed to load (`naturalWidth > 0`), to appear on its intended slide, and to
-keep its aspect ratio.
+Re-checked against the rendered presentation after the redesign. Every asset
+was confirmed to load (`naturalWidth > 0`), to appear on its intended slide,
+and to keep its aspect ratio.
 
 | File | Exists | Path valid | Rendered on | Distorted? | Mis-cropped? | Adds context |
 |---|---|---|---|---|---|---|
 | `arron_profile.png` | Yes | Yes | 02 | No (4:5 preserved, `cover`) | No — face centred | Yes — the speaker's own portrait |
-| `appbuilders_top1.png` | Yes | Yes | 02, 09 | No (2.798:1, `contain`) | No | Yes — DomoDomo ranked #1 on AppBuilders |
-| `bitpyre_hackathon.jpg` | Yes | Yes | 02, 03 | No (1.193:1, `contain`) | No — printed frame preserved | Yes — AppCon 2024 Top 20 Teams |
-| `caffeine_hackathon.jpg` | Yes | Yes | 02, 03 | No (3:2, `cover`) | No | Yes — a championship win |
-| `skydev_hackathon.jpg` | Yes | Yes | 02, 03 | No (3:2, `cover`) | No — sponsor banner kept | Yes — a championship win |
+| `appbuilders_top1.png` | Yes | Yes | 09 | No (2.798:1, `contain`) | No | Yes — DomoDomo ranked #1 on AppBuilders |
+| `bitpyre_hackathon.jpg` | Yes | Yes | 02 | No (1.193:1, `contain`) | No — printed frame preserved | Yes — AppCon 2024 Top 20 Teams |
+| `caffeine_hackathon.jpg` | Yes | Yes | 02 | No (3:2, `cover`) | No | Yes — a championship win |
+| `skydev_hackathon.jpg` | Yes | Yes | 02 | No (3:2, `cover`) | No — sponsor banner kept | Yes — a championship win |
 | `helios_hf_downloadscount.png` | Yes | Yes | 02, 09 | No (1.766:1, `contain`) | No | Yes — the open-source model and its downloads |
 | `gemini_argon.png` | Yes | Yes | 01, 09 | No (2.03:1, `contain`) | No | Yes — title card |
-| `flutter_logo.png` | Yes | Yes | 07, 08 | No (mark cropped, aspect kept) | No | Yes — official logo |
+| `flutter_logo.png` | Yes | Yes | 07, 08, 10 | No (mark cropped, aspect kept) | No | Yes — official logo |
 | `firebase_logo.png` | Yes | Yes | 07, 08 | No (flame cropped, aspect kept) | No | Yes — official logo |
 | `google_ml_kit.png` | Yes | Yes | 07, 08, 10 | No (glyph cropped, aspect kept) | No | Yes — official logo |
 | `Google_cloud.png` | Yes | Yes | 07, 08 | No (cloud cropped, aspect kept) | No | Yes — official logo |
 | `Arron_qr_socials_links.png` | Yes | Yes | 15 | No (1:1, `contain`) | No | Yes — scannable contact code |
+| `handbook_qr.png` | Yes | Yes | 15 | No (1:1, `contain`) | No | Yes — scannable handbook code |
 
-**Result: 12 of 12 supplied assets used on at least one slide; 0 unused; 0
+**Result: 13 of 13 supplied assets used on at least one slide; 0 unused; 0
 excluded as irrelevant or duplicate.**
 
 The speaker's personal images appear only in professional contexts: the
-portrait and the hackathon wins on slide 02, the hackathon mindset gallery on
-slide 03, and the project work on slides 09 and 10.
+portrait and hackathon wins on slide 02, and the project work on slide 09.

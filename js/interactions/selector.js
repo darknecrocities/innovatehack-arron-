@@ -47,11 +47,14 @@ export function initSelector(root) {
   function render() {
     const rec = recommend(answers);
     root.innerHTML = `
-      <div style="position:absolute;inset:0;background:rgba(32,33,36,.35)" data-close></div>
-      <div style="position:absolute;left:160px;right:160px;top:90px;bottom:90px;background:var(--bg);border-radius:36px;padding:48px 56px;display:flex;flex-direction:column;gap:28px;box-shadow:0 20px 60px rgba(0,0,0,.25)" role="dialog" aria-modal="true" aria-label="Stack selector">
-        <div style="display:flex;justify-content:space-between;align-items:center"><h2 class="h-md">Stack selector</h2><button class="btn ghost" data-close>Close (Esc)</button></div>
+      <div class="selector-scrim" data-close></div>
+      <div class="selector-panel" role="dialog" aria-modal="true" aria-label="Stack selector">
+        <div class="selector-head">
+          <div><span class="label">Interactive</span><h2 class="h-md">Stack selector</h2></div>
+          <button class="btn ghost" data-close>Close (Esc)</button>
+        </div>
         <div class="sel-wrap">
-          <div style="display:flex;flex-direction:column;gap:22px">
+          <div class="sel-questions">
             ${QUESTIONS.map((q) => `<div class="q"><span class="small">${q.q}</span><div class="row">${q.opts.map(([v, l]) => `<button class="btn ghost" data-k="${q.key}" data-v="${v}" aria-pressed="${answers[q.key] === v}">${l}</button>`).join("")}</div></div>`).join("")}
           </div>
           <div class="rec" aria-live="polite"><span class="tag b">Recommended stack</span>

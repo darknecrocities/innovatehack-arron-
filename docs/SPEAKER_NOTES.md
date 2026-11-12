@@ -84,7 +84,7 @@ Great ideas do not automatically become great products.
 - Untested code fails at the worst moment: live.
 
 **Example or story**
-Share a time you saw a team (or yourself) hit one of these mistakes [Your detail]. The photos on screen are real events where this mattered.
+Share a time you saw a team (or yourself) hit one of these mistakes [Your detail]. Keep it concrete and brief.
 
 **Transition**
 The fix for all three starts earlier: with the problem.
@@ -124,12 +124,12 @@ An MVP is the smallest thing that proves your idea works.
 
 **What to explain**
 - Explain Must, Should, Could, Won't (shown as Deferred in counts).
-- Use the interactive board with the emergency reporting platform.
+- Use the interactive board with the emergency reporting platform. It opens on the suggested split.
 
 **Talking points**
 - Must: one-tap report, location. Without these the product does not work.
 - Be ruthless: analytics and social sharing rarely belong in the first demo.
-- Use 'Show suggested' to compare with the audience's choices.
+- Use 'Clear board' to run the exercise live, then 'Suggested split' to restore the example.
 
 **Example or story**
 Let two volunteers sort features by dragging while you narrate trade-offs. Ask who would move a feature and why.
@@ -198,11 +198,12 @@ Google offers a connected toolkit for builders.
 - Design: Stitch, Material. Development: Flutter. Backend: Firebase.
 - Generative AI: Gemini, Google AI Studio, Firebase AI Logic. Mobile ML: ML Kit, Google AI Edge, AI Edge Gallery, LiteRT.
 - Cloud: Google Cloud, Cloud Run, Vertex AI, BigQuery.
+- Point to the Free Stack Handbook link at the bottom: a directory of free and open-source tools, APIs and docs.
 
 **Talking points**
 - You do not need all of it. Pick the minimum.
 - AI Studio is a fast place to try prompts before coding.
-- Links on the slide go to official docs.
+- Links on the slide go to official docs; the handbook is the take-home directory.
 
 **Example or story**
 Mention that Helios carries a LiteRT tag on Hugging Face, so on-device formats matter in real projects.
@@ -367,10 +368,11 @@ Build something that matters.
 
 **What to explain**
 - Understand the problem, choose the right tools, engineer the solution, validate everything, ship something that works.
-- Invite questions and point to the QR code and project links.
+- Invite questions and point to the two QR codes: the Free Developer Stack Handbook and the LinkedIn profile, with both URLs written out.
 
 **Talking points**
 - Repeat the five lines slowly.
+- Tell the audience to scan the handbook QR for the full directory of free and open-source tools, APIs and docs.
 - Share where to find Helios and DomoDomo.
 - Thank GDG on Campus Xavier Ateneo.
 

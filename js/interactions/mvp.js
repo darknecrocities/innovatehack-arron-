@@ -19,12 +19,12 @@ const BUCKETS = [
 ];
 
 /**
- * Interactive MoSCoW board. Features start unsorted and can be dragged into a
- * bucket, or moved with the keyboard-accessible "move to" menu on each chip.
+ * Interactive MoSCoW board. Features start in a suggested split and can be
+ * dragged between buckets, or moved with the keyboard-accessible menu.
  */
 export function initMvp(root) {
   if (!root) return;
-  const state = Object.fromEntries(FEATURES.map((f) => [f.id, "pool"]));
+  const state = Object.fromEntries(FEATURES.map((f) => [f.id, f.suggest]));
   let dragId = null;
 
   const featHtml = (f, compact) => `
@@ -40,14 +40,14 @@ export function initMvp(root) {
     const pool = FEATURES.filter((f) => state[f.id] === "pool");
     root.innerHTML = `
       <div class="mvp-pool" data-bucket="pool" aria-label="Unsorted features">
-        <span class="tag b">Unsorted features (${pool.length}) — drag one into a bucket, or use its menu</span>
-        ${pool.map((f) => featHtml(f)).join("") || '<p class="small">Everything is sorted. Reset to start again.</p>'}
+        <span class="tag b">${pool.length ? `Unsorted features (${pool.length}) — drag one into a bucket, or use its menu` : "All features sorted — clear the board to start again"}</span>
+        ${pool.map((f) => featHtml(f)).join("")}
       </div>
       <div class="mvp-buckets">
         ${BUCKETS.map((b) => {
           const items = FEATURES.filter((f) => state[f.id] === b.id);
           return `<div class="bucket" data-bucket="${b.id}" aria-label="${b.name}">
-            <header><span>${b.name}</span><span class="count" style="background:${b.color}" aria-label="${items.length} features">${items.length}</span></header>
+            <header><span><i class="bucket-dot" style="background:${b.color}"></i>${b.name}</span><span class="count" aria-label="${items.length} features">${items.length}</span></header>
             <div class="items">${items.map((f) => featHtml(f)).join("") || '<p class="empty">Empty</p>'}</div>
           </div>`;
         }).join("")}
