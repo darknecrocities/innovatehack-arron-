@@ -35,7 +35,7 @@ This talk is a practical path from a raw idea to a working MVP.
 - Everything today is meant to be used in your next 3–4 day sprint.
 
 **Example or story**
-Open with the Gemini slide: AI tools are changing how fast we can build, but the fundamentals of scoping and validating still decide who ships.
+Open with the cover collage: the portrait, the How & Tell stage photo, and the AppBuildersPH team. AI tools are changing how fast we can build, but the fundamentals of scoping and validating still decide who ships.
 
 **Transition**
 Before the how, a quick word on who is talking and why this advice comes from the field.
@@ -55,7 +55,7 @@ The advice comes from repeated shipping, not theory.
 - Recognition: Top 1 AppBuildersPH, Top 7 GitHub developers in the Philippines, seven hackathon championship wins, Ship-A-Little winner at Shipaton 2026, 182+ projects.
 
 **Talking points**
-- Point to the AppBuilders leaderboard where DomoDomo ranks first.
+- Point to the portrait and the cover collage from the previous slide.
 - Point to the Helios page: an open-weight model with LiteRT and ONNX tags.
 - Name the hackathon photos: Caffeine, SkyDev, and AppCon 2024 with BitPyre of Holy Angel University.
 

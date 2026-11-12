@@ -5,7 +5,7 @@
 .s1 .cover {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 600px;
-  gap: 90px;
+  gap: 80px;
   align-items: center;
   flex: 1;
   min-height: 0;
@@ -26,17 +26,27 @@
 .s1 .cover-meta div > span:last-child { font: 400 15px/1.3 var(--font-body); color: var(--ink-2); }
 .s1 .cover-meta .label { margin-bottom: 2px; }
 .s1 .rule { margin-top: 38px; }
-.s1 .cover-art { align-self: center; display: flex; flex-direction: column; }
-.s1 .cover-art img {
-  width: 100%;
-  height: auto;
-  max-height: 360px;
-  aspect-ratio: 2436 / 1200;
-  object-fit: contain;
-  border: 1px solid var(--line);
-  background: #0B0F19;
+.s1 .cover-art { align-self: center; display: block; margin: 0; }
+.s1 .cover-collage { position: relative; width: 100%; height: 640px; }
+.s1 .stack {
+  position: absolute;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  background: var(--bg-2);
+  border: 1px solid var(--line-strong);
+  box-shadow: none;
 }
-.s1 .cover-art .caption { margin-top: 10px; }
+.s1 .stack img { display: block; width: 100%; height: auto; object-fit: cover; }
+.s1 .stack .caption { margin: 0; padding: 0 2px 2px; white-space: nowrap; }
+.s1 .stack-pfp { width: 250px; left: 0; top: 20px; transform: rotate(-7deg); z-index: 2; }
+.s1 .stack-pfp img { aspect-ratio: 4 / 5; }
+.s1 .stack-stage { width: 300px; right: 0; top: 0; transform: rotate(5deg); z-index: 1; }
+.s1 .stack-stage img { aspect-ratio: 4 / 5; }
+.s1 .stack-group { width: 540px; left: 30px; bottom: 0; transform: rotate(-2.5deg); z-index: 3; }
+.s1 .stack-group img { aspect-ratio: 16 / 9; }
 
 /* S02 — speaker */
 .s2 .profile {
@@ -360,14 +370,14 @@
 .s15 .close-side { display: flex; flex-direction: column; gap: 22px; }
 .s15 .handbook {
   display: grid;
-  grid-template-columns: 190px minmax(0, 1fr);
-  gap: 22px;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 18px;
   align-items: center;
   border-top: 1px solid var(--line-strong);
   border-bottom: 1px solid var(--line);
   padding: 18px 0;
 }
-.s15 .handbook .qr { width: 190px; }
+.s15 .handbook .qr { width: 92px; }
 .s15 .handbook-copy { display: flex; flex-direction: column; gap: 7px; }
 .s15 .handbook-copy b { font: 500 21px/1.15 var(--font-display); letter-spacing: -.015em; }
 .s15 .handbook-copy p { font: 400 14px/1.45 var(--font-body); color: var(--ink-2); }

@@ -10,7 +10,7 @@
       "aspectRatio": "4:5",
       "bytes": 1391716,
       "subject": "Dithered black-and-white studio portrait of Arron Kian Parejas on a black background",
-      "slides": [2],
+      "slides": [1, 2],
       "objectFit": "cover",
       "used": true,
       "optimizedCopy": {
@@ -19,7 +19,43 @@
         "bytes": 411489,
         "reason": "Original is 1.39 MB and 4488x5608; the slide renders it at roughly 420x730 px."
       },
-      "notes": "Black background, so it is framed as a sharp-cornered dark panel on the beige canvas. object-position 50% 28% keeps the face in frame."
+      "notes": "Black background, so it is framed as a sharp-cornered dark panel on the beige canvas. On slide 1 it is the tilted portrait at the back of the cover collage; on slide 2 it is the full-height portrait. object-position 50% 28% keeps the face in frame."
+    },
+    "howtell_stage": {
+      "file": "assets/images/howtell_stage.png",
+      "type": "image/png",
+      "dimensions": "1920x1080",
+      "aspectRatio": "16:9",
+      "bytes": 1526675,
+      "subject": "Arron Kian Parejas speaking with a microphone on stage at How & Tell Meetup 2",
+      "slides": [1],
+      "objectFit": "cover",
+      "used": true,
+      "optimizedCopy": {
+        "file": "assets/images/optimized/howtell_stage.png",
+        "dimensions": "1280x720",
+        "bytes": 873971,
+        "reason": "The cover renders it at roughly 300x375 px; the 1280x720 derivative keeps the speaker sharp without shipping the full 1.53 MB original."
+      },
+      "notes": "Used in the slide 1 cover collage. It is cropped to a 4:5 portrait window with object-position 68% 42% so the speaker fills the frame; the original is untouched."
+    },
+    "appbuilders_group": {
+      "file": "assets/images/appbuilders_group.png",
+      "type": "image/png",
+      "dimensions": "1920x1080",
+      "aspectRatio": "16:9",
+      "bytes": 1798881,
+      "subject": "AppBuildersPH team on stage at How & Tell Meetup 2 holding trophies and event bags",
+      "slides": [1],
+      "objectFit": "cover",
+      "used": true,
+      "optimizedCopy": {
+        "file": "assets/images/optimized/appbuilders_group.png",
+        "dimensions": "1280x720",
+        "bytes": 952266,
+        "reason": "The cover renders it at roughly 540x304 px; the 1280x720 derivative is lighter while preserving the group and trophies."
+      },
+      "notes": "Front card of the slide 1 cover collage, tilted -2.5 degrees so every face and trophy stays visible. The original is untouched."
     },
     "domodomo_appbuilders": {
       "file": "assets/images/appbuilders_top1.png",
@@ -98,10 +134,10 @@
       "aspectRatio": "2.03:1",
       "bytes": 158499,
       "subject": "Title card reading 'Gemini 4 Argon — Google Cloud' with the Gemini sparkle, on black",
-      "slides": [1, 9],
+      "slides": [9],
       "objectFit": "contain",
       "used": true,
-      "notes": "Shown exactly as supplied in a sharp black frame. It is the hero panel on slide 1 and the Gemini context panel on slide 9. No claim is made in the talk about the product name shown in the image."
+      "notes": "Shown exactly as supplied in a sharp black frame as the Gemini context panel on slide 9. No claim is made in the talk about the product name shown in the image."
     },
     "flutter_logo": {
       "file": "assets/images/flutter_logo.png",
@@ -173,7 +209,7 @@
       "slides": [15],
       "objectFit": "contain",
       "used": true,
-      "notes": "Decoded during QA: it resolves to https://docs.google.com/document/d/1hxBY6auIP5fya0ir9FhvKsGnrCcVYjRnaIrMpx8I9Nw/edit?usp=sharing . The document title was verified as 'Free Developer Stack Handbook'. Shown at 190 px with a text link beneath it, and also linked from slide 8's docs row."
+      "notes": "Decoded during QA: it resolves to https://docs.google.com/document/d/1hxBY6auIP5fya0ir9FhvKsGnrCcVYjRnaIrMpx8I9Nw/edit?usp=sharing . The document title was verified as 'Free Developer Stack Handbook'. Shown at the same 92 px size as the socials QR, with a text link beneath it, and also linked from slide 8's docs row."
     }
   },
   "notSupplied": {

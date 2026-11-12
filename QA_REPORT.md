@@ -17,7 +17,7 @@ media. The `file://` path was tested by launching `index.html` and
 23 external link anchors (19 unique URLs) on the slides; 22 URLs checked by the
 link script, 21 reachable. 15-page PDF generated, inspected, and confirmed to
 show the CLEAR framework fully revealed. `standalone.html` verified over
-`file://` with 15 slides, 15 images, zero console errors and no overflow.**
+`file://` with 15 slides, 17 images, zero console errors and no overflow.**
 
 ---
 
@@ -58,9 +58,9 @@ show the CLEAR framework fully revealed. `standalone.html` verified over
 | 31 | CLEAR "Show all" reveals all five letters | 5 | 5 | **PASS** |
 | 32 | The assembled prompt contains all five sections | 5 sections | 5 sections | **PASS** |
 | 33 | CLEAR Reset hides every letter again | 0 | 0 | **PASS** |
-| 34 | Every image loads | 15 images, 0 broken | 15 of 15 loaded | **PASS** |
+| 34 | Every image loads | 17 images, 0 broken | 17 of 17 loaded | **PASS** |
 | 35 | Every image has alt text | 0 missing | 0 missing | **PASS** |
-| 36 | Image count | 15 `<img>` elements (13 files, 2 re-used) | 15 | **PASS** |
+| 36 | Image count | 17 `<img>` elements (15 files, 2 re-used) | 17 | **PASS** |
 | 37 | Diagram logos render inside the SVG | all sized | all sized | **PASS** |
 | 38 | Diagrams reference the supplied logo files | 4 logo files | 4 logo files | **PASS** |
 | 39 | Every external link opens in a new tab with `rel=noopener` | 23 links, 0 violations | 23 of 23 valid | **PASS** |
@@ -151,15 +151,15 @@ document title was verified as **Free Developer Stack Handbook**.
 
 | Check | Result |
 |---|---|
-| Supplied assets in `assets/images/` | 13 |
-| Assets rendered on at least one slide | **13 of 13** |
+| Supplied assets in `assets/images/` | 15 |
+| Assets rendered on at least one slide | **15 of 15** |
 | Assets unused | 0 |
-| `<img>` placements | 15 (Gemini and Helios each used twice) |
-| Images with `naturalWidth > 0` | 15 of 15 `<img>` + all SVG logo marks |
-| Images with alt text | 15 of 15 |
+| `<img>` placements | 17 (the portrait and Helios each used twice) |
+| Images with `naturalWidth > 0` | 17 of 17 `<img>` + all SVG logo marks |
+| Images with alt text | 17 of 17 |
 | Aspect ratios preserved | All — `contain` for logos and screenshots, `cover` for photographs, crops measured from the source pixels |
 | Originals modified | 0 — verified byte sizes and pixel dimensions after the build |
-| Optimized derivatives | 3, all in `assets/images/optimized/`, aspect ratio identical to the source |
+| Optimized derivatives | 5, all in `assets/images/optimized/`, aspect ratio identical to the source |
 
 Both QR codes were decoded from the **live, rendered slide 15**, not from the
 files: the handbook code returns the Google Docs URL above, and the socials
@@ -174,7 +174,7 @@ code returns the LinkedIn URL.
 | Export tool | `tools/export-pdf.mjs` (headless Chromium, print stylesheet) |
 | Pages | 15 — one per slide |
 | Page size | 1920 × 1080 px (16:9), `@page { size: 1920px 1080px; margin: 0 }` |
-| File size | 4.35 MB, `dist/from-idea-to-mvp.pdf` |
+| File size | 6.13 MB, `dist/from-idea-to-mvp.pdf` |
 | Images present in the export | Yes — all photographs, logos and both QR codes render |
 | CLEAR slide | The exporter clicks "Show all" before printing; page 12 text was extracted from the generated PDF and contains all five letters and the full assembled prompt |
 | Slides inspected in print media | 15 of 15 (screenshot of every slide in print media) |
@@ -192,7 +192,7 @@ assumed.
 | Double-clicking `index.html` | Redirects to `standalone.html`, preserving the hash |
 | `index.html#/9` over `file://` | Opens `standalone.html#/9`, active slide is `slide-9` |
 | Slides in the standalone build | 15 |
-| `<img>` elements in the standalone build | 15, zero broken |
+| `<img>` elements in the standalone build | 17, zero broken |
 | Overflow in the standalone build | none |
 | Navigation in the standalone build | `Home` → slide 1, `→` → slide 2 |
 | Console errors on direct `standalone.html` open | none |
@@ -226,17 +226,18 @@ re-verified.
 | 12 | all | Metadata colour `#928B7C` measured only 2.98:1 on the paper background. | Darkened `--ink-3` to `#6F6759` (4.91:1). | Contrast calculation |
 | 13 | QA | The notes assertion was case-sensitive while CSS uppercases the header. | Made the check case-insensitive. | 48/48 |
 | 14 | PDF | The static PDF showed the CLEAR slide with all five letters hidden. | The exporter clicks "Show all" before printing; page 12 text was extracted from the PDF and verified. | PDF text extraction |
-| 15 | 15 / 08 | The supplied Free Developer Stack Handbook QR was not used. | Added the handbook QR (190 px) beside the socials QR on slide 15, with a written link, and a "Free Stack Handbook" link in slide 08's docs row. | QR decode + link check |
+| 15 | 15 / 08 | The supplied Free Developer Stack Handbook QR was not used. | Added the handbook QR beside the socials QR on slide 15, with a written link, and a "Free Stack Handbook" link in slide 08's docs row. | QR decode + link check |
+| 16 | 01 / 15 | The cover used the Gemini title card, and the handbook QR was 190 px while the socials QR was 92 px. | Rebuilt the cover as a tilted three-photo collage (portrait, How & Tell stage photo, AppBuildersPH group photo); set both slide 15 QR codes to 92 px. | Screenshot at 1920×1080 + PDF page 1/15 |
 
 ### Not defects — deliberate decisions
 
 | Item | Decision |
 |---|---|
 | `gemini_argon.png` reads "Gemini 4 Argon" | The image is shown exactly as supplied. **No claim is made about that product name** anywhere in the slides, notes or docs. Flagged for the speaker in `docs/ASSET_INVENTORY.md`. |
-| Faces of other people in the hackathon photographs | `caffeine_hackathon.jpg` and `skydev_hackathon.jpg` show attendees and judges; `bitpyre_hackathon.jpg` shows the BitPyre team. These are public photos of the speaker's own hackathon history and are used unmodified and uncropped. Flagged for the speaker's review. |
+| Faces of other people in the event photographs | `caffeine_hackathon.jpg`, `skydev_hackathon.jpg` and `appbuilders_group.png` show attendees and teammates; `bitpyre_hackathon.jpg` shows the BitPyre team. These are public photos of the speaker's own hackathon and community history, used unmodified except for the cover collage's portrait crop of `howtell_stage.png`. Flagged for the speaker's review. |
 | Missing EasyLense, GDG, Stitch, Gemini and AI Edge imagery | No file for these exists in the supplied folder. Nothing was fabricated: those products appear as text wordmarks, and Gemini and Google AI Edge use drawn marks. Documented in `docs/ASSET_INVENTORY.md`. |
 | The LinkedIn link cannot be auto-verified | LinkedIn blocks automated clients. The URL comes from the speaker's own QR code and is also written out as text on slide 15. |
-| Slide 03 has no photographs | Deliberate typographic composition; all photographs remain on slide 02 and all supplied images are still used. |
+| Slide 03 has no photographs | Deliberate typographic composition; all photographs remain on slides 01–02 and all supplied images are still used. |
 | The PDF shows "MVP" in solid blue rather than the Gemini gradient | Chromium's PDF rasteriser clips `background-clip: text` gradients. The live deck keeps the full gradient; only the PDF fallback is flattened. |
 
 ---
@@ -269,7 +270,7 @@ console/network errors.
 | Keyboard navigation | Every shortcut exercised in the automated suite | **PASS** |
 | Visible focus states | `:focus-visible` ring (2 px, 3 px offset) on every interactive element | **PASS** |
 | Reduced motion | Second browser context with `reducedMotion: "reduce"` | Transitions and animations collapse to 0.00001 s |
-| Alt text | Enumerated in the suite — 15 of 15 images | **PASS** |
+| Alt text | Enumerated in the suite — 17 of 17 images | **PASS** |
 | ARIA live slide counter | `aria-live="polite"` on `#counter-label` | **PASS** |
 | Hidden inactive slides | `aria-hidden="true"` on 14 slides | **PASS** |
 | Inert inactive slides | `inert` on 14 slides | **PASS** |

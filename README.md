@@ -178,10 +178,10 @@ RESPONSE` pipeline while it is on screen. All animation is disabled under
 7. **Have a fallback.** `dist/from-idea-to-mvp.pdf` is a 15-page 16:9 PDF
    backup of the same deck. Upload it to Drive as a second tab, so if the
    browser or the network fails you can present from the PDF.
-8. **Check the QR codes.** Slide 15 shows two codes: the larger one opens the
-   **Free Developer Stack Handbook**, and the smaller one opens the speaker's
-   LinkedIn profile. Both URLs are written out beside the codes. Test them
-   with a phone camera on the same screen-share setup before going live.
+8. **Check the QR codes.** Slide 15 shows two codes at the same small size:
+   one opens the **Free Developer Stack Handbook**, the other opens the
+   speaker's LinkedIn profile. Both URLs are written out beside the codes. Test
+   them with a phone camera on the same screen-share setup before going live.
 
 ---
 
@@ -217,7 +217,7 @@ js/
     part1.js part2.js part3.js   The slide markup, split for readability
     notes.js               Presenter notes (source of docs/SPEAKER_NOTES.md)
 assets/
-  images/                  The 13 supplied images, unmodified
+  images/                  The 15 supplied images, unmodified
   images/optimized/        Lighter derivatives used where a photo is large
   asset-manifest.json      Every asset, its dimensions and its slide placement
 docs/
@@ -283,7 +283,7 @@ Results and defects found are recorded in **`QA_REPORT.md`**.
 
 ## 9. Content and assets
 
-- All 13 supplied images are used on at least one slide. Placement, cropping
+- All 15 supplied images are used on at least one slide. Placement, cropping
   decisions and the usage report are in **`docs/ASSET_INVENTORY.md`**; the
   machine-readable version is **`assets/asset-manifest.json`**.
 - Original image files are untouched. Lighter derivatives live in
@@ -291,9 +291,9 @@ Results and defects found are recorded in **`QA_REPORT.md`**.
 - No achievement, statistic or credential was invented. Where a logo does not
   exist in the supplied folder, the deck uses a **text wordmark**, not a
   fabricated graphic.
-- Slide 15 carries two QR codes — the Free Developer Stack Handbook and the
-  speaker's LinkedIn profile — with both URLs written out in text. The handbook
-  is also linked from slide 08.
+- Slide 15 carries two equally sized QR codes — the Free Developer Stack
+  Handbook and the speaker's LinkedIn profile — with both URLs written out in
+  text. The handbook is also linked from slide 08.
 - All external links point to official documentation, open in a new tab, and
   carry no tracking parameters.
 

@@ -206,7 +206,7 @@ record("Every image loads", `${images.length} images, 0 broken`, `${images.lengt
   broken.length === 0, broken.map((b) => b.src).join(", "));
 const noAlt = images.filter((i) => !i.alt.trim());
 record("Every image has alt text", "0 missing", `${noAlt.length} missing`, noAlt.length === 0);
-record("Image count", "15 <img> elements (13 files, 2 re-used)", String(images.length), images.length === 15);
+record("Image count", "17 <img> elements (15 files, 2 re-used)", String(images.length), images.length === 17);
 
 // SVG <image> references inside the diagrams (slide 07 and 10) load the logo files too
 const svgImages = await page.evaluate(() =>

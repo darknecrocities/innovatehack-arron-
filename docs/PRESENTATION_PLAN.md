@@ -27,7 +27,7 @@ one of those three words.
 
 | # | Title | Core message | Visual device | Assets | Time |
 |---|---|---|---|---|---|
-| 01 | From Idea to MVP | A practical path from idea to working MVP | Typographic cover: oversized title on the left, Gemini title card in a sharp black frame on the right | `gemini_argon.png` | 2 min |
+| 01 | From Idea to MVP | A practical path from idea to working MVP | Typographic cover: oversized title on the left, tilted collage on the right — portrait, How & Tell stage photo, and the AppBuildersPH group photo | `arron_profile.png`, `howtell_stage.png`, `appbuilders_group.png` | 2 min |
 | 02 | Meet Your Speaker | The advice comes from shipping, not theory | Three-column profile: portrait · roles + supplied numbers · four-image gallery, with recognition lines | `arron_profile.png`, 3 hackathon photos, `helios_hf_downloadscount.png` | 4 min |
 | 03 | The Hackathon Mindset | Great ideas don't automatically become great products | Purely typographic: four-step rule across the top, three mistakes and a closing line, centred | — | 3 min |
 | 04 | Start With the Problem | Understand the problem before choosing the technology | Who/What/Why rows → vague-idea-to-clear-statement transformation with an arrow | — | 3 min |
@@ -41,7 +41,7 @@ one of those three words.
 | 12 | The CLEAR Framework | Structure your prompts | **Interactive** progressive reveal of C·L·E·A·R + a prompt that assembles live | — | 3 min |
 | 13 | Set Up Your Team | Good engineering starts with good foundations | Six numbered foundations in one full-height column + a repository/branch/PR code panel | — | 2 min |
 | 14 | From Sprint to Ship | Every sprint needs a deliverable | Five-step sprint rule + four phase columns with vertical rules and bottom-anchored deliverables | — | 2 min |
-| 15 | Build Something That Matters | Ship something that works | Closing statement + five-line checklist + **two QR codes**: Free Developer Stack Handbook (primary) and socials, with written links | `handbook_qr.png`, `Arron_qr_socials_links.png` | 2 min |
+| 15 | Build Something That Matters | Ship something that works | Closing statement + five-line checklist + **two equal 92 px QR codes**: Free Developer Stack Handbook and socials, with written links | `handbook_qr.png`, `Arron_qr_socials_links.png` | 2 min |
 
 ---
 
@@ -198,5 +198,6 @@ These rules were applied while writing the slides.
    `target="_blank" rel="noopener noreferrer"`, and none carry tracking
    parameters.
 6. **The handbook QR is a supplied asset.** It points to the *Free Developer
-   Stack Handbook* Google Doc, whose title was verified during QA. The URL is
-   also printed beside the QR and linked from slide 08.
+   Stack Handbook* Google Doc, whose title was verified during QA. It is shown
+   at the same 92 px size as the socials QR. The URL is also printed beside the
+   QR and linked from slide 08.

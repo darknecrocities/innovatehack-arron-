@@ -81,7 +81,7 @@ uses a four-colour gradient bar.
 
 | # | Slide | Typographic composition | Containers kept |
 |---|---|---|---|
-| 01 | From Idea to MVP | Giant two-line title, mono metadata row, four-segment rule, single image plate | Image frame |
+| 01 | From Idea to MVP | Giant two-line title, mono metadata row, four-segment rule, tilted three-photo collage | Paper mats |
 | 02 | Meet Your Speaker | Portrait · statement + seven roles · 2×2 photo grid · four large numerals | Image frames |
 | 03 | The Hackathon Mindset | Headline, four-step rule, pull statement, three numbered mistake rows | None |
 | 04 | Start With the Problem | Three question columns, then vague → clear comparison split by a vertical rule | None |
@@ -129,8 +129,9 @@ uses a four-colour gradient bar.
 ## 6. What was kept
 
 - All 15 slides, titles and supplied claims.
-- All 13 supplied images (15 rendered `<img>` placements; Gemini and Helios are
-  each used twice). The new handbook QR joins the socials QR on slide 15.
+- All 15 supplied images (17 rendered `<img>` placements; the portrait and Helios
+  are each used twice). The handbook QR sits beside the socials QR on slide 15
+  at the same 92 px size.
 - Every interaction: keyboard navigation, progress, counter, notes, fullscreen,
   overview, MVP board, stack selector, CLEAR reveal.
 - Both SVG diagrams and the official product marks.

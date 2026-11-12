@@ -17,9 +17,19 @@ export const part1 = [
         <span>From idea to working product</span>
       </div>
     </div>
-    <figure class="cover-art" data-rise style="--i:2">
-      <img src="assets/images/gemini_argon.png" alt="Gemini 4 Argon, Google Cloud title card with the Gemini sparkle logo" width="2436" height="1200">
-      <figcaption class="caption">Gemini on Google Cloud</figcaption>
+    <figure class="cover-art" data-rise style="--i:2" aria-label="Collage of Arron Kian Parejas speaking at How and Tell Meetup 2 and with the AppBuildersPH team">
+      <div class="cover-collage">
+        <figure class="stack stack-pfp">
+          <img src="assets/images/optimized/arron_profile.png" alt="Dithered black-and-white portrait of Arron Kian Parejas" width="720" height="900">
+        </figure>
+        <figure class="stack stack-stage">
+          <img src="assets/images/optimized/howtell_stage.png" alt="Arron Kian Parejas speaking on stage at How and Tell Meetup 2" width="1280" height="720" style="object-position:68% 42%">
+        </figure>
+        <figure class="stack stack-group">
+          <img src="assets/images/optimized/appbuilders_group.png" alt="AppBuildersPH team holding trophies at How and Tell Meetup 2" width="1280" height="720">
+          <figcaption class="caption">AppBuildersPH · How &amp; Tell Meetup 2</figcaption>
+        </figure>
+      </div>
     </figure>
   </div>`
 },

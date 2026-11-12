@@ -851,7 +851,7 @@ pre.code .c { color: #9AA0A6; }
 .s1 .cover {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 600px;
-  gap: 90px;
+  gap: 80px;
   align-items: center;
   flex: 1;
   min-height: 0;
@@ -872,17 +872,27 @@ pre.code .c { color: #9AA0A6; }
 .s1 .cover-meta div > span:last-child { font: 400 15px/1.3 var(--font-body); color: var(--ink-2); }
 .s1 .cover-meta .label { margin-bottom: 2px; }
 .s1 .rule { margin-top: 38px; }
-.s1 .cover-art { align-self: center; display: flex; flex-direction: column; }
-.s1 .cover-art img {
-  width: 100%;
-  height: auto;
-  max-height: 360px;
-  aspect-ratio: 2436 / 1200;
-  object-fit: contain;
-  border: 1px solid var(--line);
-  background: #0B0F19;
+.s1 .cover-art { align-self: center; display: block; margin: 0; }
+.s1 .cover-collage { position: relative; width: 100%; height: 640px; }
+.s1 .stack {
+  position: absolute;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  background: var(--bg-2);
+  border: 1px solid var(--line-strong);
+  box-shadow: none;
 }
-.s1 .cover-art .caption { margin-top: 10px; }
+.s1 .stack img { display: block; width: 100%; height: auto; object-fit: cover; }
+.s1 .stack .caption { margin: 0; padding: 0 2px 2px; white-space: nowrap; }
+.s1 .stack-pfp { width: 250px; left: 0; top: 20px; transform: rotate(-7deg); z-index: 2; }
+.s1 .stack-pfp img { aspect-ratio: 4 / 5; }
+.s1 .stack-stage { width: 300px; right: 0; top: 0; transform: rotate(5deg); z-index: 1; }
+.s1 .stack-stage img { aspect-ratio: 4 / 5; }
+.s1 .stack-group { width: 540px; left: 30px; bottom: 0; transform: rotate(-2.5deg); z-index: 3; }
+.s1 .stack-group img { aspect-ratio: 16 / 9; }
 
 /* S02 — speaker */
 .s2 .profile {
@@ -1206,14 +1216,14 @@ pre.code .c { color: #9AA0A6; }
 .s15 .close-side { display: flex; flex-direction: column; gap: 22px; }
 .s15 .handbook {
   display: grid;
-  grid-template-columns: 190px minmax(0, 1fr);
-  gap: 22px;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 18px;
   align-items: center;
   border-top: 1px solid var(--line-strong);
   border-bottom: 1px solid var(--line);
   padding: 18px 0;
 }
-.s15 .handbook .qr { width: 190px; }
+.s15 .handbook .qr { width: 92px; }
 .s15 .handbook-copy { display: flex; flex-direction: column; gap: 7px; }
 .s15 .handbook-copy b { font: 500 21px/1.15 var(--font-display); letter-spacing: -.015em; }
 .s15 .handbook-copy p { font: 400 14px/1.45 var(--font-body); color: var(--ink-2); }
@@ -1381,9 +1391,19 @@ pre.code .c { color: #9AA0A6; }
         <span>From idea to working product</span>
       </div>
     </div>
-    <figure class="cover-art" data-rise style="--i:2">
-      <img src="assets/images/gemini_argon.png" alt="Gemini 4 Argon, Google Cloud title card with the Gemini sparkle logo" width="2436" height="1200">
-      <figcaption class="caption">Gemini on Google Cloud</figcaption>
+    <figure class="cover-art" data-rise style="--i:2" aria-label="Collage of Arron Kian Parejas speaking at How and Tell Meetup 2 and with the AppBuildersPH team">
+      <div class="cover-collage">
+        <figure class="stack stack-pfp">
+          <img src="assets/images/optimized/arron_profile.png" alt="Dithered black-and-white portrait of Arron Kian Parejas" width="720" height="900">
+        </figure>
+        <figure class="stack stack-stage">
+          <img src="assets/images/optimized/howtell_stage.png" alt="Arron Kian Parejas speaking on stage at How and Tell Meetup 2" width="1280" height="720" style="object-position:68% 42%">
+        </figure>
+        <figure class="stack stack-group">
+          <img src="assets/images/optimized/appbuilders_group.png" alt="AppBuildersPH team holding trophies at How and Tell Meetup 2" width="1280" height="720">
+          <figcaption class="caption">AppBuildersPH \xB7 How &amp; Tell Meetup 2</figcaption>
+        </figure>
+      </div>
     </figure>
   </div>`
     },
@@ -1943,14 +1963,14 @@ pre.code .c { color: #9AA0A6; }
       message: "This talk is a practical path from a raw idea to a working MVP.",
       explain: ["Welcome the GDG on Campus Xavier Ateneo organizers and participants.", "Say what they will leave with: a scoping method, a stack decision process, and ways to use Google AI tools."],
       points: ["Hackathons reward finished, demonstrable work.", "We will go from problem to scope to stack to AI to team workflow.", "Everything today is meant to be used in your next 3\u20134 day sprint."],
-      story: "Open with the Gemini slide: AI tools are changing how fast we can build, but the fundamentals of scoping and validating still decide who ships.",
+      story: "Open with the cover collage: the portrait, the How & Tell stage photo, and the AppBuildersPH team. AI tools are changing how fast we can build, but the fundamentals of scoping and validating still decide who ships.",
       transition: "Before the how, a quick word on who is talking and why this advice comes from the field."
     },
     {
       minutes: 4,
       message: "The advice comes from repeated shipping, not theory.",
       explain: ["Current roles: AI Engineer, ML Engineering Intern at FlyRank.ai, founder of DomoDomo, builder of Helios.", "Community: former GDG on Campus HAU Chapter Lead and open-source contributor.", "Recognition: Top 1 AppBuildersPH, Top 7 GitHub developers in the Philippines, seven hackathon championship wins, Ship-A-Little winner at Shipaton 2026, 182+ projects."],
-      points: ["Point to the AppBuilders leaderboard where DomoDomo ranks first.", "Point to the Helios page: an open-weight model with LiteRT and ONNX tags.", "Name the hackathon photos: Caffeine, SkyDev, and AppCon 2024 with BitPyre of Holy Angel University."],
+      points: ["Point to the portrait and the cover collage from the previous slide.", "Point to the Helios page: an open-weight model with LiteRT and ONNX tags.", "Name the hackathon photos: Caffeine, SkyDev, and AppCon 2024 with BitPyre of Holy Angel University."],
       story: "Pick one hackathon photo and tell what the team cut from scope that weekend [Your detail]. Keep it under 60 seconds.",
       transition: "Winning and losing hackathons taught me the same lesson: great ideas are not enough."
     },
