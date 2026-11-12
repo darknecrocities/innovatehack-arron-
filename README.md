@@ -178,7 +178,7 @@ RESPONSE` pipeline while it is on screen. All animation is disabled under
 7. **Have a fallback.** `dist/from-idea-to-mvp.pdf` is a 15-page 16:9 PDF
    backup of the same deck. Upload it to Drive as a second tab, so if the
    browser or the network fails you can present from the PDF.
-8. **Check the QR codes.** Slide 15 shows two codes at the same small size:
+8. **Check the QR codes.** Slide 15 shows two codes at the same 190 px size:
    one opens the **Free Developer Stack Handbook**, the other opens the
    speaker's LinkedIn profile. Both URLs are written out beside the codes. Test
    them with a phone camera on the same screen-share setup before going live.

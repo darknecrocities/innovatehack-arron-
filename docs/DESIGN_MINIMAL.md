@@ -131,7 +131,7 @@ uses a four-colour gradient bar.
 - All 15 slides, titles and supplied claims.
 - All 15 supplied images (17 rendered `<img>` placements; the portrait and Helios
   are each used twice). The handbook QR sits beside the socials QR on slide 15
-  at the same 92 px size.
+  at the same 190 px size.
 - Every interaction: keyboard navigation, progress, counter, notes, fullscreen,
   overview, MVP board, stack selector, CLEAR reveal.
 - Both SVG diagrams and the official product marks.

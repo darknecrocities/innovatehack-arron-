@@ -67,8 +67,8 @@ architecture diagram (slide 10).
 | `firebase_logo.png` | 07, 08 | Decision-tree mark (07), toolkit card (08) | `contain` | Flame cropped from the wordmark on 07 only |
 | `google_ml_kit.png` | 07, 08, 10 | Decision-tree mark (07), toolkit card (08), architecture box (10) | `contain` | "M" glyph cropped from the wordmark on 07 and 10 |
 | `Google_cloud.png` | 07, 08 | Decision-tree mark (07), toolkit card (08) | `contain` | Cloud cropped from the wordmark on 07 only |
-| `Arron_qr_socials_links.png` | 15 | Contact QR, beside the handbook QR | `contain` | None — 92 px square |
-| `handbook_qr.png` | 15 | Handbook QR, same 92 px size as the socials QR | `contain` | None — 92 px square |
+| `Arron_qr_socials_links.png` | 15 | Contact QR, beside the handbook QR | `contain` | None — 190 px square |
+| `handbook_qr.png` | 15 | Handbook QR, same 190 px size as the socials QR | `contain` | None — 190 px square |
 
 **Every one of the 15 supplied files appears on at least one slide.** The deck
 renders 17 `<img>` elements (the portrait and Helios are each used twice) plus
@@ -179,8 +179,8 @@ and to keep its aspect ratio.
 | `firebase_logo.png` | Yes | Yes | 07, 08 | No (flame cropped, aspect kept) | No | Yes — official logo |
 | `google_ml_kit.png` | Yes | Yes | 07, 08, 10 | No (glyph cropped, aspect kept) | No | Yes — official logo |
 | `Google_cloud.png` | Yes | Yes | 07, 08 | No (cloud cropped, aspect kept) | No | Yes — official logo |
-| `Arron_qr_socials_links.png` | Yes | Yes | 15 | No (1:1, `contain`) | No | Yes — scannable contact code, 92 px |
-| `handbook_qr.png` | Yes | Yes | 15 | No (1:1, `contain`) | No | Yes — scannable handbook code, 92 px |
+| `Arron_qr_socials_links.png` | Yes | Yes | 15 | No (1:1, `contain`) | No | Yes — scannable contact code, 190 px |
+| `handbook_qr.png` | Yes | Yes | 15 | No (1:1, `contain`) | No | Yes — scannable handbook code, 190 px |
 
 **Result: 15 of 15 supplied assets used on at least one slide; 0 unused; 0
 excluded as irrelevant or duplicate.**

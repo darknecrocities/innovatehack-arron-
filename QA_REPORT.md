@@ -227,7 +227,7 @@ re-verified.
 | 13 | QA | The notes assertion was case-sensitive while CSS uppercases the header. | Made the check case-insensitive. | 48/48 |
 | 14 | PDF | The static PDF showed the CLEAR slide with all five letters hidden. | The exporter clicks "Show all" before printing; page 12 text was extracted from the PDF and verified. | PDF text extraction |
 | 15 | 15 / 08 | The supplied Free Developer Stack Handbook QR was not used. | Added the handbook QR beside the socials QR on slide 15, with a written link, and a "Free Stack Handbook" link in slide 08's docs row. | QR decode + link check |
-| 16 | 01 / 15 | The cover used the Gemini title card, and the handbook QR was 190 px while the socials QR was 92 px. | Rebuilt the cover as a tilted three-photo collage (portrait, How & Tell stage photo, AppBuildersPH group photo); set both slide 15 QR codes to 92 px. | Screenshot at 1920×1080 + PDF page 1/15 |
+| 16 | 01 / 15 | The cover used the Gemini title card, and the handbook QR was 190 px while the socials QR was 92 px. | Rebuilt the cover as a tilted three-photo collage (portrait, How & Tell stage photo, AppBuildersPH group photo); set both slide 15 QR codes to 190 px. | Screenshot at 1920×1080 + PDF page 1/15 |
 
 ### Not defects — deliberate decisions
 
