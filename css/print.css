@@ -1,0 +1,94 @@
+/* Print / PDF export.
+   Every slide becomes its own 1920x1080 page so the exported PDF matches the
+   on-screen composition exactly. Used by tools/export-pdf.mjs. */
+
+@page {
+  size: 1920px 1080px;
+  margin: 0;
+}
+
+@media print {
+  html, body {
+    height: auto;
+    overflow: visible;
+    background: #fff;
+  }
+
+  #viewport {
+    position: static;
+    display: block;
+    background: #fff;
+  }
+
+  #stage {
+    position: static;
+    width: 1920px;
+    height: auto;
+    transform: none !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+  }
+
+  .slide {
+    position: relative !important;
+    inset: auto !important;
+    width: 1920px;
+    height: 1080px;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+    break-after: page;
+    page-break-after: always;
+    overflow: hidden;
+  }
+
+  .slide:last-of-type {
+    break-after: auto;
+    page-break-after: auto;
+  }
+
+  /* chrome that belongs to the live app, not to the slides */
+  #progress,
+  #counter,
+  #brand,
+  #help,
+  .overlay {
+    display: none !important;
+  }
+
+  /* Blurred shadows rasterise as hard rectangles in PDF; flat panels print cleaner. */
+  .card,
+  .photo,
+  .shot,
+  .chip,
+  .feat,
+  .bucket,
+  .letter,
+  .rec,
+  .mock,
+  .clear-prompt,
+  #notes button,
+  #counter button {
+    box-shadow: none !important;
+  }
+
+  /* keep the entry animations from freezing content at opacity 0 */
+  .slide.is-active [data-rise],
+  .slide [data-rise] {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Chromium's PDF rasteriser renders background-clip:text gradients as a
+     clipped rectangle. Fall back to a solid brand colour in the PDF only. */
+  .grad-text {
+    background: none !important;
+    color: var(--blue) !important;
+    -webkit-text-fill-color: var(--blue) !important;
+    padding-bottom: 0 !important;
+  }
+}

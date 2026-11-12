@@ -1,0 +1,178 @@
+{
+  "project": "From Idea to MVP — InnovateHack+ 2.0",
+  "generated": "2026-11-11",
+  "note": "Paths are relative to the project root. 'slides' lists every slide the asset is rendered on. Assets marked 'optimizedCopy' exist as a lighter derivative in assets/images/optimized/ so the original stays untouched.",
+  "assets": {
+    "speaker_portrait": {
+      "file": "assets/images/arron_profile.png",
+      "type": "image/png",
+      "dimensions": "4488x5608",
+      "aspectRatio": "4:5",
+      "bytes": 1391716,
+      "subject": "Dithered black-and-white studio portrait of Arron Kian Parejas on a black background",
+      "slides": [2],
+      "objectFit": "cover",
+      "used": true,
+      "optimizedCopy": {
+        "file": "assets/images/optimized/arron_profile.png",
+        "dimensions": "720x900",
+        "bytes": 411489,
+        "reason": "Original is 1.39 MB and 4488x5608; the slide renders it at roughly 420x730 px."
+      },
+      "notes": "Black background, so it is framed as a rounded dark panel on the beige canvas. object-position 50% 28% keeps the face in frame."
+    },
+    "domodomo_appbuilders": {
+      "file": "assets/images/appbuilders_top1.png",
+      "type": "image/png",
+      "dimensions": "2104x752",
+      "aspectRatio": "2.798:1",
+      "bytes": 906013,
+      "subject": "Collage: AppBuilders community leaderboard with DomoDomo ranked first, plus the DomoDomo website and event visuals",
+      "slides": [2, 9],
+      "objectFit": "contain",
+      "used": true,
+      "notes": "White source background, so it is shown on a white surface with object-fit: contain to keep the leaderboard readable."
+    },
+    "bitpyre_hackathon": {
+      "file": "assets/images/bitpyre_hackathon.jpg",
+      "type": "image/jpeg",
+      "dimensions": "940x788",
+      "aspectRatio": "1.193:1",
+      "bytes": 102825,
+      "subject": "AppCon 2024 Top 20 Teams: the BitPyre team of Holy Angel University on stage, inside a yellow event frame",
+      "slides": [2, 3],
+      "objectFit": "contain",
+      "used": true,
+      "notes": "The artwork already carries a yellow frame and event caption, so it is never cropped; the slide background matches the frame colour."
+    },
+    "caffeine_hackathon": {
+      "file": "assets/images/caffeine_hackathon.jpg",
+      "type": "image/jpeg",
+      "dimensions": "2048x1365",
+      "aspectRatio": "3:2",
+      "bytes": 274233,
+      "subject": "Group on stage at the Caffeine hackathon holding first-place certificates",
+      "slides": [2, 3],
+      "objectFit": "cover",
+      "used": true,
+      "optimizedCopy": {
+        "file": "assets/images/optimized/caffeine_hackathon.jpg",
+        "dimensions": "1600x1066",
+        "bytes": 272197,
+        "reason": "Slightly smaller derivative used where the photo is rendered large."
+      }
+    },
+    "skydev_hackathon": {
+      "file": "assets/images/skydev_hackathon.jpg",
+      "type": "image/jpeg",
+      "dimensions": "2048x1365",
+      "aspectRatio": "3:2",
+      "bytes": 619183,
+      "subject": "SkyDev 'Automate the Future' hackathon group holding certificates, with the sponsor banner at the bottom",
+      "slides": [2, 3],
+      "objectFit": "cover",
+      "used": true,
+      "optimizedCopy": {
+        "file": "assets/images/optimized/skydev_hackathon.jpg",
+        "dimensions": "1600x1066",
+        "bytes": 388449,
+        "reason": "Original is 619 KB; the derivative is 37% lighter at the rendered size."
+      }
+    },
+    "helios_huggingface": {
+      "file": "assets/images/helios_hf_downloadscount.png",
+      "type": "image/png",
+      "dimensions": "2048x1160",
+      "aspectRatio": "1.766:1",
+      "bytes": 795258,
+      "subject": "Helios open-weight foundation model page on Hugging Face (dark theme), showing LiteRT and ONNX tags and 2,256 downloads last month",
+      "slides": [2, 9, 10],
+      "objectFit": "contain",
+      "used": true,
+      "notes": "Rendered at the top of the frame on slide 2 and slide 9 so the model name and download count stay visible. Slide 10 references its LiteRT tag in text."
+    },
+    "gemini_title_card": {
+      "file": "assets/images/gemini_argon.png",
+      "type": "image/png",
+      "dimensions": "2436x1200",
+      "aspectRatio": "2.03:1",
+      "bytes": 158499,
+      "subject": "Title card reading 'Gemini 4 Argon — Google Cloud' with the Gemini sparkle, on black",
+      "slides": [1, 9],
+      "objectFit": "contain",
+      "used": true,
+      "notes": "Shown exactly as supplied. It is the hero panel on slide 1 and the Gemini context panel on slide 9. No claim is made in the talk about the product name shown in the image."
+    },
+    "flutter_logo": {
+      "file": "assets/images/flutter_logo.png",
+      "type": "image/png",
+      "dimensions": "953x272",
+      "aspectRatio": "3.504:1",
+      "bytes": 20955,
+      "subject": "Flutter logo — blue chevron mark plus wordmark on a transparent background",
+      "slides": [7, 8],
+      "objectFit": "contain",
+      "used": true,
+      "notes": "On slide 7 the mark is cropped from the wordmark with a nested SVG viewBox (crop 4,4,214,264) so the mark and the row label never overlap."
+    },
+    "firebase_logo": {
+      "file": "assets/images/firebase_logo.png",
+      "type": "image/png",
+      "dimensions": "640x640",
+      "aspectRatio": "1:1",
+      "bytes": 19467,
+      "subject": "Firebase logo — flame mark above the 'Firebase' wordmark on white",
+      "slides": [7, 8],
+      "objectFit": "contain",
+      "used": true,
+      "notes": "On slide 7 the flame is cropped with a nested SVG viewBox (crop 211,117,219,273) and paired with a text label."
+    },
+    "ml_kit_logo": {
+      "file": "assets/images/google_ml_kit.png",
+      "type": "image/png",
+      "dimensions": "1600x468",
+      "aspectRatio": "3.419:1",
+      "bytes": 58608,
+      "subject": "Google ML Kit logo — blue 'M' glyph plus wordmark on a transparent background",
+      "slides": [7, 8, 10],
+      "objectFit": "contain",
+      "used": true,
+      "notes": "On slides 7 and 10 the 'M' glyph is cropped with a nested SVG viewBox (crop 0,54,496,360) and paired with a text label."
+    },
+    "google_cloud_logo": {
+      "file": "assets/images/Google_cloud.png",
+      "type": "image/png",
+      "dimensions": "225x225",
+      "aspectRatio": "1:1",
+      "bytes": 9594,
+      "subject": "Google Cloud logo — multicolor cloud above the 'Google Cloud' wordmark on white",
+      "slides": [7, 8],
+      "objectFit": "contain",
+      "used": true,
+      "notes": "Lowest-resolution source in the set (225x225). It is rendered small on slide 8 and its cloud mark is cropped with a nested SVG viewBox (crop 52,41,121,98) on slide 7."
+    },
+    "contact_qr": {
+      "file": "assets/images/Arron_qr_socials_links.png",
+      "type": "image/png",
+      "dimensions": "400x400",
+      "aspectRatio": "1:1",
+      "bytes": 15295,
+      "subject": "QR code with white modules on a dark navy background",
+      "slides": [15],
+      "objectFit": "contain",
+      "used": true,
+      "notes": "Decoded during QA: it resolves to https://www.linkedin.com/in/arron-parejas/ . That URL is also written out as a text link beside the QR so the contact details work even if the code is not scanned."
+    }
+  },
+  "notSupplied": {
+    "note": "The speaker's asset folder contains no files for these categories. Nothing was fabricated to fill them; the slides use diagrams, wordmarks and text instead.",
+    "missing": [
+      "EasyLense computer-vision screenshots (slide 10 uses the ML Kit logo and the Helios LiteRT tag instead)",
+      "DomoDomo-only screenshots (the AppBuilders collage is used on slides 2 and 9)",
+      "GDG on Campus group photographs",
+      "Google Stitch, Material Design, Gemini, Google AI Studio and Google AI Edge logos",
+      "Certificates or award close-ups (the AppBuilders collage carries the recognition evidence)",
+      "App UI screenshots for slide 6 (the design-system strip is drawn natively)"
+    ]
+  }
+}

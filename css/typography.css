@@ -1,0 +1,11 @@
+.eyebrow { font: 600 22px/1 var(--font-display); letter-spacing: .16em; text-transform: uppercase; color: var(--ink-2); display: flex; align-items: center; gap: 14px; }
+.eyebrow::before { content: ""; width: 36px; height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--blue) 25%, var(--red) 25% 50%, var(--yellow) 50% 75%, var(--green) 75%); }
+.h-xl { font: 500 128px/1.0 var(--font-display); letter-spacing: -.03em; }
+.h-lg { font: 500 76px/1.06 var(--font-display); letter-spacing: -.025em; }
+.h-md { font: 500 40px/1.15 var(--font-display); letter-spacing: -.01em; }
+.lead { font: 400 34px/1.4 var(--font-body); color: var(--ink-2); }
+.body { font: 400 28px/1.4 var(--font-body); color: var(--ink-2); }
+.small { font: 500 22px/1.35 var(--font-body); color: var(--ink-2); }
+.mono { font-family: var(--font-mono); }
+.accent-blue { color: var(--blue); } .accent-red { color: var(--red); } .accent-green { color: var(--green); }
+.grad-text { display: inline-block; padding-bottom: .06em; background: var(--gemini); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }

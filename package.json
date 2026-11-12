@@ -1,0 +1,20 @@
+{
+  "name": "from-idea-to-mvp",
+  "version": "1.0.0",
+  "description": "Interactive 15-slide keynote for InnovateHack+ 2.0 — From Idea to MVP, by Arron Kian Parejas",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "serve": "python3 -m http.server 8899",
+    "qa": "node tools/qa.mjs",
+    "qa:responsive": "node tools/responsive-test.mjs",
+    "qa:capture": "node tools/capture.mjs 1920 1080 1920x1080 /tmp/shots/1920x1080",
+    "notes": "node tools/build-notes.mjs",
+    "pdf": "node tools/export-pdf.mjs"
+  },
+  "keywords": ["presentation", "keynote", "gdg", "google-ai", "gemini"],
+  "license": "MIT",
+  "devDependencies": {
+    "playwright": "^1.65.0"
+  }
+}
