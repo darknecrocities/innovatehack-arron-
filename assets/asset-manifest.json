@@ -197,7 +197,7 @@
       "slides": [15],
       "objectFit": "contain",
       "used": true,
-      "notes": "Decoded during QA: it resolves to https://www.linkedin.com/in/arron-parejas/ . That URL is also written out as a text link beside the QR so the contact details work even if the code is not scanned. Shown at 190 px beside the handbook QR."
+      "notes": "Decoded during QA: it resolves to https://www.linkedin.com/in/arron-parejas/ . That URL is also written out as a text link beside the QR so the contact details work even if the code is not scanned. Shown at 260 px beside the handbook QR."
     },
     "handbook_qr": {
       "file": "assets/images/handbook_qr.png",
@@ -209,7 +209,7 @@
       "slides": [15],
       "objectFit": "contain",
       "used": true,
-      "notes": "Decoded during QA: it resolves to https://docs.google.com/document/d/1hxBY6auIP5fya0ir9FhvKsGnrCcVYjRnaIrMpx8I9Nw/edit?usp=sharing . The document title was verified as 'Free Developer Stack Handbook'. Shown at the same 190 px size as the socials QR, with a text link beneath it, and also linked from slide 8's docs row."
+      "notes": "Decoded during QA: it resolves to https://docs.google.com/document/d/1hxBY6auIP5fya0ir9FhvKsGnrCcVYjRnaIrMpx8I9Nw/edit?usp=sharing . The document title was verified as 'Free Developer Stack Handbook'. Shown at the same 260 px size as the socials QR, with a text link beneath it, and also linked from slide 8's docs row."
     }
   },
   "notSupplied": {

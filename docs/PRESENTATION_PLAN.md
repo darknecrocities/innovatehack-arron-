@@ -41,7 +41,7 @@ one of those three words.
 | 12 | The CLEAR Framework | Structure your prompts | **Interactive** progressive reveal of C·L·E·A·R + a prompt that assembles live | — | 3 min |
 | 13 | Set Up Your Team | Good engineering starts with good foundations | Six numbered foundations in one full-height column + a repository/branch/PR code panel | — | 2 min |
 | 14 | From Sprint to Ship | Every sprint needs a deliverable | Five-step sprint rule + four phase columns with vertical rules and bottom-anchored deliverables | — | 2 min |
-| 15 | Build Something That Matters | Ship something that works | Closing statement + five-line checklist + **two equal 190 px QR codes**: Free Developer Stack Handbook and socials, with written links | `handbook_qr.png`, `Arron_qr_socials_links.png` | 2 min |
+| 15 | Build Something That Matters | Ship something that works | Closing statement + five-line checklist + **two equal 260 px QR codes**: Free Developer Stack Handbook and socials, with written links | `handbook_qr.png`, `Arron_qr_socials_links.png` | 2 min |
 
 ---
 
@@ -199,5 +199,5 @@ These rules were applied while writing the slides.
    parameters.
 6. **The handbook QR is a supplied asset.** It points to the *Free Developer
    Stack Handbook* Google Doc, whose title was verified during QA. It is shown
-   at the same 190 px size as the socials QR. The URL is also printed beside the
+   at the same 260 px size as the socials QR. The URL is also printed beside the
    QR and linked from slide 08.
