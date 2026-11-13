@@ -990,6 +990,8 @@ pre.code .c { color: #9AA0A6; }
 }
 .s4 .def-list dd { margin: 0; font: 400 16px/1.4 var(--font-body); color: var(--ink-2); }
 
+.s2 .credential { font: 500 20px/1.35 var(--font-body); color: #1A73E8; margin-top: 10px; }
+
 /* S06 — design */
 .s6 .design-lab {
   display: grid;
@@ -1037,7 +1039,20 @@ pre.code .c { color: #9AA0A6; }
 .s6 .specimen-foot { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
 .s6 .specimen .label { margin-left: 0; }
 .s6 .swatches { display: flex; gap: 6px; }
-.s6 .swatches i { width: 38px; height: 38px; display: block; border: 1px solid rgba(0, 0, 0, .08); }
+.s6 .specimen-display, .s6 .specimen-type { color: var(--accent, var(--ink)); transition: color .2s ease; }
+.s6 .swatch {
+  width: 44px; height: 44px; padding: 0; cursor: pointer;
+  background: var(--sw); border: 1px solid rgba(0, 0, 0, .12);
+  transition: transform .15s ease, outline-color .15s ease;
+}
+.s6 .swatch:hover { transform: translateY(-2px); }
+.s6 .swatch[aria-pressed="true"] { outline: 2px solid var(--ink); outline-offset: 3px; }
+.s6 .swatch:focus-visible { outline: 3px solid #4285F4; outline-offset: 3px; }
+.s6 .specimen-btn {
+  cursor: pointer; font: inherit; background: transparent;
+  color: var(--accent, var(--ink)); border-color: var(--accent, currentColor);
+  transition: color .2s ease, border-color .2s ease;
+}
 
 /* S07 — stack tree */
 .s7 .tree-root { flex: 1; min-height: 0; }
@@ -1384,7 +1399,6 @@ pre.code .c { color: #9AA0A6; }
       <div class="cover-meta" data-rise style="--i:3">
         <div><span class="label">Speaker</span><b>Arron Kian Parejas</b><span>AI Engineer</span></div>
         <div><span class="label">Date</span><b>November 16, 2026</b><span>Google Meet</span></div>
-        <div><span class="label">Format</span><b>45 minutes</b><span>15 slides \xB7 bring your own idea</span></div>
       </div>
       <div class="rule" data-rise style="--i:4">
         <i style="background:#4285F4"></i><i style="background:#EA4335"></i><i style="background:#FBBC05"></i><i style="background:#34A853"></i>
@@ -1420,6 +1434,7 @@ pre.code .c { color: #9AA0A6; }
     <figure class="photo portrait"><img src="assets/images/optimized/arron_profile.png" alt="Dithered black-and-white portrait of Arron Kian Parejas" width="720" height="900"></figure>
     <div class="profile-body">
       <p class="statement">A practical method for turning an idea into working software.</p>
+      <p class="credential">Multi-awarded hackathon champion \xB7 Top 7 GitHub user in the Philippines</p>
       <ul class="rows roles">
         <li><span class="idx">01</span><span>AI Engineer</span></li>
         <li><span class="idx">02</span><span>ML Engineering Intern @ FlyRank.ai</span></li>
@@ -1547,9 +1562,9 @@ pre.code .c { color: #9AA0A6; }
       <div class="specimen-display" aria-hidden="true">Aa</div>
       <div class="specimen-type">Report an emergency</div>
       <div class="specimen-foot">
-        <div class="swatches"><i style="background:#4285F4"></i><i style="background:#EA4335"></i><i style="background:#FBBC05"></i><i style="background:#34A853"></i><i style="background:#F4F0E7;border:1px solid var(--line)"></i></div>
+        <div class="swatches" id="palette" role="group" aria-label="Accent color"><button type="button" class="swatch" data-color="#4285F4" aria-label="Apply blue accent" aria-pressed="false" style="--sw:#4285F4"></button><button type="button" class="swatch" data-color="#EA4335" aria-label="Apply red accent" aria-pressed="false" style="--sw:#EA4335"></button><button type="button" class="swatch" data-color="#FBBC05" aria-label="Apply yellow accent" aria-pressed="false" style="--sw:#FBBC05"></button><button type="button" class="swatch" data-color="#34A853" aria-label="Apply green accent" aria-pressed="false" style="--sw:#34A853"></button><button type="button" class="swatch" data-color="" aria-label="Apply default accent" aria-pressed="false" style="--sw:#F4F0E7"></button></div>
         <div class="label">16/24 \xB7 4.5:1 contrast</div>
-        <span class="btn ghost">Send report</span>
+        <button type="button" class="btn ghost specimen-btn">Send report</button>
       </div>
     </div>
   </div>`
@@ -1725,11 +1740,14 @@ pre.code .c { color: #9AA0A6; }
       <li><span class="idx">04</span><div><h3>Environment variables</h3><p>Keys stay out of Git.</p></div></li>
       <li><span class="idx">05</span><div><h3>Shared documentation</h3><p>README, setup, decisions.</p></div></li>
       <li><span class="idx">06</span><div><h3>Task ownership</h3><p>Every task has one owner.</p></div></li>
+      <li><span class="idx">07</span><div><h3>Continuous skills folder</h3><p>Teach your AI coding agents your conventions.</p></div></li>
     </ol>
     <pre class="code" aria-label="Example repository layout and pull request checklist"><span class="k">my-mvp/</span>
 \u251C\u2500\u2500 <span class="k">lib/</span>            <span class="c"># app code</span>
 \u251C\u2500\u2500 <span class="k">test/</span>           <span class="c"># unit tests</span>
 \u251C\u2500\u2500 <span class="k">docs/</span>           <span class="c"># decisions, setup</span>
+\u251C\u2500\u2500 <span class="k">.agents/skills/</span> <span class="c"># agent skills</span>
+\u2502   \u2514\u2500\u2500 SKILL.md    <span class="c"># conventions agents learn &amp; reuse</span>
 \u251C\u2500\u2500 .env.example    <span class="c"># names only, no secrets</span>
 \u251C\u2500\u2500 .gitignore      <span class="c"># ignores .env</span>
 \u2514\u2500\u2500 README.md
@@ -2002,7 +2020,7 @@ pre.code .c { color: #9AA0A6; }
       minutes: 3,
       message: "Prototype the experience first.",
       explain: ["PROMPT \u2192 DESIGN \u2192 PROTOTYPE \u2192 IMPLEMENT.", "Google Stitch for generating UI from prompts, Material Design for components and patterns, Google Fonts for typography."],
-      points: ["Changing a prototype is cheaper than changing code.", "Material gives accessibility and consistency for free.", "Verify current Stitch features before the talk; the product evolves."],
+      points: ["Click the color swatches live: one accent token restyles the whole specimen.", "Changing a prototype is cheaper than changing code.", "Material gives accessibility and consistency for free.", "Verify current Stitch features before the talk; the product evolves."],
       story: "Describe how this very presentation uses a small design system: a palette and type scale defined once.",
       transition: "Design in hand, now choose the stack that fits the problem."
     },
@@ -2058,7 +2076,7 @@ pre.code .c { color: #9AA0A6; }
       minutes: 2,
       message: "Foundations prevent chaos in a short sprint.",
       explain: ["Repository, feature branches, pull requests, environment variables, shared docs, task ownership.", "Walk the repo diagram."],
-      points: ["Never commit secrets; commit .env.example.", "Small pull requests are easier to review.", "One owner per task avoids duplicate work."],
+      points: ["Add a continuous skills folder (.agents/skills/SKILL.md) so AI coding agents learn and reuse your team conventions.", "Never commit secrets; commit .env.example.", "Small pull requests are easier to review.", "One owner per task avoids duplicate work."],
       story: "Share one workflow rule that saved your team time [Your detail].",
       transition: "Now put it on a calendar."
     },
@@ -2397,10 +2415,29 @@ pre.code .c { color: #9AA0A6; }
     render();
   }
 
+  // js/interactions/palette.js
+  function initPalette(root) {
+    if (!root) return;
+    const specimen = root.closest(".specimen");
+    root.addEventListener("click", (e) => {
+      const btn = e.target.closest(".swatch");
+      if (!btn) return;
+      e.stopPropagation();
+      const color = btn.dataset.color;
+      if (color) specimen.style.setProperty("--accent", color);
+      else specimen.style.removeProperty("--accent");
+      root.querySelectorAll(".swatch").forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+    });
+    root.addEventListener("keydown", (e) => {
+      if (e.target.closest(".swatch") && (e.key === "Enter" || e.key === " ")) e.stopPropagation();
+    });
+  }
+
   // js/interactions.js
   function initInteractions() {
     initMvp(document.getElementById("mvp-root"));
     initSelector(document.getElementById("selector"));
+    initPalette(document.getElementById("palette"));
     const clear = initClear(document.getElementById("clear-root"));
     return { 12: { forward: () => clear.forward(), back: () => clear.back() } };
   }

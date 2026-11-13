@@ -144,6 +144,8 @@
 }
 .s4 .def-list dd { margin: 0; font: 400 16px/1.4 var(--font-body); color: var(--ink-2); }
 
+.s2 .credential { font: 500 20px/1.35 var(--font-body); color: #1A73E8; margin-top: 10px; }
+
 /* S06 — design */
 .s6 .design-lab {
   display: grid;
@@ -191,7 +193,20 @@
 .s6 .specimen-foot { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
 .s6 .specimen .label { margin-left: 0; }
 .s6 .swatches { display: flex; gap: 6px; }
-.s6 .swatches i { width: 38px; height: 38px; display: block; border: 1px solid rgba(0, 0, 0, .08); }
+.s6 .specimen-display, .s6 .specimen-type { color: var(--accent, var(--ink)); transition: color .2s ease; }
+.s6 .swatch {
+  width: 44px; height: 44px; padding: 0; cursor: pointer;
+  background: var(--sw); border: 1px solid rgba(0, 0, 0, .12);
+  transition: transform .15s ease, outline-color .15s ease;
+}
+.s6 .swatch:hover { transform: translateY(-2px); }
+.s6 .swatch[aria-pressed="true"] { outline: 2px solid var(--ink); outline-offset: 3px; }
+.s6 .swatch:focus-visible { outline: 3px solid #4285F4; outline-offset: 3px; }
+.s6 .specimen-btn {
+  cursor: pointer; font: inherit; background: transparent;
+  color: var(--accent, var(--ink)); border-color: var(--accent, currentColor);
+  transition: color .2s ease, border-color .2s ease;
+}
 
 /* S07 — stack tree */
 .s7 .tree-root { flex: 1; min-height: 0; }

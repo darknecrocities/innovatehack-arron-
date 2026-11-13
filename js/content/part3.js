@@ -61,11 +61,14 @@ export const part3 = [
       <li><span class="idx">04</span><div><h3>Environment variables</h3><p>Keys stay out of Git.</p></div></li>
       <li><span class="idx">05</span><div><h3>Shared documentation</h3><p>README, setup, decisions.</p></div></li>
       <li><span class="idx">06</span><div><h3>Task ownership</h3><p>Every task has one owner.</p></div></li>
+      <li><span class="idx">07</span><div><h3>Continuous skills folder</h3><p>Teach your AI coding agents your conventions.</p></div></li>
     </ol>
     <pre class="code" aria-label="Example repository layout and pull request checklist"><span class="k">my-mvp/</span>
 ├── <span class="k">lib/</span>            <span class="c"># app code</span>
 ├── <span class="k">test/</span>           <span class="c"># unit tests</span>
 ├── <span class="k">docs/</span>           <span class="c"># decisions, setup</span>
+├── <span class="k">.agents/skills/</span> <span class="c"># agent skills</span>
+│   └── SKILL.md    <span class="c"># conventions agents learn &amp; reuse</span>
 ├── .env.example    <span class="c"># names only, no secrets</span>
 ├── .gitignore      <span class="c"># ignores .env</span>
 └── README.md

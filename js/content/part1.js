@@ -10,7 +10,6 @@ export const part1 = [
       <div class="cover-meta" data-rise style="--i:3">
         <div><span class="label">Speaker</span><b>Arron Kian Parejas</b><span>AI Engineer</span></div>
         <div><span class="label">Date</span><b>November 16, 2026</b><span>Google Meet</span></div>
-        <div><span class="label">Format</span><b>45 minutes</b><span>15 slides · bring your own idea</span></div>
       </div>
       <div class="rule" data-rise style="--i:4">
         <i style="background:#4285F4"></i><i style="background:#EA4335"></i><i style="background:#FBBC05"></i><i style="background:#34A853"></i>
@@ -44,6 +43,7 @@ export const part1 = [
     <figure class="photo portrait"><img src="assets/images/optimized/arron_profile.png" alt="Dithered black-and-white portrait of Arron Kian Parejas" width="720" height="900"></figure>
     <div class="profile-body">
       <p class="statement">A practical method for turning an idea into working software.</p>
+      <p class="credential">Multi-awarded hackathon champion · Top 7 GitHub user in the Philippines</p>
       <ul class="rows roles">
         <li><span class="idx">01</span><span>AI Engineer</span></li>
         <li><span class="idx">02</span><span>ML Engineering Intern @ FlyRank.ai</span></li>
