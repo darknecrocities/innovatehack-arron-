@@ -25,9 +25,9 @@ export const part2 = [
       <div class="specimen-display" aria-hidden="true">Aa</div>
       <div class="specimen-type">Report an emergency</div>
       <div class="specimen-foot">
-        <div class="swatches"><i style="background:#4285F4"></i><i style="background:#EA4335"></i><i style="background:#FBBC05"></i><i style="background:#34A853"></i><i style="background:#F4F0E7;border:1px solid var(--line)"></i></div>
+        <div class="swatches" id="palette" role="group" aria-label="Accent color"><button type="button" class="swatch" data-color="#4285F4" aria-label="Apply blue accent" aria-pressed="false" style="--sw:#4285F4"></button><button type="button" class="swatch" data-color="#EA4335" aria-label="Apply red accent" aria-pressed="false" style="--sw:#EA4335"></button><button type="button" class="swatch" data-color="#FBBC05" aria-label="Apply yellow accent" aria-pressed="false" style="--sw:#FBBC05"></button><button type="button" class="swatch" data-color="#34A853" aria-label="Apply green accent" aria-pressed="false" style="--sw:#34A853"></button><button type="button" class="swatch" data-color="" aria-label="Apply default accent" aria-pressed="false" style="--sw:#F4F0E7"></button></div>
         <div class="label">16/24 · 4.5:1 contrast</div>
-        <span class="btn ghost">Send report</span>
+        <button type="button" class="btn ghost specimen-btn">Send report</button>
       </div>
     </div>
   </div>`

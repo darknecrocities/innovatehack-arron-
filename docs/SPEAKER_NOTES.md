@@ -151,6 +151,7 @@ Prototype the experience first.
 - Google Stitch for generating UI from prompts, Material Design for components and patterns, Google Fonts for typography.
 
 **Talking points**
+- Click the color swatches live: one accent token restyles the whole specimen.
 - Changing a prototype is cheaper than changing code.
 - Material gives accessibility and consistency for free.
 - Verify current Stitch features before the talk; the product evolves.
@@ -322,6 +323,7 @@ Foundations prevent chaos in a short sprint.
 - Walk the repo diagram.
 
 **Talking points**
+- Add a continuous skills folder (.agents/skills/SKILL.md) so AI coding agents learn and reuse your team conventions.
 - Never commit secrets; commit .env.example.
 - Small pull requests are easier to review.
 - One owner per task avoids duplicate work.
