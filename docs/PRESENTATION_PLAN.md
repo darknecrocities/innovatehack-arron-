@@ -186,7 +186,7 @@ These rules were applied while writing the slides.
 
 1. **No invented achievements.** "182+ projects", "seven hackathon
    championship wins", "Top 1 AppBuildersPH", "Top 7 GitHub developers in the
-   Philippines" and "Ship-A-Little winner, Shipaton 2026" are used exactly as
+   Philippines" and "Ship-A-Little winner, Shipaton AppbuildersPH 2026" are used exactly as
    supplied. No statistic was added.
 2. **No duplicate titles.** "Former GDG on Campus HAU Chapter Lead" and
    "CEO / Chapter Lead" are shown once, as the first form.

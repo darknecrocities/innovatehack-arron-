@@ -52,7 +52,7 @@ The advice comes from repeated shipping, not theory.
 **What to explain**
 - Current roles: AI Engineer, ML Engineering Intern at FlyRank.ai, founder of DomoDomo, builder of Helios.
 - Community: former GDG on Campus HAU Chapter Lead and open-source contributor.
-- Recognition: Top 1 AppBuildersPH, Top 7 GitHub developers in the Philippines, seven hackathon championship wins, Ship-A-Little winner at Shipaton 2026, 182+ projects.
+- Recognition: Top 1 AppBuildersPH, Top 7 GitHub developers in the Philippines, seven hackathon championship wins, Ship-A-Little winner at Shipaton AppbuildersPH 2026, 182+ projects.
 
 **Talking points**
 - Point to the portrait and the cover collage from the previous slide.

@@ -51,7 +51,7 @@ export const part1 = [
         <li><span class="idx">04</span><span>Builder of Helios, an open-source language model</span></li>
         <li><span class="idx">05</span><span>Former GDG on Campus HAU Chapter Lead</span></li>
         <li><span class="idx">06</span><span>Open-source contributor</span></li>
-        <li><span class="idx">07</span><span>Ship-A-Little winner, Shipaton 2026</span></li>
+        <li><span class="idx">07</span><span>Ship-A-Little winner, Shipaton AppbuildersPH 2026</span></li>
       </ul>
     </div>
     <div class="gallery">

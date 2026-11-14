@@ -7,7 +7,7 @@ export const notes = [
   story: "Open with the cover collage: the portrait, the How & Tell stage photo, and the AppBuildersPH team. AI tools are changing how fast we can build, but the fundamentals of scoping and validating still decide who ships.",
   transition: "Before the how, a quick word on who is talking and why this advice comes from the field." },
 { minutes: 4, message: "The advice comes from repeated shipping, not theory.",
-  explain: ["Current roles: AI Engineer, ML Engineering Intern at FlyRank.ai, founder of DomoDomo, builder of Helios.", "Community: former GDG on Campus HAU Chapter Lead and open-source contributor.", "Recognition: Top 1 AppBuildersPH, Top 7 GitHub developers in the Philippines, seven hackathon championship wins, Ship-A-Little winner at Shipaton 2026, 182+ projects."],
+  explain: ["Current roles: AI Engineer, ML Engineering Intern at FlyRank.ai, founder of DomoDomo, builder of Helios.", "Community: former GDG on Campus HAU Chapter Lead and open-source contributor.", "Recognition: Top 1 AppBuildersPH, Top 7 GitHub developers in the Philippines, seven hackathon championship wins, Ship-A-Little winner at Shipaton AppbuildersPH 2026, 182+ projects."],
   points: ["Point to the portrait and the cover collage from the previous slide.", "Point to the Helios page: an open-weight model with LiteRT and ONNX tags.", "Name the hackathon photos: Caffeine, SkyDev, and AppCon 2024 with BitPyre of Holy Angel University."],
   story: "Pick one hackathon photo and tell what the team cut from scope that weekend [Your detail]. Keep it under 60 seconds.",
   transition: "Winning and losing hackathons taught me the same lesson: great ideas are not enough." },
